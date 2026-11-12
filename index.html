@@ -173,6 +173,57 @@ table.obs td.n{ text-align:right; }
 footer{ margin-top:36px; color:var(--muted); font-size:14px; max-width:70ch; }
 [hidden]{ display:none !important; }
 
+/* Fichas */
+.pchip{ width:44px; height:44px; border-radius:50%; border:3px dashed rgba(255,255,255,.8); color:#fff; font-weight:700; font-size:13px; box-shadow:0 2px 4px rgba(0,0,0,.35); padding:0; flex:none; }
+.pchip[aria-pressed="true"]{ outline:3px solid var(--gold); outline-offset:2px; }
+.c05{ background:#7D8580; } .c1{ background:#EDEDED; color:#1b1b1b; border-color:rgba(0,0,0,.35); } .c5{ background:#B3261E; } .c10{ background:#1F5FA8; } .c25{ background:#1C7A55; } .c50{ background:#C46A12; } .c100{ background:#161616; }
+.fbtn{ border:1px solid rgba(238,246,241,.45); background:transparent; color:var(--felt-ink); border-radius:999px; padding:6px 12px; font-weight:600; font-size:13.5px; }
+.fbtn:hover{ background:rgba(255,255,255,.1); }
+.feltseg{ background:rgba(0,0,0,.22); border-color:rgba(238,246,241,.3); }
+.feltseg button{ color:var(--felt-muted); }
+.feltseg button[aria-pressed="true"]{ background:var(--felt-ink); color:var(--felt2); }
+
+/* Apuestas en el paño (blackjack) */
+.betstrip{ margin-top:16px; padding-top:14px; border-top:1px solid rgba(238,246,241,.18); display:grid; gap:10px; justify-items:center; }
+.spots{ display:flex; gap:8px; flex-wrap:wrap; justify-content:center; }
+.spot{ min-width:66px; padding:6px 10px; border-radius:12px; border:1px dashed rgba(238,246,241,.45); background:transparent; color:var(--felt-muted); display:flex; flex-direction:column; align-items:center; font-size:13px; }
+.spot b{ font-family:"Young Serif", Georgia, serif; font-weight:400; font-size:17px; color:var(--felt-ink); font-variant-numeric:tabular-nums; }
+.spot[aria-pressed="true"]{ border-style:solid; border-color:var(--gold); background:rgba(201,166,74,.18); color:var(--felt-ink); }
+.chiprow{ display:flex; gap:6px; flex-wrap:wrap; justify-content:center; align-items:center; }
+.strip-hint{ font-size:13px; color:var(--felt-muted); text-align:center; }
+.side-res{ display:flex; gap:6px; flex-wrap:wrap; justify-content:center; font-size:14px; }
+.side-res span{ padding:3px 10px; border-radius:999px; background:rgba(255,255,255,.1); }
+.side-res .w{ color:#A6EBC0; } .side-res .l{ color:#F7AEA6; }
+.ct-mini{ position:absolute; top:14px; left:16px; font-size:13px; color:var(--felt-muted); line-height:1.35; }
+.payin{ width:64px; padding:4px 6px !important; }
+table.side td{ vertical-align:middle; }
+
+/* Ruleta */
+.ru-top{ display:flex; flex-wrap:wrap; gap:12px 20px; justify-content:space-between; align-items:center; margin-bottom:14px; }
+.denoms{ display:flex; gap:6px; align-items:center; flex-wrap:wrap; }
+.denoms input{ width:84px; background:rgba(0,0,0,.22); color:var(--felt-ink); border-color:rgba(238,246,241,.35); }
+.cell .amt{ position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); min-width:30px; height:26px; padding:0 5px; border-radius:13px; background:var(--gold); color:#1b1b1b; border:2px dashed #fff; font:700 11px Figtree, sans-serif; display:flex; align-items:center; justify-content:center; z-index:1; white-space:nowrap; }
+.cell.cov{ box-shadow:inset 0 0 0 3px var(--gold); }
+.cell.pend{ outline:3px dashed #fff; outline-offset:-4px; }
+.ru-msg{ color:var(--felt-ink); font-weight:600; } .ru-err{ color:#F7AEA6; font-weight:600; }
+.betrow{ display:grid; grid-template-columns:1fr auto auto; gap:10px; align-items:center; padding:7px 0; border-bottom:1px solid var(--line); font-size:14.5px; }
+.betrow .v{ font-weight:600; font-variant-numeric:tabular-nums; }
+.xbtn{ border:0; background:transparent; font-size:20px; color:var(--muted); line-height:1; padding:0 4px; }
+
+/* Conteo discreto */
+.ct-wrap{ max-width:460px; margin:0 auto; background:#0A0E0C; color:#6F7A74; border-radius:22px; padding:18px; border:1px solid #1A221E; }
+.ct-screen{ display:flex; justify-content:space-between; align-items:flex-end; padding:6px 6px 14px; user-select:none; -webkit-user-select:none; touch-action:none; cursor:pointer; }
+.ct-screen .big{ font-family:"Young Serif", Georgia, serif; font-size:44px; line-height:1; color:#8E9A93; font-variant-numeric:tabular-nums; }
+.ct-screen .lab{ font-size:12px; color:#4E5852; }
+.ct-pad{ display:grid; grid-template-columns:repeat(3,1fr); gap:8px; }
+.ct-pad button{ height:120px; border-radius:16px; border:1px solid #1E2823; background:#111714; color:#5E6963; font-size:15px; font-weight:600; }
+.ct-pad button:active{ background:#18201C; }
+.ct-row{ display:flex; gap:8px; margin-top:8px; }
+.ct-row button{ flex:1; height:46px; border-radius:12px; border:1px solid #1E2823; background:#0E1311; color:#56605A; font-weight:600; font-size:14px; }
+.ct-info{ margin-top:12px; font-size:13px; color:#56605A; text-align:center; }
+.ct-settings{ max-width:460px; margin:18px auto 0; }
+
+
 /* Sesión */
 .sess{ margin-bottom:20px; }
 .sess-start{ display:grid; grid-template-columns:minmax(0,1.2fr) minmax(0,1fr); gap:16px 24px; align-items:end; }
@@ -217,6 +268,7 @@ footer{ margin-top:36px; color:var(--muted); font-size:14px; max-width:70ch; }
     <nav class="tabs" role="tablist" aria-label="Juego">
       <a class="tab" role="tab" data-tab="blackjack" href="#blackjack">Blackjack</a>
       <a class="tab" role="tab" data-tab="ruleta" href="#ruleta">Ruleta</a>
+      <a class="tab" role="tab" data-tab="conteo" href="#conteo">Conteo</a>
     </nav>
   </header>
 
@@ -236,6 +288,8 @@ footer{ margin-top:36px; color:var(--muted); font-size:14px; max-width:70ch; }
             <div class="hand" id="playerHand"></div>
             <span class="total" id="playerTotal"></span>
           </div>
+          <div class="ct-mini" id="ctMini"></div>
+          <div class="betstrip" id="betStrip"></div>
           <div id="resultBar"></div>
         </div>
 
@@ -277,6 +331,8 @@ footer{ margin-top:36px; color:var(--muted); font-size:14px; max-width:70ch; }
           <p class="muted small" style="margin-top:12px" id="rulesNote"></p>
         </div>
 
+        <div class="panel" id="sidesPanel"></div>
+
         <div class="panel" id="bjStats"></div>
         <div class="panel" id="bjLog"></div>
       </div>
@@ -299,6 +355,7 @@ footer{ margin-top:36px; color:var(--muted); font-size:14px; max-width:70ch; }
 
   <!-- ============ RULETA ============ -->
   <section data-view="ruleta" hidden>
+    <div class="panel sess" id="ruSess"></div>
     <div class="ru-controls">
       <div class="group">
         <span class="small muted">Rueda</span>
@@ -310,17 +367,18 @@ footer{ margin-top:36px; color:var(--muted); font-size:14px; max-width:70ch; }
       <div class="group">
         <span class="small muted">Al tocar un número</span>
         <div class="seg" role="group" aria-label="Modo">
-          <button id="mBet" aria-pressed="true">Marcar mi apuesta</button>
+          <button id="mBet" aria-pressed="true">Apostar</button>
           <button id="mSpin" aria-pressed="false">Registrar lo que salió</button>
         </div>
       </div>
     </div>
 
     <div class="felt" id="ruFelt">
+      <div class="ru-top" id="ruTop"></div>
       <div class="scroll"><div class="ru-board" id="board"></div></div>
       <div class="ru-legend">
         <span id="modeHint"></span>
-        <span><button class="btn" id="clearSel" style="background:transparent;color:var(--felt-ink);border-color:rgba(238,246,241,.45)">Quitar fichas</button></span>
+        <span><button class="fbtn" id="clearSel">Quitar todas las fichas</button></span>
       </div>
     </div>
 
@@ -328,6 +386,34 @@ footer{ margin-top:36px; color:var(--muted); font-size:14px; max-width:70ch; }
       <div class="panel" id="betPanel"></div>
       <div class="panel" id="histPanel"></div>
       <div class="panel" id="riskPanel"></div>
+    </div>
+  </section>
+
+  <!-- ============ CONTEO ============ -->
+  <section data-view="conteo" hidden>
+    <div class="ct-wrap">
+      <div class="ct-screen" id="ctScreen" aria-label="Mantén presionado para ver el conteo"></div>
+      <div class="ct-pad" id="ctPad">
+        <button data-d="1">2 a 6</button>
+        <button data-d="0">7 a 9</button>
+        <button data-d="-1">10 a A</button>
+      </div>
+      <div class="ct-row"><button id="ctUndo">Deshacer</button><button id="ctShuffle">Barajaron</button></div>
+      <p class="ct-info" id="ctInfo"></p>
+    </div>
+    <div class="panel ct-settings">
+      <h2>Conteo Hi-Lo</h2>
+      <div class="switches">
+        <label class="switch"><span>Usar el conteo en la guía de blackjack</span><input type="checkbox" id="ctOn"></label>
+        <label class="switch"><span>Contar también las cartas que marco en la guía</span><input type="checkbox" id="ctLink"></label>
+        <label class="switch"><span>Ocultar números hasta mantener presionado</span><input type="checkbox" id="ctHide"></label>
+        <label class="field"><span>Apuesta mínima (unidad)</span><input type="number" id="ctUnit" min="0" step="1" placeholder="Automática"><span class="hint muted small" id="ctUnitHint"></span></label>
+      </div>
+      <p class="small" style="margin-top:12px">Cartas de 2 a 6 suman 1, de 7 a 9 no cambian, y 10, J, Q, K y A restan 1. El conteo real divide el conteo corriente entre los mazos que quedan. Con conteo real alto quedan más cartas altas y la ventaja se inclina hacia ti: la apuesta sugerida es tu unidad multiplicada por el conteo real menos 1. Con el conteo activado, la guía aplica los ajustes más importantes a la estrategia y te avisa cuando conviene el seguro.</p>
+      <p class="muted small" style="margin-top:8px">Contar de memoria es legal, pero muchos casinos prohíben usar el celular en la mesa y pueden pedirte que te retires; en algunos países usar un dispositivo para contar es delito. Lo ideal es practicar aquí y contar de cabeza.</p>
+      <h3>Práctica</h3>
+      <div id="prArea"></div>
+      <div class="btns"><button class="btn primary" id="prDeal">Repartir carta</button><button class="btn" id="prShow">Ver conteo</button><button class="btn" id="prReset">Reiniciar</button></div>
     </div>
   </section>
 
@@ -362,8 +448,8 @@ async function loadRemote(){
   setSync('loading');
   try{
     const r=await fetch(APPS_SCRIPT_URL+'?t='+Date.now()); const d=await r.json();
-    ru.byWheel={eu:[],us:[]};
-    (d.spins||[]).forEach(x=>{ if(ru.byWheel[x.w]) ru.byWheel[x.w].push(x.n); });
+    ru.spins={eu:[],us:[]};
+    (d.spins||[]).forEach(x=>{ if(ru.spins[x.w]) ru.spins[x.w].push({n:x.n,ses:x.ses||'',st:+x.st||0,net:+x.net||0}); });
     bj.log=d.hands||[];
     const c=d.config||{};
     if(c.bj_h17!==undefined) bj.h17=String(c.bj_h17)==='true';
@@ -371,6 +457,8 @@ async function loadRemote(){
     if(c.ru_wheel==='eu'||c.ru_wheel==='us') ru.wheel=c.ru_wheel;
     if(c.bj_decks&&[1,2,4,6,8].includes(+c.bj_decks)) bj.decks=+c.bj_decks;
     if(c.bj_session!==undefined){ try{ bj.sess=c.bj_session?JSON.parse(c.bj_session):null; }catch(e){} }
+    if(c.ru_session!==undefined){ try{ ru.sess=c.ru_session?JSON.parse(c.ru_session):null; }catch(e){} }
+    if(c.bj_pay){ try{ Object.assign(bj.pay,JSON.parse(c.bj_pay)); store.set('bj_pay',bj.pay); }catch(e){} }
     store.set('bj_h17',bj.h17); store.set('bj_surr',bj.surr); store.set('bj_log',bj.log); store.set('bj_decks',bj.decks); store.set('bj_sess',bj.sess); save();
     renderBJ(); renderAll(); setSync('ok');
   }catch(e){ setSync('error'); }
@@ -379,7 +467,7 @@ async function loadRemote(){
 /* ---------- Routing ---------- */
 function route(){
   const h=location.hash.slice(1);
-  const v=h==='ruleta'?'ruleta':'blackjack';
+  const v=['ruleta','conteo'].includes(h)?h:'blackjack';
   document.querySelectorAll('[data-view]').forEach(s=>s.hidden=s.dataset.view!==v);
   document.querySelectorAll('.tab').forEach(t=>t.setAttribute('aria-selected',String(t.dataset.tab===v)));
 }
@@ -391,7 +479,7 @@ const COLS=['2','3','4','5','6','7','8','9','10','A'];
 const SUITS=['♠','♥','♣','♦'];
 const rv=r=>r==='A'?1:+r;
 const PR=v=>v===10?4/13:1/13;
-const bj={player:['10','6'],dealer:'10',h17:store.get('bj_h17',false),surr:store.get('bj_surr',true),log:store.get('bj_log',[]),decks:store.get('bj_decks',6),sess:store.get('bj_sess',null)};
+const bj={player:['10','6'],dealer:'10',h17:store.get('bj_h17',false),surr:store.get('bj_surr',true),log:store.get('bj_log',[]),decks:store.get('bj_decks',6),sess:store.get('bj_sess',null),bets:store.get('bj_bets',{main:0,over:0,under:0,exact:0,pair:0}),spot:'main',pay:store.get('bj_pay',{over:1,under:1,exact:10,pmix:5,pcol:10,pperf:25}),pairType:'no',pairKey:''};
 
 const HARD={8:'HHHHHHHHHH',9:'HDDDDHHHHH',10:'DDDDDDDDHH',11:'DDDDDDDDDH',12:'HHSSSHHHHH',13:'SSSSSHHHHH',14:'SSSSSHHHHH',15:'SSSSSHHHUH',16:'SSSSSHHUUU',17:'SSSSSSSSSS',18:'SSSSSSSSSS'};
 const HARD_H17={11:'DDDDDDDDDD',15:'SSSSSHHHUU',17:'SSSSSSSSSV'};
@@ -517,7 +605,8 @@ function renderBJ(){
   $('#s17').setAttribute('aria-pressed',String(!bj.h17)); $('#h17').setAttribute('aria-pressed',String(bj.h17));
   $('#surr').checked=bj.surr;
 
-  const a=analyze(); const v=$('#verdict'); let tot='';
+  const a=analyze(); const dv=deviation(a); if(dv){ a.base=a.main; a.main=dv; a.fb=null; }
+  const v=$('#verdict'); let tot='';
   if(a.h){
     const p=bj.player;
     tot=(a.table==='pairs')?`Tu mano: <b>par de ${p[0]==='A'?'ases':p[0]}</b>`:`Tu mano: <b>${a.h.total}</b> ${a.h.soft?'blando':'duro'}`;
@@ -535,9 +624,10 @@ function renderBJ(){
     let alt='';
     if(a.fb) alt=`Si la mesa no lo permite: ${ACT[a.fb].name.toLowerCase()}.`;
     if(a.lost) alt='Con más de dos cartas ya no puedes doblar ni rendirte, por eso cambia la jugada.';
+    if(a.base) alt=`Ajuste por conteo (conteo real ${fmtTC()}): la tabla básica dice ${ACT[a.base].name.toLowerCase()}.`;
     v.innerHTML=`<div class="v-chip pop" style="--cell:var(--c${A.cls})"><span class="sym">${A.sym}</span>${A.name}</div><p class="v-why">${why(a)}</p>${alt?`<p class="v-alt">${alt}</p>`:''}`;
   }
-  renderStats(a); renderCharts(a); renderResultBar(a); renderLog(a); renderSession(); renderNotes();
+  renderStats(a); renderCharts(a); renderBetStrip(); renderResultBar(a); renderLog(a); renderSession(); renderSidesPanel(); renderNotes();
 }
 
 function renderStats(a){
@@ -560,7 +650,7 @@ function renderStats(a){
   html+=`<h3>El crupier con ${upName(bj.dealer)} termina en</h3><div class="bars">`+
     rows.map(r=>`<div class="bar"><span>${r[0]}</span><div class="track"><div class="fill${r[0]==='Se pasa'?' win':''}" style="width:${r[1]/mx*100}%"></div></div><span class="v">${pct(r[1])}</span></div>`).join('')+'</div>';
   if(bj.dealer==='A'||bj.dealer==='10') html+=`<p class="muted small" style="margin-top:8px">Calculado sabiendo que el crupier ya revisó y no tiene blackjack.</p>`;
-  if(bj.dealer==='A') html+=`<div class="note">No tomes el seguro. Paga 2:1, pero el crupier solo completa blackjack el 30,8 % de las veces: pierdes en promedio 7,7 % de lo que apuestas al seguro.</div>`;
+  if(bj.dealer==='A') html+=(ct.on&&trueCount()>=3)?`<div class="note">Con conteo real ${fmtTC()} (+3 o más) el seguro sí conviene: quedan suficientes cartas de 10 para que el crupier complete blackjack más de un tercio de las veces.</div>`:`<div class="note">No tomes el seguro. Paga 2:1, pero el crupier solo completa blackjack el 30,8 % de las veces: pierdes en promedio 7,7 % de lo que apuestas al seguro.</div>`;
   el.innerHTML=html;
 }
 
@@ -595,10 +685,11 @@ function recName(a){
   if(a.state==='bust')return 'Te pasaste';
   return ACT[a.main].name;
 }
-/* ---------- Sesión y dinero ---------- */
+/* ---------- Sesión, apuestas y comodines ---------- */
 const EDGE_BASE={1:0.05,2:0.19,4:0.36,6:0.40,8:0.43};
 function houseEdge(){ return Math.max(0,EDGE_BASE[bj.decks]+(bj.h17?0.22:0)-(bj.surr?0.08:0))/100; }
-const money=x=>{ const a=Math.abs(x); return (x<0?'−':'')+'$'+a.toLocaleString('es-EC',{minimumFractionDigits:a%1?2:0,maximumFractionDigits:2}); };
+const money=x=>{ const a=Math.abs(x); return (x<0?'−':'')+'$'+a.toLocaleString('es-EC',{minimumFractionDigits:Math.round(a*100)%100?2:0,maximumFractionDigits:2}); };
+const signed=x=>(x>0?'+':'')+money(x);
 const sessHands=()=>bj.sess?bj.log.filter(h=>h.session===bj.sess.id):[];
 const balance=()=>bj.sess?bj.sess.start+sessHands().reduce((t,h)=>t+(+h.net||0),0):0;
 const recFor=v=>({bet:Math.max(1,Math.round(v/50)),goal:Math.max(1,Math.round(v*0.25)),stop:Math.max(1,Math.round(v*0.5))});
@@ -610,87 +701,160 @@ function riskStats(st){
   return {p,T,loss:e*st.bet};
 }
 function saveSess(){ store.set('bj_sess',bj.sess); send('saveConfig',{key:'bj_session',value:bj.sess?JSON.stringify(bj.sess):''}); }
+function rangeHTML(start,b,lo,hi){
+  const at=x=>Math.min(100,Math.max(0,(x-lo)/(hi-lo)*100));
+  return `<div class="range" role="img" aria-label="Saldo entre el límite de pérdida y la meta"><span class="mk st" style="left:${at(start)}%"></span><span class="mk" style="left:${at(b)}%"></span></div>
+  <div class="range-lbl"><span>Retírate si bajas a ${money(lo)}</span><span>Retírate si llegas a ${money(hi)}</span></div>`;
+}
+function alertHTML(b,lo,hi,diff,stake){
+  if(b>=hi) return `<div class="alert good">Llegaste a tu meta. Es el momento recomendado para retirarte con ${money(diff)} de ganancia.</div>`;
+  if(b<=lo) return `<div class="alert bad">Llegaste a tu límite de pérdida. Retírate de la mesa: intentar recuperar lo perdido es como se pierde más.</div>`;
+  if(stake>b) return `<div class="alert bad">Lo que tienes apostado es mayor que tu saldo.</div>`;
+  if(stake>b*0.05) return `<div class="alert warn">Estás apostando más del 5 % de tu saldo por jugada: una racha corta en contra te puede sacar de la mesa.</div>`;
+  return '';
+}
 
 function renderSession(){
   const el=$('#sessPanel');
   if(!bj.sess){
     el.innerHTML=`<div class="sess-start">
-      <div><h2>Tu sesión</h2><p class="muted small">Indica con cuánto dinero entras a la mesa. Te sugiero cuánto apostar por mano, una meta para retirarte ganando y un límite para retirarte perdiendo.</p></div>
+      <div><h2>Tu sesión</h2><p class="muted small">Indica con cuánto dinero entras a la mesa. Te sugiero una apuesta inicial, una meta para retirarte ganando y un límite para retirarte perdiendo.</p></div>
       <div class="sess-new"><label class="field"><span>Dinero con el que entras</span><input type="number" id="sStart" min="1" step="1" placeholder="Ej.: 200" inputmode="decimal"></label><button class="btn primary" id="sGo">Empezar sesión</button></div>
     </div>`;
-    const go=()=>{ const v=+$('#sStart').value; if(!(v>0)){ $('#sStart').focus(); return; } bj.sess=Object.assign({id:'S'+Date.now(),start:v},recFor(v)); saveSess(); renderBJ(); };
+    const go=()=>{ const v=+$('#sStart').value; if(!(v>0)){ $('#sStart').focus(); return; } const r=recFor(v); bj.sess={id:'S'+Date.now(),start:v,goal:r.goal,stop:r.stop}; if(!bj.bets.main){ bj.bets.main=r.bet; store.set('bj_bets',bj.bets); } saveSess(); renderBJ(); };
     $('#sGo').onclick=go; $('#sStart').onkeydown=e=>{ if(e.key==='Enter') go(); };
     return;
   }
-  const st=bj.sess, b=balance(), diff=b-st.start, n=sessHands().length, r=recFor(st.start), k=riskStats(st);
-  const lo=st.start-st.stop, hi=st.start+st.goal, span=hi-lo;
-  const at=x=>Math.min(100,Math.max(0,(x-lo)/span*100));
-  let alert='';
-  if(b>=hi) alert=`<div class="alert good">Llegaste a tu meta. Es el momento recomendado para retirarte con ${money(diff)} de ganancia.</div>`;
-  else if(b<=lo) alert=`<div class="alert bad">Llegaste a tu límite de pérdida. Retírate de la mesa: intentar recuperar lo perdido es como se pierde más.</div>`;
-  else if(st.bet>b) alert=`<div class="alert bad">Tu apuesta por mano es mayor que tu saldo.</div>`;
-  else if(st.bet>b*0.05) alert=`<div class="alert warn">Tu apuesta es más del 5 % de tu saldo: una racha corta de manos perdidas te puede sacar de la mesa.</div>`;
+  const st=bj.sess, b=balance(), diff=b-st.start, n=sessHands().length, r=recFor(st.start);
+  const bet=bj.bets.main||r.bet, k=riskStats({bet,goal:st.goal,stop:st.stop});
+  const lo=st.start-st.stop, hi=st.start+st.goal;
   el.innerHTML=`<div class="sess-grid">
     <div>
       <h2>Tu sesión</h2>
       <p class="muted small">Saldo actual (entraste con ${money(st.start)})</p>
       <p class="balance">${money(b)}</p>
-      <p class="${diff>=0?'up':'down'}">${diff>0?'+':''}${money(diff)} en ${n} ${n===1?'mano':'manos'}</p>
-      <div class="range" role="img" aria-label="Saldo entre el límite de pérdida y la meta"><span class="mk st" style="left:${at(st.start)}%"></span><span class="mk" style="left:${at(b)}%"></span></div>
-      <div class="range-lbl"><span>Retirarte si bajas a ${money(lo)}</span><span>Retirarte si llegas a ${money(hi)}</span></div>
-      ${alert}
+      <p class="${diff>=0?'up':'down'}">${signed(diff)} en ${n} ${n===1?'mano':'manos'}</p>
+      ${rangeHTML(st.start,b,lo,hi)}
+      ${alertHTML(b,lo,hi,diff,bj.bets.main+sideTotal())}
     </div>
     <div class="sess-fields">
-      <label class="field"><span>Apuesta por mano</span><input type="number" id="sBet" min="1" step="1" value="${st.bet}"><span class="hint">Recomendado: ${money(r.bet)} (2 % de tu dinero, unas 50 apuestas)</span></label>
+      <p class="small">Tu apuesta principal se cambia con las fichas del paño. Apuesta sugerida para empezar: <b>${money(r.bet)}</b> (2 % de tu dinero).</p>
       <label class="field"><span>Meta de ganancia</span><input type="number" id="sGoal" min="1" step="1" value="${st.goal}"><span class="hint">Recomendado: ${money(r.goal)} (25 %)</span></label>
       <label class="field"><span>Límite de pérdida</span><input type="number" id="sStop" min="1" step="1" value="${st.stop}"><span class="hint">Recomendado: ${money(r.stop)} (50 %)</span></label>
       <div class="btns" style="margin-top:0"><button class="btn" id="sRec">Usar recomendados</button><button class="btn" id="sNew">Nueva sesión</button></div>
     </div>
     <div>
-      <h3 style="margin-top:0">Si mantienes esta apuesta</h3>
+      <h3 style="margin-top:0">Con apuestas de ${money(bet)} por mano</h3>
       <div class="kv">
         <span>Llegas a la meta antes que al límite</span><span class="v">${pct(k.p,0)}</span>
         <span>Terminas en el límite de pérdida</span><span class="v">${pct(1-k.p,0)}</span>
         <span>Duración esperada</span><span class="v">≈ ${num(Math.round(k.T))} manos</span>
         <span>Pérdida esperada por mano</span><span class="v">${k.loss<1?num(k.loss*100,1)+' centavos':money(k.loss)}</span>
       </div>
-      <p class="muted small" style="margin-top:10px">Una meta más pequeña sube la probabilidad de terminar ganando, pero el promedio a largo plazo sigue siendo la ventaja de la casa (${pct(houseEdge(),2)}).</p>
+      <p class="muted small" style="margin-top:10px">No incluye los comodines, que tienen más ventaja para la casa. Una meta más pequeña sube la probabilidad de terminar ganando.</p>
     </div>
   </div>`;
-  const upd=(id,key)=>{ $(id).onchange=e=>{ const v=Math.max(1,+e.target.value||1); bj.sess[key]=v; saveSess(); renderBJ(); }; };
-  upd('#sBet','bet'); upd('#sGoal','goal'); upd('#sStop','stop');
-  $('#sRec').onclick=()=>{ Object.assign(bj.sess,recFor(bj.sess.start)); saveSess(); renderBJ(); };
+  const upd=(id,key)=>{ $(id).onchange=e=>{ bj.sess[key]=Math.max(1,+e.target.value||1); saveSess(); renderBJ(); }; };
+  upd('#sGoal','goal'); upd('#sStop','stop');
+  $('#sRec').onclick=()=>{ Object.assign(bj.sess,{goal:r.goal,stop:r.stop}); bj.bets.main=r.bet; store.set('bj_bets',bj.bets); saveSess(); renderBJ(); };
   $('#sNew').onclick=()=>{ if(!confirm('¿Terminar esta sesión y empezar una nueva? Tu registro de manos se conserva.'))return; bj.sess=null; saveSess(); renderBJ(); };
+}
+
+/* Comodines: se resuelven con las dos primeras cartas; el as vale 1 */
+const SPOTS=[['main','Apuesta'],['over','+13'],['under','−13'],['exact','13'],['pair','Par']];
+const SIDE_NAME={over:'Más de 13',under:'Menos de 13',exact:'13 exacto',pair:'Par'};
+const CHIPS=[1,5,10,25,50,100];
+const chipCls=v=>({0.5:'c05',1:'c1',5:'c5',10:'c10',25:'c25',50:'c50',100:'c100'})[v]||'c1';
+const sideTotal=()=>bj.bets.over+bj.bets.under+bj.bets.exact+bj.bets.pair;
+function sideProbs(){
+  const nd=bj.decks, T=52*nd, c=4*nd; let over=0,under=0,exact=0;
+  for(let a=1;a<=13;a++) for(let b=1;b<=13;b++){
+    const p=c*(c-(a===b?1:0))/(T*(T-1)), s=Math.min(a,10)+Math.min(b,10);
+    if(s>13) over+=p; else if(s<13) under+=p; else exact+=p;
+  }
+  return {over,under,exact,pperf:(nd-1)/(T-1),pcol:nd/(T-1),pmix:2*nd/(T-1)};
+}
+function resolveSides(){
+  if(bj.player.length<2) return null;
+  const s=rv(bj.player[0])+rv(bj.player[1]), B=bj.bets, y=bj.pay, items=[];
+  if(B.over) items.push({k:'+13',name:SIDE_NAME.over,bet:B.over,net:s>13?B.over*y.over:-B.over});
+  if(B.under) items.push({k:'−13',name:SIDE_NAME.under,bet:B.under,net:s<13?B.under*y.under:-B.under});
+  if(B.exact) items.push({k:'13',name:SIDE_NAME.exact,bet:B.exact,net:s===13?B.exact*y.exact:-B.exact});
+  if(B.pair){ const pay={mix:y.pmix,col:y.pcol,perf:y.pperf}[bj.pairType]; items.push({k:'Par',name:SIDE_NAME.pair,bet:B.pair,net:pay?B.pair*pay:-B.pair}); }
+  return {sum:s,items,net:items.reduce((t,x)=>t+x.net,0)};
+}
+function renderSidesPanel(){
+  const P=sideProbs(), y=bj.pay, el=$('#sidesPanel');
+  const e1=(p,pay)=>(1-p)-p*pay;
+  const pp=P.pperf+P.pcol+P.pmix, ePair=(1-pp)-(P.pperf*y.pperf+P.pcol*y.pcol+P.pmix*y.pmix);
+  const ec=e=>`<td class="n" style="color:${e>0?'var(--red-ink)':'var(--green)'}">${pct(e,1)}</td>`;
+  const inp=k=>`<input type="number" class="payin" data-k="${k}" min="0" step="0.5" value="${y[k]}"> a 1`;
+  el.innerHTML=`<h2>Comodines</h2>
+  <p class="muted small">Se resuelven con tus dos primeras cartas y el as vale 1. Ajusta los pagos a los de tu mesa.</p>
+  <div class="scroll"><table class="obs side"><thead><tr><th>Comodín</th><th>Paga</th><th style="text-align:right">Prob.</th><th style="text-align:right">Ventaja casa</th></tr></thead><tbody>
+    <tr><td>Más de 13 (+13)</td><td>${inp('over')}</td><td class="n">${pct(P.over,1)}</td>${ec(e1(P.over,y.over))}</tr>
+    <tr><td>Menos de 13 (−13)</td><td>${inp('under')}</td><td class="n">${pct(P.under,1)}</td>${ec(e1(P.under,y.under))}</tr>
+    <tr><td>13 exacto</td><td>${inp('exact')}</td><td class="n">${pct(P.exact,1)}</td>${ec(e1(P.exact,y.exact))}</tr>
+    <tr><td>Par mixto</td><td>${inp('pmix')}</td><td class="n">${pct(P.pmix,2)}</td><td class="n" rowspan="3" style="color:${ePair>0?'var(--red-ink)':'var(--green)'}">${pct(ePair,1)}</td></tr>
+    <tr><td>Par de color</td><td>${inp('pcol')}</td><td class="n">${pct(P.pcol,2)}</td></tr>
+    <tr><td>Par perfecto</td><td>${inp('pperf')}</td><td class="n">${pct(P.pperf,2)}</td></tr>
+  </tbody></table></div>
+  <p class="muted small" style="margin-top:10px">El juego principal le deja a la casa cerca de ${pct(houseEdge(),1)}. Si un comodín muestra mucho más, cada dólar que pones ahí rinde peor.</p>`;
+  el.querySelectorAll('.payin').forEach(i=>i.onchange=e=>{ bj.pay[i.dataset.k]=Math.max(0,+e.target.value||0); store.set('bj_pay',bj.pay); send('saveConfig',{key:'bj_pay',value:JSON.stringify(bj.pay)}); renderBJ(); });
+}
+
+function renderBetStrip(){
+  const B=bj.bets;
+  $('#betStrip').innerHTML=`<div class="spots" role="group" aria-label="Dónde apuestas">${SPOTS.map(([k,l])=>`<button class="spot" data-spot="${k}" aria-pressed="${bj.spot===k}"><span>${l}</span><b>${money(B[k])}</b></button>`).join('')}</div>
+  <div class="chiprow">${CHIPS.map(v=>`<button class="pchip ${chipCls(v)}" data-chip="${v}" aria-label="Sumar ${money(v)}">${v}</button>`).join('')}</div>
+  <div class="chiprow"><button class="fbtn" data-act="x2">Doblar este lugar</button><button class="fbtn" data-act="clear">Borrar este lugar</button><button class="fbtn" data-act="sides">Quitar comodines</button></div>
+  <p class="strip-hint">Toca dónde apuestas y luego las fichas. Lo apostado se mantiene para la siguiente mano.</p>`;
 }
 
 function renderNotes(){
   document.querySelectorAll('#decks button').forEach(b=>b.setAttribute('aria-pressed',String(+b.dataset.d===bj.decks)));
   $('#rulesNote').textContent=`Zapato de ${bj.decks} ${bj.decks===1?'mazo':'mazos'}, doblar después de dividir permitido y blackjack pagado 3:2.`+(bj.decks<=2?' La tabla está optimizada para 4 a 8 mazos; con 1 o 2 mazos hay pocas diferencias y casi no cambian la ventaja.':'');
   const e=houseEdge();
-  $('#edgeNote').textContent=`Con estas reglas y la estrategia básica, la ventaja de la casa es de aproximadamente ${pct(e,2)}: por cada $100 apostados pierdes en promedio ${money(e*100)}. Menos mazos favorecen al jugador. Si la mesa paga el blackjack 6:5 en lugar de 3:2, la ventaja sube alrededor de 1,4 puntos: evita esas mesas. Nunca tomes el seguro.`;
+  $('#edgeNote').textContent=`Con estas reglas y la estrategia básica, la ventaja de la casa es de aproximadamente ${pct(e,2)}: por cada $100 apostados pierdes en promedio ${money(e*100)}. Menos mazos favorecen al jugador. Si la mesa paga el blackjack 6:5 en lugar de 3:2, la ventaja sube alrededor de 1,4 puntos: evita esas mesas. Nunca tomes el seguro, salvo que cuentes cartas y el conteo real sea +3 o más.`;
   $('#feltBal').innerHTML=bj.sess?`Saldo<b>${money(balance())}</b>`:'';
+  $('#ctMini').innerHTML=ct.on?`Conteo real ${fmtTC()}<br>Sugerida ${money(ctBet())}`:'';
 }
 
 /* ---------- Botones de resultado en el paño ---------- */
 function renderResultBar(a){
   const el=$('#resultBar');
   if(a.state==='incomplete'){ el.innerHTML=''; return; }
-  const isBJ=a.state==='bj', isBust=a.state==='bust', two=bj.player.length===2;
-  const canDouble=a.state==='ok'&&two;
+  const isBJ=a.state==='bj', isBust=a.state==='bust', two=bj.player.length===2, canDouble=a.state==='ok'&&two;
+  const key=bj.player.slice(0,2).join();
+  const same=bj.player[0]===bj.player[1];
+  if(bj.pairKey!==key){ bj.pairKey=key; bj.pairType=(same&&bj.player[0]!=='10')?'mix':'no'; }
   el.innerHTML=`<div class="rbar">
+    <div id="sideRes" style="display:grid;gap:8px;justify-items:center"></div>
     ${a.state==='ok'?`<div class="rbar-opts"><label><input type="checkbox" id="followed" checked> Seguí la guía</label>${canDouble?`<label><input type="checkbox" id="doubled"${a.main==='D'?' checked':''}> Doblé</label>`:''}</div>`:''}
     <div class="rbar-btns" id="rbtns"></div>
   </div>`;
   const draw=()=>{
-    const dbl=!!($('#doubled')&&$('#doubled').checked), bet=bj.sess?bj.sess.bet:0, risk=bet*(dbl?2:1);
+    const sides=resolveSides();
+    let sr='';
+    if(sides&&sides.items.length){
+      sr=`<div class="side-res">${sides.items.map(x=>`<span class="${x.net>0?'w':'l'}">${x.k}: ${x.net>0?'gana':'pierde'} ${signed(x.net)}</span>`).join('')}</div>`;
+      if(bj.bets.pair&&same) sr+=`<div class="rbar-opts"><span>¿Qué par fue?</span><div class="seg feltseg">${[['no','No es par'],['mix','Mixto'],['col','Color'],['perf','Perfecto']].map(([k,l])=>`<button data-pt="${k}" aria-pressed="${bj.pairType===k}">${l}</button>`).join('')}</div></div>${bj.player[0]==='10'?'<p class="strip-hint">Con 10, J, Q o K solo es par si son la misma figura.</p>':''}`;
+    }
+    $('#sideRes').innerHTML=sr;
+    $('#sideRes').querySelectorAll('[data-pt]').forEach(b=>b.onclick=()=>{ bj.pairType=b.dataset.pt; draw(); });
+    const dbl=!!($('#doubled')&&$('#doubled').checked), bet=bj.bets.main, risk=bet*(dbl?2:1), sn=sides?sides.net:0;
     let B;
     if(isBust) B=[['Perdí',-risk,'lose']];
     else if(isBJ) B=[['Gané',bet*1.5,'win'],['Empaté',0,'']];
     else { B=[['Gané',risk,'win'],['Empaté',0,''],['Perdí',-risk,'lose']]; if(bj.surr&&two&&!dbl) B.push(['Me rendí',-bet/2,'lose']); }
-    $('#rbtns').innerHTML=B.map(x=>`<button class="rb ${x[2]}" data-res="${x[0]}" data-net="${x[1]}">${x[0]}${bj.sess?`<small>${x[1]>0?'+':''}${money(x[1])}</small>`:''}</button>`).join('');
+    const showAmt=bet>0||sides&&sides.items.length;
+    $('#rbtns').innerHTML=B.map(x=>`<button class="rb ${x[2]}" data-res="${x[0]}" data-net="${x[1]}">${x[0]}${showAmt?`<small>${signed(x[1]+sn)}</small>`:''}</button>`).join('');
     $('#rbtns').querySelectorAll('.rb').forEach(btn=>btn.onclick=()=>{
       const f=$('#followed');
-      const hand={cards:bj.player.join(' - '),dealer:bj.dealer,total:a.h?a.h.total:'',rec:recName(a),followed:f?f.checked:true,result:btn.dataset.res,session:bj.sess?bj.sess.id:'',bet:risk,net:+btn.dataset.net};
+      const hand={cards:bj.player.join(' - '),dealer:bj.dealer,total:a.h?a.h.total:'',rec:recName(a),followed:f?f.checked:true,result:btn.dataset.res,
+        session:bj.sess?bj.sess.id:'',bet:risk,
+        sides:sides?sides.items.map(x=>`${x.name} ${money(x.bet)}: ${signed(x.net)}`).join('; '):'',
+        sideNet:sn,net:+btn.dataset.net+sn};
       bj.log.push(hand); store.set('bj_log',bj.log); send('addHand',hand);
       bj.player=[]; bj.dealer=null; renderBJ();
     });
@@ -707,20 +871,98 @@ function renderLog(a){
   const lost=x=>x.result==='Perdí'||x.result==='Me rendí';
   const f=L.filter(x=>x.followed), nf=L.filter(x=>!x.followed);
   const line=(lab,arr)=>arr.length?`<span>${lab} (${arr.length})</span><span class="v">${pct(arr.filter(x=>x.result==='Gané').length/arr.length,0)} / ${pct(arr.filter(x=>x.result==='Empaté').length/arr.length,0)} / ${pct(arr.filter(lost).length/arr.length,0)}</span>`:'';
+  const S=sessHands(), sideN=S.reduce((t,x)=>t+(+x.sideNet||0),0), mainN=S.reduce((t,x)=>t+(+x.net||0),0)-sideN;
   h+=`<p class="muted small" style="margin-bottom:6px">Ganadas / empatadas / perdidas</p>
   <div class="kv">${line('Todas las manos',L)}${line('Siguiendo la guía',f)}${line('Sin seguirla',nf)}</div>
+  ${bj.sess&&S.length?`<h3>En esta sesión</h3><div class="kv"><span>Juego principal</span><span class="v">${signed(mainN)}</span><span>Comodines</span><span class="v">${signed(sideN)}</span></div>`:''}
   <p class="muted small" style="margin-top:10px">Con estrategia perfecta lo normal es ganar cerca del 43 %, empatar el 9 % y perder el 48 %; los dobles y el pago 3:2 del blackjack compensan la diferencia. Con pocas manos los porcentajes varían mucho.</p>
   <div class="btns"><button class="btn" id="undoHand">Deshacer última mano</button></div>`;
   el.innerHTML=h;
   $('#undoHand').onclick=()=>{ bj.log.pop(); store.set('bj_log',bj.log); send('undoHand'); renderBJ(); };
 }
 
+/* =================== CONTEO DE CARTAS (Hi-Lo) =================== */
+const HL=r=>({'2':1,'3':1,'4':1,'5':1,'6':1,'10':-1,'A':-1})[r]||0;
+const ct={rc:store.get('ct_rc',0),seen:store.get('ct_seen',0),stack:store.get('ct_stack',[]),on:store.get('ct_on',false),link:store.get('ct_link',true),hide:store.get('ct_hide',true),unit:store.get('ct_unit',0),reveal:false,pr:{rc:0,n:0,card:null,show:false}};
+function saveCt(){ ['rc','seen','stack','on','link','hide','unit'].forEach(k=>store.set('ct_'+k,ct[k])); }
+const decksLeft=()=>Math.max(0.5,bj.decks-ct.seen/52);
+const trueCount=()=>ct.rc/decksLeft();
+const fmtTC=()=>{ const t=trueCount(); return (t>0?'+':'')+num(t,1); };
+const ctUnit=()=>ct.unit||(bj.sess?recFor(bj.sess.start).bet:1);
+const ctBet=()=>ctUnit()*Math.max(1,Math.floor(trueCount())-1);
+function ctAdd(delta){ ct.rc+=delta; ct.seen+=1; ct.stack.push(delta); if(ct.stack.length>600) ct.stack.shift(); saveCt(); }
+function ctCard(r,sign){ if(!(ct.on&&ct.link))return; if(sign>0) ctAdd(HL(r)); else { ct.rc-=HL(r); ct.seen=Math.max(0,ct.seen-1); saveCt(); } }
+function ctUndo(){ if(!ct.stack.length)return; ct.rc-=ct.stack.pop(); ct.seen=Math.max(0,ct.seen-1); saveCt(); }
+function deviation(a){
+  if(!ct.on||a.state!=='ok'||a.h.soft) return null;
+  if(a.table==='pairs'&&a.key!=='10'&&a.key!=='5') return null;
+  const tc=trueCount(), t=a.h.total, d=bj.dealer, two=a.two, base=a.main;
+  let act=null;
+  if(a.table==='pairs'&&a.key==='10'){ if((d==='5'&&tc>=5)||(d==='6'&&tc>=4)) act='P'; return act&&act!==base?act:null; }
+  if(base!=='R'){
+    if(t===16&&d==='10'&&tc>=0) act='S';
+    if(t===15&&d==='10'&&tc>=4) act='S';
+    if(t===16&&d==='9'&&tc>=5) act='S';
+  }
+  if(t===12&&d==='3'&&tc>=2) act='S';
+  if(t===12&&d==='2'&&tc>=3) act='S';
+  if(t===12&&d==='4'&&tc<0) act='H';
+  if(t===12&&d==='5'&&tc<=-2) act='H';
+  if(t===12&&d==='6'&&tc<=-1) act='H';
+  if(t===13&&d==='2'&&tc<=-1) act='H';
+  if(t===13&&d==='3'&&tc<=-2) act='H';
+  if(two){
+    if(t===10&&(d==='10'||d==='A')&&tc>=4) act='D';
+    if(t===11&&d==='A'&&tc>=1) act='D';
+    if(t===9&&d==='2'&&tc>=1) act='D';
+    if(t===9&&d==='7'&&tc>=3) act='D';
+  }
+  return act&&act!==base?act:null;
+}
+function renderCount(){
+  const show=!ct.hide||ct.reveal;
+  const dl=decksLeft();
+  $('#ctScreen').innerHTML=`<div><div class="lab">Corriente</div><div class="big">${show?(ct.rc>0?'+':'')+ct.rc:'··'}</div></div>
+    <div style="text-align:center"><div class="lab">Real</div><div class="big">${show?fmtTC():'··'}</div></div>
+    <div style="text-align:right"><div class="lab">Apuesta</div><div class="big" style="font-size:30px">${show?money(ctBet()):'··'}</div></div>`;
+  $('#ctInfo').textContent=`${ct.seen} cartas vistas, quedan ≈ ${num(dl,1)} mazos${ct.hide?'. Mantén presionado arriba para ver':''}`;
+  $('#ctOn').checked=ct.on; $('#ctLink').checked=ct.link; $('#ctHide').checked=ct.hide; $('#ctUnit').value=ct.unit||'';
+  $('#ctUnitHint').textContent=`Si lo dejas vacío uso ${money(ctUnit())}.`;
+  const pr=ct.pr;
+  $('#prArea').innerHTML=pr.card?`<div class="hand" style="justify-content:flex-start;padding-left:22px">${cardHTML(pr.card,Math.floor(Math.random()*4))}</div>
+    <p class="small" style="margin-top:8px">${pr.n} cartas repartidas. ${pr.show?`Conteo correcto: <b>${pr.rc>0?'+':''}${pr.rc}</b>`:'Lleva la cuenta mentalmente.'}</p>`:'<p class="muted small">Reparte cartas al azar y lleva la cuenta de memoria; luego compruébala.</p>';
+}
+function initCount(){
+  $('#ctPad').addEventListener('click',e=>{ const b=e.target.closest('button'); if(!b)return; ctAdd(+b.dataset.d); renderCount(); renderBJ(); if(navigator.vibrate) navigator.vibrate(8); });
+  $('#ctUndo').onclick=()=>{ ctUndo(); renderCount(); renderBJ(); };
+  $('#ctShuffle').onclick=()=>{ if(!confirm('¿Reiniciar el conteo? Úsalo cuando el crupier baraje.'))return; ct.rc=0; ct.seen=0; ct.stack=[]; saveCt(); renderCount(); renderBJ(); };
+  const scr=$('#ctScreen');
+  const on=()=>{ ct.reveal=true; renderCount(); }, off=()=>{ ct.reveal=false; renderCount(); };
+  scr.addEventListener('pointerdown',on); scr.addEventListener('pointerup',off); scr.addEventListener('pointerleave',off); scr.addEventListener('pointercancel',off);
+  $('#ctOn').onchange=e=>{ ct.on=e.target.checked; saveCt(); renderCount(); renderBJ(); };
+  $('#ctLink').onchange=e=>{ ct.link=e.target.checked; saveCt(); };
+  $('#ctHide').onchange=e=>{ ct.hide=e.target.checked; saveCt(); renderCount(); };
+  $('#ctUnit').onchange=e=>{ ct.unit=Math.max(0,+e.target.value||0); saveCt(); renderCount(); renderBJ(); };
+  $('#prDeal').onclick=()=>{ const r=RANKS[Math.min(9,Math.floor(Math.random()*13))]; ct.pr.card=r; ct.pr.rc+=HL(r); ct.pr.n++; ct.pr.show=false; renderCount(); };
+  $('#prShow').onclick=()=>{ ct.pr.show=true; renderCount(); };
+  $('#prReset').onclick=()=>{ ct.pr={rc:0,n:0,card:null,show:false}; renderCount(); };
+  renderCount();
+}
+
 function initBJ(){
   $('#playerPicker').innerHTML=RANKS.map(r=>`<button class="rank" data-r="${r}" aria-label="Agregar ${r==='A'?'as':r}">${r}</button>`).join('');
   $('#dealerPicker').innerHTML=RANKS.map(r=>`<button class="rank" data-r="${r}" aria-label="Crupier muestra ${r==='A'?'as':r}">${r}</button>`).join('');
-  $('#playerPicker').addEventListener('click',e=>{const b=e.target.closest('.rank'); if(!b)return; const h=evalHand(bj.player); if(bj.player.length>=2&&h.total>=21)return; if(bj.player.length>=9)return; bj.player.push(b.dataset.r); renderBJ();});
-  $('#dealerPicker').addEventListener('click',e=>{const b=e.target.closest('.rank'); if(!b)return; bj.dealer=b.dataset.r; renderBJ();});
-  $('#undoCard').onclick=()=>{bj.player.pop(); renderBJ();};
+  $('#playerPicker').addEventListener('click',e=>{const b=e.target.closest('.rank'); if(!b)return; const h=evalHand(bj.player); if(bj.player.length>=2&&h.total>=21)return; if(bj.player.length>=9)return; bj.player.push(b.dataset.r); ctCard(b.dataset.r,1); renderBJ(); renderCount();});
+  $('#dealerPicker').addEventListener('click',e=>{const b=e.target.closest('.rank'); if(!b)return; if(bj.dealer===b.dataset.r)return; if(bj.dealer) ctCard(bj.dealer,-1); bj.dealer=b.dataset.r; ctCard(bj.dealer,1); renderBJ(); renderCount();});
+  $('#undoCard').onclick=()=>{const r=bj.player.pop(); if(r) ctCard(r,-1); renderBJ(); renderCount();};
+  $('#betStrip').addEventListener('click',e=>{
+    const sp=e.target.closest('[data-spot]'), ch=e.target.closest('[data-chip]'), ac=e.target.closest('[data-act]');
+    if(sp) bj.spot=sp.dataset.spot;
+    else if(ch) bj.bets[bj.spot]=+(bj.bets[bj.spot]+(+ch.dataset.chip)).toFixed(2);
+    else if(ac){ const k=ac.dataset.act; if(k==='x2') bj.bets[bj.spot]*=2; if(k==='clear') bj.bets[bj.spot]=0; if(k==='sides'){ bj.bets.over=bj.bets.under=bj.bets.exact=bj.bets.pair=0; } }
+    else return;
+    store.set('bj_bets',bj.bets); renderBJ();
+  });
   $('#newHand').onclick=()=>{bj.player=[]; bj.dealer=null; renderBJ();};
   $('#s17').onclick=()=>{bj.h17=false; store.set('bj_h17',false); send('saveConfig',{key:'bj_h17',value:'false'}); renderBJ();};
   $('#h17').onclick=()=>{bj.h17=true; store.set('bj_h17',true); send('saveConfig',{key:'bj_h17',value:'true'}); renderBJ();};
@@ -732,83 +974,186 @@ function initBJ(){
 /* =================== RULETA =================== */
 const REDS=new Set([1,3,5,7,9,12,14,16,18,19,21,23,25,27,30,32,34,36]);
 const NUMS=Array.from({length:36},(_,i)=>String(i+1));
-const ru={wheel:store.get('ru_wheel','eu'),mode:'bet',sel:new Set(store.get('ru_sel',[])),byWheel:store.get('ru_byWheel',{eu:[],us:[]}),n:store.get('ru_n',20),base:store.get('ru_base',1),steps:store.get('ru_steps',7)};
-Object.defineProperty(ru,'hist',{get(){return ru.byWheel[ru.wheel];},set(v){ru.byWheel[ru.wheel]=v;}});
+const PAY={pleno:35,caballo:17,calle:11,cuadro:8,linea:5,docena:2,columna:2,simple:1};
+const TNAME={pleno:'Pleno',caballo:'Caballo',calle:'Calle',cuadro:'Cuadro',linea:'Línea',docena:'Docena',columna:'Columna',simple:'Sencilla'};
+const NEED={pleno:1,caballo:2,calle:3,cuadro:4,linea:6};
+const HINT={pleno:'Toca un número.',caballo:'Toca 2 números vecinos.',calle:'Toca los 3 números de una misma fila vertical (ej.: 1, 2 y 3).',cuadro:'Toca 4 números que formen un cuadro (ej.: 1, 2, 4 y 5).',linea:'Toca los 6 números de dos calles seguidas (ej.: del 1 al 6).'};
+const DENOMS=[0.5,1,5,10,25,100];
+let spinsInit=store.get('ru_spins',null);
+if(!spinsInit){ const old=store.get('ru_byWheel',{eu:[],us:[]}); spinsInit={eu:(old.eu||[]).map(n=>({n})),us:(old.us||[]).map(n=>({n}))}; }
+const ru={wheel:store.get('ru_wheel','eu'),mode:'bet',btype:'pleno',denom:store.get('ru_denom',1),bets:store.get('ru_bets',[]),pending:[],spins:spinsInit,sess:store.get('ru_sess',null),n:store.get('ru_n',20),base:store.get('ru_base',1),steps:store.get('ru_steps',7),msg:'',err:''};
+Object.defineProperty(ru,'hist',{get(){return ru.spins[ru.wheel].map(x=>x.n);}});
 const ids=()=>ru.wheel==='us'?['0','00',...NUMS]:['0',...NUMS];
 const N=()=>ru.wheel==='us'?38:37;
 const colorOf=id=>(id==='0'||id==='00')?'g':(REDS.has(+id)?'r':'b');
 const GROUPS={
-  col1:{lab:'2 a 1',ids:NUMS.filter(n=>n%3===0),name:'columna superior'},
-  col2:{lab:'2 a 1',ids:NUMS.filter(n=>n%3===2),name:'columna del medio'},
-  col3:{lab:'2 a 1',ids:NUMS.filter(n=>n%3===1),name:'columna inferior'},
-  doz1:{lab:'1.ª docena',ids:NUMS.filter(n=>n<=12)},
-  doz2:{lab:'2.ª docena',ids:NUMS.filter(n=>n>12&&n<=24)},
-  doz3:{lab:'3.ª docena',ids:NUMS.filter(n=>n>24)},
-  low:{lab:'1 a 18',ids:NUMS.filter(n=>n<=18)},
-  even:{lab:'Par',ids:NUMS.filter(n=>n%2===0)},
-  red:{lab:'Rojo',ids:NUMS.filter(n=>REDS.has(+n))},
-  black:{lab:'Negro',ids:NUMS.filter(n=>!REDS.has(+n))},
-  odd:{lab:'Impar',ids:NUMS.filter(n=>n%2===1)},
-  high:{lab:'19 a 36',ids:NUMS.filter(n=>n>18)}
+  col1:{lab:'2 a 1',t:'columna',name:'Columna superior',ids:NUMS.filter(n=>n%3===0)},
+  col2:{lab:'2 a 1',t:'columna',name:'Columna del medio',ids:NUMS.filter(n=>n%3===2)},
+  col3:{lab:'2 a 1',t:'columna',name:'Columna inferior',ids:NUMS.filter(n=>n%3===1)},
+  doz1:{lab:'1.ª docena',t:'docena',name:'1.ª docena',ids:NUMS.filter(n=>n<=12)},
+  doz2:{lab:'2.ª docena',t:'docena',name:'2.ª docena',ids:NUMS.filter(n=>n>12&&n<=24)},
+  doz3:{lab:'3.ª docena',t:'docena',name:'3.ª docena',ids:NUMS.filter(n=>n>24)},
+  low:{lab:'1 a 18',t:'simple',name:'1 a 18',ids:NUMS.filter(n=>n<=18)},
+  even:{lab:'Par',t:'simple',name:'Par',ids:NUMS.filter(n=>n%2===0)},
+  red:{lab:'Rojo',t:'simple',name:'Rojo',ids:NUMS.filter(n=>REDS.has(+n))},
+  black:{lab:'Negro',t:'simple',name:'Negro',ids:NUMS.filter(n=>!REDS.has(+n))},
+  odd:{lab:'Impar',t:'simple',name:'Impar',ids:NUMS.filter(n=>n%2===1)},
+  high:{lab:'19 a 36',t:'simple',name:'19 a 36',ids:NUMS.filter(n=>n>18)}
 };
-function save(){ store.set('ru_wheel',ru.wheel); store.set('ru_sel',[...ru.sel]); store.set('ru_byWheel',ru.byWheel); store.set('ru_n',ru.n); store.set('ru_base',ru.base); store.set('ru_steps',ru.steps); }
+function save(){ store.set('ru_wheel',ru.wheel); store.set('ru_denom',ru.denom); store.set('ru_bets',ru.bets); store.set('ru_spins',ru.spins); store.set('ru_sess',ru.sess); store.set('ru_n',ru.n); store.set('ru_base',ru.base); store.set('ru_steps',ru.steps); }
+const covered=()=>{ const s=new Set(); ru.bets.forEach(b=>b.ids.forEach(x=>s.add(x))); return s; };
+const totalBet=()=>ru.bets.reduce((t,b)=>t+b.amount,0);
+const sortIds=a=>a.slice().sort((x,y)=>(x==='00'?-1:+x)-(y==='00'?-1:+y));
+const betName=b=>b.g?b.name:`${TNAME[b.type]} ${sortIds(b.ids).join('-')}`;
+function addBet(type,list,g,name){
+  const key=(g||type)+':'+sortIds(list).join(',');
+  const ex=ru.bets.find(b=>b.key===key);
+  if(ex) ex.amount=+(ex.amount+ru.denom).toFixed(2);
+  else ru.bets.push({key,type,ids:list.slice(),amount:ru.denom,g:g||null,name:name||null});
+}
+function shapeOK(type,list){
+  const z=list.filter(x=>x==='0'||x==='00'), n=list.filter(x=>x!=='0'&&x!=='00').map(Number).sort((a,b)=>a-b), us=ru.wheel==='us';
+  if(type==='caballo'){
+    if(list.length!==2) return false;
+    if(z.length===2) return us;
+    if(z.length===1){ const x=n[0]; if(z[0]==='0') return us?[1,2].includes(x):[1,2,3].includes(x); return [2,3].includes(x); }
+    const [a,b]=n; return b-a===3||(b-a===1&&a%3!==0);
+  }
+  if(type==='calle'){
+    if(list.length!==3) return false;
+    if(z.length===1&&!us) return n.join()==='1,2'||n.join()==='2,3';
+    if(z.length===2&&us) return n[0]===2;
+    if(z.length) return false;
+    return n[0]%3===1&&n[1]===n[0]+1&&n[2]===n[0]+2;
+  }
+  if(type==='cuadro'){
+    if(list.length!==4) return false;
+    if(z.length===1&&z[0]==='0'&&!us) return n.join()==='1,2,3';
+    if(z.length) return false;
+    const a=n[0]; return a%3!==0&&n[1]===a+1&&n[2]===a+3&&n[3]===a+4;
+  }
+  if(type==='linea'){
+    if(list.length!==6||z.length) return false;
+    const a=n[0]; return a%3===1&&n.every((x,i)=>x===a+i);
+  }
+  return list.length===1;
+}
+const netFor=id=>ru.bets.reduce((t,b)=>t+(b.ids.includes(id)?b.amount*PAY[b.type]:-b.amount),0);
+function ruBalance(){ if(!ru.sess) return 0; let t=ru.sess.start; ['eu','us'].forEach(w=>ru.spins[w].forEach(x=>{ if(x.ses===ru.sess.id) t+=(+x.net||0); })); return t; }
+const ruSessSpins=()=>ru.sess?['eu','us'].reduce((a,w)=>a.concat(ru.spins[w].filter(x=>x.ses===ru.sess.id)),[]):[];
+function saveRuSess(){ save(); send('saveConfig',{key:'ru_session',value:ru.sess?JSON.stringify(ru.sess):''}); }
+
+function registerSpin(id){
+  const st=totalBet(), net=ru.bets.length?netFor(id):0;
+  const d=ru.bets.map(b=>`${betName(b)} ${money(b.amount)}: ${b.ids.includes(id)?signed(b.amount*PAY[b.type]):signed(-b.amount)}`).join('; ');
+  const rec={n:id,ses:ru.sess?ru.sess.id:'',st,net,d};
+  ru.spins[ru.wheel].push(rec);
+  send('addSpins',{wheel:ru.wheel,spins:[rec]});
+  const wins=ru.bets.filter(b=>b.ids.includes(id));
+  ru.msg=st?`Salió ${id}. ${wins.length?'Ganaste '+wins.map(b=>`${betName(b).toLowerCase()} (${signed(b.amount*PAY[b.type])})`).join(', ')+'.':'Ninguna de tus apuestas ganó.'} Neto del giro: ${signed(net)}.`:`Salió ${id}.`;
+}
+
+function renderRuSess(){
+  const el=$('#ruSess');
+  if(!ru.sess){
+    el.innerHTML=`<div class="sess-start">
+      <div><h2>Tu sesión de ruleta</h2><p class="muted small">Indica con cuánto inicias. Cada giro que registres sumará o restará según tus fichas.</p></div>
+      <div class="sess-new"><label class="field"><span>Dinero con el que inicias</span><input type="number" id="rStart" min="1" step="1" placeholder="Ej.: 100" inputmode="decimal"></label><button class="btn primary" id="rGo">Empezar sesión</button></div>
+    </div>`;
+    const go=()=>{ const v=+$('#rStart').value; if(!(v>0)){ $('#rStart').focus(); return; } const r=recFor(v); ru.sess={id:'R'+Date.now(),start:v,goal:r.goal,stop:r.stop}; saveRuSess(); renderAll(); };
+    $('#rGo').onclick=go; $('#rStart').onkeydown=e=>{ if(e.key==='Enter') go(); };
+    return;
+  }
+  const st=ru.sess, b=ruBalance(), diff=b-st.start, S=ruSessSpins(), played=S.filter(x=>x.st>0), wagered=S.reduce((t,x)=>t+(+x.st||0),0), r=recFor(st.start);
+  const lo=st.start-st.stop, hi=st.start+st.goal;
+  el.innerHTML=`<div class="sess-grid">
+    <div>
+      <h2>Tu sesión de ruleta</h2>
+      <p class="muted small">Saldo actual (iniciaste con ${money(st.start)})</p>
+      <p class="balance">${money(b)}</p>
+      <p class="${diff>=0?'up':'down'}">${signed(diff)} en ${played.length} ${played.length===1?'giro':'giros'} apostados</p>
+      ${rangeHTML(st.start,b,lo,hi)}
+      ${alertHTML(b,lo,hi,diff,totalBet())}
+    </div>
+    <div class="sess-fields">
+      <label class="field"><span>Meta de ganancia</span><input type="number" id="rGoal" min="1" step="1" value="${st.goal}"><span class="hint">Recomendado: ${money(r.goal)} (25 %)</span></label>
+      <label class="field"><span>Límite de pérdida</span><input type="number" id="rStop" min="1" step="1" value="${st.stop}"><span class="hint">Recomendado: ${money(r.stop)} (50 %)</span></label>
+      <div class="btns" style="margin-top:0"><button class="btn" id="rRec">Usar recomendados</button><button class="btn" id="rNew">Nueva sesión</button></div>
+    </div>
+    <div>
+      <h3 style="margin-top:0">En esta sesión</h3>
+      <div class="kv">
+        <span>Total apostado</span><span class="v">${money(wagered)}</span>
+        <span>Pérdida esperada por la ventaja de la casa</span><span class="v">${money(wagered*(1-36/N()))}</span>
+        <span>Tu resultado real</span><span class="v">${signed(diff)}</span>
+      </div>
+      <p class="muted small" style="margin-top:10px">La diferencia entre lo esperado y lo real es la suerte del momento; a largo plazo el resultado se acerca a lo esperado.</p>
+    </div>
+  </div>`;
+  const upd=(id,key)=>{ $(id).onchange=e=>{ ru.sess[key]=Math.max(1,+e.target.value||1); saveRuSess(); renderAll(); }; };
+  upd('#rGoal','goal'); upd('#rStop','stop');
+  $('#rRec').onclick=()=>{ Object.assign(ru.sess,{goal:r.goal,stop:r.stop}); saveRuSess(); renderAll(); };
+  $('#rNew').onclick=()=>{ if(!confirm('¿Terminar esta sesión y empezar una nueva? El historial de giros se conserva.'))return; ru.sess=null; saveRuSess(); renderAll(); };
+}
+
+function renderTop(){
+  $('#ruTop').innerHTML=`<div class="seg feltseg" role="group" aria-label="Tipo de apuesta">${Object.keys(NEED).map(k=>`<button data-bt="${k}" aria-pressed="${ru.btype===k}">${TNAME[k]}</button>`).join('')}</div>
+  <div class="denoms" role="group" aria-label="Valor de la ficha">${DENOMS.map(v=>`<button class="pchip ${chipCls(v)}" data-den="${v}" aria-pressed="${ru.denom===v}">${v===0.5?'0,50':v}</button>`).join('')}
+  <input type="number" id="denOther" min="0.1" step="0.1" placeholder="Otro" value="${DENOMS.includes(ru.denom)?'':ru.denom}" aria-label="Otro valor de ficha"></div>`;
+}
 
 function renderBoard(){
   const counts={}; ru.hist.forEach(h=>counts[h]=(counts[h]||0)+1);
-  const last=ru.hist[ru.hist.length-1];
-  const btn=(id,style)=>{
-    const s=ru.sel.has(id), c=counts[id];
-    return `<button class="cell ${colorOf(id)}${s?' sel':''}${id===last?' last':''}" style="${style}" data-id="${id}" aria-label="Número ${id}${s?', marcado':''}"><span>${id}</span>${c&&ru.mode==='spin'?`<i class="cnt">${c}</i>`:''}</button>`;
-  };
+  const last=ru.hist[ru.hist.length-1], cov=covered(), pend=new Set(ru.pending);
+  const direct={}, gAmt={};
+  ru.bets.forEach(b=>{ if(b.type==='pleno') direct[b.ids[0]]=(direct[b.ids[0]]||0)+b.amount; if(b.g) gAmt[b.g]=b.amount; });
+  const btn=(id,style)=>`<button class="cell ${colorOf(id)}${cov.has(id)&&!direct[id]?' cov':''}${pend.has(id)?' pend':''}${id===last?' last':''}" style="${style}" data-id="${id}" aria-label="Número ${id}"><span>${id}</span>${direct[id]?`<i class="amt">${money(direct[id])}</i>`:''}${counts[id]&&ru.mode==='spin'?`<i class="cnt">${counts[id]}</i>`:''}</button>`;
   let h='';
   if(ru.wheel==='us'){ h+=btn('00','grid-column:1;grid-row:1/span 3'); h+=btn('0','grid-column:1;grid-row:4/span 3'); }
   else h+=btn('0','grid-column:1;grid-row:1/span 6');
   for(let c=0;c<12;c++) for(let r=0;r<3;r++){ const n=String(3*c+3-r); h+=btn(n,`grid-column:${c+2};grid-row:${2*r+1}/span 2`); }
-  const g=(k,style)=>{const G=GROUPS[k]; const all=G.ids.every(x=>ru.sel.has(x)); return `<button class="cell out${all?' sel':''}" style="${style}" data-g="${k}"><span>${G.lab}</span></button>`;};
+  const g=(k,style)=>`<button class="cell out" style="${style}" data-g="${k}"><span>${GROUPS[k].lab}</span>${gAmt[k]?`<i class="amt">${money(gAmt[k])}</i>`:''}</button>`;
   h+=g('col1','grid-column:14;grid-row:1/span 2')+g('col2','grid-column:14;grid-row:3/span 2')+g('col3','grid-column:14;grid-row:5/span 2');
   h+=g('doz1','grid-column:2/span 4;grid-row:7')+g('doz2','grid-column:6/span 4;grid-row:7')+g('doz3','grid-column:10/span 4;grid-row:7');
   ['low','even','red','black','odd','high'].forEach((k,i)=>{h+=g(k,`grid-column:${2+i*2}/span 2;grid-row:8`);});
   $('#board').innerHTML=h;
   $('#ruFelt').classList.toggle('mode-spin',ru.mode==='spin');
-  $('#modeHint').textContent=ru.mode==='bet'?'Toca números o zonas para colocar fichas.':'Toca el número que salió en cada giro.';
+  let hint;
+  if(ru.err) hint=`<span class="ru-err">${ru.err}</span>`;
+  else if(ru.mode==='spin') hint=ru.msg?`<span class="ru-msg">${ru.msg}</span>`:'Toca el número que salió. Tus fichas se cobran o se pierden solas.';
+  else hint=`Ficha de ${money(ru.denom)}. ${HINT[ru.btype]}${ru.pending.length?` (${ru.pending.length} de ${NEED[ru.btype]})`:''}`;
+  $('#modeHint').innerHTML=hint;
 }
 
-function payoutFor(){
-  const k=ru.sel.size;
-  if(ru.wheel==='us'&&k===5&&['0','00','1','2','3'].every(x=>ru.sel.has(x))) return 6;
-  if([1,2,3,4,6,12,18].includes(k)) return 36/k-1;
-  return null;
-}
 function renderBet(){
-  const k=ru.sel.size, n=N(), p=k/n, edge=1-36/n;
-  let h='<h2>Tu apuesta</h2>';
-  if(!k){ h+='<p class="muted">Marca en la mesa los números (o zonas) a los que apostarías y aquí verás tu probabilidad real.</p>'; }
-  else{
-    const pay=payoutFor();
-    const ev=pay!==null?p*(pay+1)-1:-edge;
-    h+=`<p class="muted small">${k} ${k===1?'número':'números'} de ${n}</p>
-    <p class="bigstat" style="font-size:44px;margin:4px 0">${pct(p,2)}</p>
-    <p class="muted small">de ganar en el próximo giro, aproximadamente 1 de cada ${num(1/p,1)}</p>
-    <div class="kv" style="margin-top:14px">
-      <span>Pago estándar</span><span class="v">${pay!==null?num(pay)+' a 1':'Combinada (varias fichas)'}</span>
-      <span>Valor esperado por ficha</span><span class="v" style="color:var(--red-ink)">${pct(ev,2)}</span>
+  const n=N(), edge=1-36/n, tot=totalBet(), cov=covered(), k=cov.size, p=k/n;
+  let h='<h2>Tus apuestas</h2>';
+  if(!ru.bets.length){
+    h+='<p class="muted">Elige el valor de la ficha y el tipo de apuesta en el paño, y toca los números o las zonas. Puedes combinar varias apuestas; cada toque suma una ficha.</p>';
+  } else {
+    h+=ru.bets.map((b,i)=>`<div class="betrow"><div>${betName(b)}<br><span class="muted small">Paga ${PAY[b.type]} a 1, gana ${pct(b.ids.length/n,1)}</span></div><span class="v">${money(b.amount)}</span><button class="xbtn" data-del="${i}" aria-label="Quitar">×</button></div>`).join('');
+    const nets=ids().map(netFor), win=nets.filter(x=>x>0).length/n, tie=nets.filter(x=>x===0).length/n;
+    h+=`<div class="kv" style="margin-top:12px">
+      <span>Total en la mesa</span><span class="v">${money(tot)}</span>
+      <span>Terminas el giro ganando</span><span class="v">${pct(win,1)}</span>
+      ${tie?`<span>Terminas igual</span><span class="v">${pct(tie,1)}</span>`:''}
+      <span>Terminas perdiendo</span><span class="v">${pct(1-win-tie,1)}</span>
+      <span>Mejor resultado posible</span><span class="v">${signed(Math.max(...nets))}</span>
+      <span>Peor resultado posible</span><span class="v">${signed(Math.min(...nets))}</span>
+      <span>Valor esperado por giro</span><span class="v" style="color:var(--red-ink)">${signed(-tot*edge)}</span>
     </div>
     <h3>En los próximos giros</h3>
-    <label class="field"><span>Giros: <b id="nOut">${ru.n}</b></span><input type="range" id="nSpins" min="1" max="100" value="${ru.n}"></label>
+    <label class="field"><span>Giros: <b>${ru.n}</b></span><input type="range" id="nSpins" min="1" max="100" value="${ru.n}"></label>
     <div class="kv" style="margin-top:10px">
-      <span>Sale al menos una vez</span><span class="v">${pct(1-Math.pow(1-p,ru.n))}</span>
-      <span>No sale ninguna vez</span><span class="v">${pct(Math.pow(1-p,ru.n))}</span>
-      <span>Aciertos esperados</span><span class="v">${num(ru.n*p,1)}</span>
-      <span>Pérdida esperada (1 ficha por número)</span><span class="v">${num(ru.n*k*edge,2)} fichas</span>
+      <span>Sale al menos uno de tus números</span><span class="v">${pct(1-Math.pow(1-p,ru.n))}</span>
+      <span>No sale ninguno</span><span class="v">${pct(Math.pow(1-p,ru.n))}</span>
+      <span>Pérdida esperada con estas fichas</span><span class="v">${money(ru.n*tot*edge)}</span>
     </div>`;
-    if(ru.hist.length){
-      const hits=ru.hist.filter(x=>ru.sel.has(x)).length;
-      h+=`<p class="small muted" style="margin-top:12px">En tu historial (${ru.hist.length} giros) tu selección salió ${hits} ${hits===1?'vez':'veces'}; lo esperado era ${num(ru.hist.length*p,1)}.</p>`;
-    }
   }
-  h+=`<div class="note">La rueda no tiene memoria. Cada número tiene ${pct(1/n,2)} en cada giro, sin importar lo que haya salido antes. La casa se queda en promedio con ${pct(edge,2)} de todo lo apostado.</div>`;
+  h+=`<div class="note">La rueda no tiene memoria: cada número tiene ${pct(1/n,2)} en cada giro, pase lo que pase antes. Toda apuesta le deja a la casa ${pct(edge,2)} en promedio. Si sale ${ru.wheel==='us'?'0 o 00':'0'}, las apuestas sencillas, docenas y columnas pierden.</div>`;
   $('#betPanel').innerHTML=h;
-  const r=$('#nSpins'); if(r) r.oninput=e=>{ru.n=+e.target.value; save(); renderBet();};
+  $('#betPanel').querySelectorAll('[data-del]').forEach(b=>b.onclick=()=>{ ru.bets.splice(+b.dataset.del,1); save(); renderAll(); });
+  const r=$('#nSpins'); if(r) r.oninput=e=>{ ru.n=+e.target.value; save(); renderBet(); };
 }
 
 function Phi(z){ const t=1/(1+0.3275911*Math.abs(z)/Math.SQRT2); const y=1-(((((1.061405429*t-1.453152027)*t)+1.421413741)*t-0.284496736)*t+0.254829592)*t*Math.exp(-z*z/2); return 0.5*(1+(z>=0?y:-y)); }
@@ -817,24 +1162,22 @@ function chiP(x,df){ const z=(Math.pow(x/df,1/3)-(1-2/(9*df)))/Math.sqrt(2/(9*df
 function renderHist(){
   const H=ru.hist, T=H.length, n=N(), list=ids();
   let h=`<h2>Lo que ha salido</h2>
-  <label class="field"><span>Agregar varios (separados por coma o espacio)</span><input type="text" id="paste" placeholder="Ej.: 17, 32, 0, 5" inputmode="numeric"></label>
-  <div class="btns"><button class="btn primary" id="addPaste">Agregar</button><button class="btn" id="undoSpin">Deshacer último</button><button class="btn" id="clearHist">Borrar historial</button></div>`;
-  if(!T){ h+='<p class="muted" style="margin-top:12px">Cambia a “Registrar lo que salió” y toca los números de la mesa, o pégalos aquí arriba.</p>'; $('#histPanel').innerHTML=h; bindHist(); return; }
+  <label class="field"><span>Cargar giros anteriores (no cambian tu saldo)</span><input type="text" id="paste" placeholder="Ej.: 17, 32, 0, 5" inputmode="numeric"></label>
+  <div class="btns"><button class="btn primary" id="addPaste">Agregar</button><button class="btn" id="undoSpin">Deshacer último giro</button><button class="btn" id="clearHist">Borrar historial</button></div>`;
+  if(!T){ h+='<p class="muted" style="margin-top:12px">Cambia a “Registrar lo que salió” y toca los números en el paño.</p>'; $('#histPanel').innerHTML=h; bindHist(); return; }
   h+=`<h3>Últimos giros (${T} en total)</h3><div class="chips">`+H.slice(-24).reverse().map(x=>`<span class="chip ${colorOf(x)}">${x}</span>`).join('')+'</div>';
-  const cnt={}; list.forEach(x=>cnt[x]=0); H.forEach(x=>{if(x in cnt)cnt[x]++;});
+  const cnt={}; list.forEach(x=>cnt[x]=0); H.forEach(x=>{ if(x in cnt) cnt[x]++; });
   const mx=Math.max(1,...Object.values(cnt));
   h+=`<h3>Frecuencia por número</h3><div class="freq" role="img" aria-label="Frecuencia de cada número">`+list.map(x=>`<div class="${colorOf(x)}" style="height:${cnt[x]/mx*100}%" title="${x}: ${cnt[x]}"></div>`).join('')+'</div>';
-  const cat=(name,set)=>{const o=H.filter(x=>set.includes(x)).length; return `<tr><td>${name}</td><td class="n">${o} (${pct(o/T,0)})</td><td class="n">${pct(set.length/n,1)}</td></tr>`;};
+  const cat=(name,set)=>{ const o=H.filter(x=>set.includes(x)).length; return `<tr><td>${name}</td><td class="n">${o} (${pct(o/T,0)})</td><td class="n">${pct(set.length/n,1)}</td></tr>`; };
   const zeros=ru.wheel==='us'?['0','00']:['0'];
   h+=`<h3>Observado contra esperado</h3><table class="obs"><thead><tr><th>Zona</th><th style="text-align:right">Salió</th><th style="text-align:right">Esperado</th></tr></thead><tbody>`+
     cat('Rojo',GROUPS.red.ids)+cat('Negro',GROUPS.black.ids)+cat('Cero',zeros)+cat('Par',GROUPS.even.ids)+cat('Impar',GROUPS.odd.ids)+
     cat('1 a 18',GROUPS.low.ids)+cat('19 a 36',GROUPS.high.ids)+cat('1.ª docena',GROUPS.doz1.ids)+cat('2.ª docena',GROUPS.doz2.ids)+cat('3.ª docena',GROUPS.doz3.ids)+'</tbody></table>';
-  // ausencias
-  const since={}; list.forEach(x=>{const i=H.lastIndexOf(x); since[x]=i<0?T:T-1-i;});
+  const since={}; list.forEach(x=>{ const i=H.lastIndexOf(x); since[x]=i<0?T:T-1-i; });
   const cold=list.slice().sort((a,b)=>since[b]-since[a]).slice(0,5);
   h+=`<h3>Más tiempo sin salir</h3><p class="small">${cold.map(x=>`<b>${x}</b> (${since[x]===T?'nunca':since[x]+' giros'})`).join(', ')}.</p><p class="muted small">Un número “atrasado” no tiene más probabilidad de salir: sigue en ${pct(1/n,2)}.</p>`;
-  // chi cuadrado
-  const E=T/n; let chi=0; list.forEach(x=>{chi+=Math.pow(cnt[x]-E,2)/E;}); const pv=chiP(chi,n-1);
+  const E=T/n; let chi=0; list.forEach(x=>{ chi+=Math.pow(cnt[x]-E,2)/E; }); const pv=chiP(chi,n-1);
   let verdict;
   if(T<5*n) verdict=`Con ${T} giros no hay datos suficientes para juzgar la rueda; hacen falta al menos ${5*n}. Las rachas que ves ahora son ruido normal.`;
   else if(pv<0.01) verdict=`Prueba chi cuadrado: valor p ${num(pv,4)}. La distribución es inusual y podría indicar una rueda sesgada, pero confírmalo con muchos más giros antes de sacar conclusiones.`;
@@ -846,14 +1189,14 @@ function bindHist(){
   const valid=new Set(ids());
   const add=()=>{
     const added=[];
-    $('#paste').value.split(/[\s,;]+/).forEach(s=>{ s=s.trim(); if(!s)return; const id=s==='00'?'00':String(parseInt(s,10)); if(valid.has(id)){ ru.hist.push(id); added.push(id);} });
-    if(added.length) send('addSpins',{wheel:ru.wheel,numbers:added});
+    $('#paste').value.split(/[\s,;]+/).forEach(s=>{ s=s.trim(); if(!s)return; const id=s==='00'?'00':String(parseInt(s,10)); if(valid.has(id)){ const rec={n:id,ses:'',st:0,net:0,d:''}; ru.spins[ru.wheel].push(rec); added.push(rec);} });
+    if(added.length) send('addSpins',{wheel:ru.wheel,spins:added});
     $('#paste').value=''; save(); renderAll();
   };
   $('#addPaste').onclick=add;
-  $('#paste').onkeydown=e=>{if(e.key==='Enter')add();};
-  $('#undoSpin').onclick=()=>{if(!ru.hist.length)return; ru.hist.pop(); send('undoSpin',{wheel:ru.wheel}); save(); renderAll();};
-  $('#clearHist').onclick=()=>{if(!confirm('¿Borrar todo el historial de esta rueda? También se borra de Google Sheets.'))return; ru.hist=[]; send('clearSpins',{wheel:ru.wheel}); save(); renderAll();};
+  $('#paste').onkeydown=e=>{ if(e.key==='Enter') add(); };
+  $('#undoSpin').onclick=()=>{ if(!ru.spins[ru.wheel].length)return; ru.spins[ru.wheel].pop(); ru.msg=''; send('undoSpin',{wheel:ru.wheel}); save(); renderAll(); };
+  $('#clearHist').onclick=()=>{ if(!confirm('¿Borrar todo el historial de esta rueda? También se borra de Google Sheets y deja de contar en tu saldo.'))return; ru.spins[ru.wheel]=[]; ru.msg=''; send('clearSpins',{wheel:ru.wheel}); save(); renderAll(); };
 }
 
 function renderRisk(){
@@ -862,49 +1205,65 @@ function renderRisk(){
   $('#riskPanel').innerHTML=`<h2>Riesgo de la martingala</h2>
   <p class="muted small">Doblar la apuesta a rojo o negro después de cada pérdida. Parece infalible; mira por qué no lo es.</p>
   <div class="fields" style="margin-top:12px">
-    <label class="field"><span>Apuesta base</span><input type="number" id="rBase" min="1" step="1" value="${b}"></label>
+    <label class="field"><span>Apuesta base</span><input type="number" id="rBase" min="0.5" step="0.5" value="${b}"></label>
     <label class="field"><span>Pérdidas seguidas que aguantas</span><input type="number" id="rSteps" min="1" max="20" value="${s}"></label>
   </div>
   <div class="kv" style="margin-top:14px">
-    <span>Capital necesario</span><span class="v">${num(bank)}</span>
-    <span>Apuesta en el último intento</span><span class="v">${num(b*Math.pow(2,s-1))}</span>
-    <span>Ganancia si el ciclo sale bien</span><span class="v">${num(b)}</span>
+    <span>Capital necesario</span><span class="v">${money(bank)}</span>
+    <span>Apuesta en el último intento</span><span class="v">${money(b*Math.pow(2,s-1))}</span>
+    <span>Ganancia si el ciclo sale bien</span><span class="v">${money(b)}</span>
     <span>Probabilidad de perder el ciclo</span><span class="v">${pct(pr,2)}</span>
     <span>Ruina en 100 ciclos</span><span class="v" style="color:var(--red-ink)">${pct(p100,1)}</span>
-    <span>Valor esperado por ciclo</span><span class="v" style="color:var(--red-ink)">${num(ev,3)}</span>
+    <span>Valor esperado por ciclo</span><span class="v" style="color:var(--red-ink)">${signed(ev)}</span>
   </div>
-  <div class="note">Ganas poco muchas veces y pierdes ${num(bank)} de golpe de vez en cuando. El valor esperado sigue siendo negativo: ningún sistema de apuestas cambia la ventaja de la casa, y el límite de la mesa corta la progresión.</div>`;
-  $('#rBase').onchange=e=>{ru.base=Math.max(1,+e.target.value||1); save(); renderRisk();};
-  $('#rSteps').onchange=e=>{ru.steps=Math.min(20,Math.max(1,Math.round(+e.target.value)||1)); save(); renderRisk();};
+  <div class="note">Ganas poco muchas veces y pierdes ${money(bank)} de golpe de vez en cuando. El valor esperado sigue siendo negativo: ningún sistema de apuestas cambia la ventaja de la casa, y el límite de la mesa corta la progresión.</div>`;
+  $('#rBase').onchange=e=>{ ru.base=Math.max(0.5,+e.target.value||1); save(); renderRisk(); };
+  $('#rSteps').onchange=e=>{ ru.steps=Math.min(20,Math.max(1,Math.round(+e.target.value)||1)); save(); renderRisk(); };
 }
 
 function renderAll(){
   $('#wEu').setAttribute('aria-pressed',String(ru.wheel==='eu')); $('#wUs').setAttribute('aria-pressed',String(ru.wheel==='us'));
   $('#mBet').setAttribute('aria-pressed',String(ru.mode==='bet')); $('#mSpin').setAttribute('aria-pressed',String(ru.mode==='spin'));
-  renderBoard(); renderBet(); renderHist(); renderRisk();
+  renderRuSess(); renderTop(); renderBoard(); renderBet(); renderHist(); renderRisk();
 }
 function initRU(){
   $('#board').addEventListener('click',e=>{
     const b=e.target.closest('.cell'); if(!b)return;
+    ru.err='';
     if(b.dataset.id){
       const id=b.dataset.id;
-      if(ru.mode==='bet'){ ru.sel.has(id)?ru.sel.delete(id):ru.sel.add(id); }
-      else { ru.hist.push(id); send('addSpins',{wheel:ru.wheel,numbers:[id]}); }
+      if(ru.mode==='spin'){ registerSpin(id); ru.pending=[]; }
+      else if(ru.btype==='pleno') addBet('pleno',[id]);
+      else {
+        const i=ru.pending.indexOf(id); if(i>=0) ru.pending.splice(i,1); else ru.pending.push(id);
+        if(ru.pending.length===NEED[ru.btype]){
+          if(shapeOK(ru.btype,ru.pending)) addBet(ru.btype,ru.pending);
+          else ru.err=`Esos números no forman ${ {caballo:'un caballo',calle:'una calle',cuadro:'un cuadro',linea:'una línea'}[ru.btype] }. ${HINT[ru.btype]}`;
+          ru.pending=[];
+        }
+      }
     } else if(b.dataset.g&&ru.mode==='bet'){
-      const G=GROUPS[b.dataset.g].ids; const all=G.every(x=>ru.sel.has(x));
-      G.forEach(x=>all?ru.sel.delete(x):ru.sel.add(x));
+      const G=GROUPS[b.dataset.g]; addBet(G.t,G.ids,b.dataset.g,G.name);
     }
     save(); renderAll();
   });
-  $('#wEu').onclick=()=>{ru.wheel='eu'; ru.sel.delete('00'); send('saveConfig',{key:'ru_wheel',value:'eu'}); save(); renderAll();};
-  $('#wUs').onclick=()=>{ru.wheel='us'; send('saveConfig',{key:'ru_wheel',value:'us'}); save(); renderAll();};
-  $('#mBet').onclick=()=>{ru.mode='bet'; renderAll();};
-  $('#mSpin').onclick=()=>{ru.mode='spin'; renderAll();};
-  $('#clearSel').onclick=()=>{ru.sel.clear(); save(); renderAll();};
+  $('#ruTop').addEventListener('click',e=>{
+    const bt=e.target.closest('[data-bt]'), dn=e.target.closest('[data-den]');
+    if(bt){ ru.btype=bt.dataset.bt; ru.pending=[]; ru.err=''; ru.mode='bet'; }
+    else if(dn){ ru.denom=+dn.dataset.den; }
+    else return;
+    save(); renderAll();
+  });
+  $('#ruTop').addEventListener('change',e=>{ if(e.target.id==='denOther'){ const v=+e.target.value; if(v>0){ ru.denom=+v.toFixed(2); save(); renderAll(); } } });
+  $('#wEu').onclick=()=>{ ru.wheel='eu'; ru.bets=ru.bets.filter(b=>!b.ids.includes('00')); ru.pending=[]; ru.msg=''; send('saveConfig',{key:'ru_wheel',value:'eu'}); save(); renderAll(); };
+  $('#wUs').onclick=()=>{ ru.wheel='us'; ru.pending=[]; ru.msg=''; send('saveConfig',{key:'ru_wheel',value:'us'}); save(); renderAll(); };
+  $('#mBet').onclick=()=>{ ru.mode='bet'; ru.err=''; renderAll(); };
+  $('#mSpin').onclick=()=>{ ru.mode='spin'; ru.pending=[]; ru.err=''; renderAll(); };
+  $('#clearSel').onclick=()=>{ ru.bets=[]; ru.pending=[]; save(); renderAll(); };
   renderAll();
 }
 
-route(); initBJ(); initRU(); loadRemote();
+route(); initBJ(); initRU(); initCount(); loadRemote();
 })();
 </script>
 </body>
