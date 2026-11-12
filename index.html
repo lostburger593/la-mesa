@@ -229,6 +229,20 @@ table.side td{ vertical-align:middle; }
 .cell.out2.r{ background:var(--rouge); } .cell.out2.b{ background:var(--blk); }
 .cell.vert span{ writing-mode:vertical-rl; transform:rotate(180deg); white-space:nowrap; }
 .cell.alt{ outline:2px dashed var(--gold); outline-offset:-4px; }
+.cell.out2 .amt{ top:auto; bottom:4px; transform:translateX(-50%); min-width:26px; height:22px; font-size:10.5px; }
+.ru-felt-grid{ display:grid; grid-template-columns:minmax(0,390px) minmax(0,1fr); gap:24px; align-items:start; }
+@media (max-width:820px){ .ru-felt-grid{ grid-template-columns:1fr; } }
+.ru-side{ color:var(--felt-ink); }
+.ru-side h3{ margin:0 0 4px; font-size:20px; }
+.ru-side .sub{ color:var(--felt-muted); font-size:13.5px; margin-bottom:6px; }
+.opt{ display:grid; grid-template-columns:20px 1fr auto; gap:2px 10px; padding:9px 0; border-bottom:1px solid rgba(238,246,241,.15); font-size:14px; }
+.opt .v{ text-align:right; font-weight:700; font-variant-numeric:tabular-nums; }
+.opt .d{ grid-column:2/-1; color:var(--felt-muted); font-size:13px; }
+.opt .rtag{ font-size:11.5px; font-weight:700; padding:1px 7px; border-radius:999px; background:var(--gold); color:#1b1b1b; margin-left:6px; }
+.sw{ width:18px; height:18px; border-radius:4px; margin-top:2px; box-sizing:border-box; }
+.sw.chip{ border-radius:50%; background:var(--gold); border:2px dashed #fff; }
+.sw.dash{ border:2px dashed var(--gold); }
+.legend2{ margin-top:12px; font-size:13px; color:var(--felt-muted); display:grid; gap:4px; }
 .optrow{ display:grid; grid-template-columns:1fr auto; gap:4px 12px; padding:10px 0; border-bottom:1px solid var(--line); font-size:14.5px; }
 .optrow .v{ text-align:right; font-weight:600; font-variant-numeric:tabular-nums; }
 .optrow .tag{ font-size:12px; font-weight:600; padding:2px 8px; border-radius:999px; background:var(--cD); color:var(--cell-ink); margin-left:6px; }
@@ -425,19 +439,23 @@ details.guide p{ font-size:14.5px; margin-top:8px; }
     <div class="felt" id="ruFelt">
       <div class="next" id="ruNext" aria-live="polite"></div>
       <div class="plan-opts" id="ruPlan"></div>
-      <p class="strip-hint" style="margin-bottom:10px" id="boardHint"></p>
-      <div class="rv-board" id="board"></div>
-      <div class="board-tools">
-        <button class="fbtn" id="undoSpin">Deshacer último</button>
-        <input type="text" id="paste" placeholder="Varios: 17, 32, 0" inputmode="numeric" aria-label="Agregar varios números">
-        <button class="fbtn" id="addPaste">Agregar</button>
-      </div>
-      <div class="board-tools">
-        <div class="seg feltseg" role="group" aria-label="Tipo de rueda"><button id="wEu" aria-pressed="true">Europea (0)</button><button id="wUs" aria-pressed="false">Americana (0 y 00)</button></div>
+      <div class="ru-felt-grid">
+        <div>
+          <p class="strip-hint" style="margin-bottom:10px" id="boardHint"></p>
+          <div class="rv-board" id="board"></div>
+          <div class="board-tools">
+            <button class="fbtn" id="undoSpin">Deshacer último</button>
+            <input type="text" id="paste" placeholder="Varios: 17, 32, 0" inputmode="numeric" aria-label="Agregar varios números">
+            <button class="fbtn" id="addPaste">Agregar</button>
+          </div>
+          <div class="board-tools">
+            <div class="seg feltseg" role="group" aria-label="Tipo de rueda"><button id="wEu" aria-pressed="true">Europea (0)</button><button id="wUs" aria-pressed="false">Americana (0 y 00)</button></div>
+          </div>
+        </div>
+        <div class="ru-side" id="ruSide"></div>
       </div>
     </div>
     <div class="ru-layout">
-      <div class="panel" id="optPanel"></div>
       <div class="panel" id="histPanel"></div>
       <div class="panel" id="guidePanel"></div>
     </div>
@@ -1285,16 +1303,47 @@ function bestOf(keys){
   keys.forEach(k=>{ const c=H.filter(x=>GROUPS[k].ids.includes(x)).length; if(!best||c>best.c) best={key:k,c}; });
   return {key:best.key,share:T?best.c/T:0,T};
 }
+const INSIDE_COLORS={linea:'#F28DB2',calle:'#B48CF2',cuadro:'#F4A259',caballo:'#5BC0EB',sector:'#9BE15D'};
+function insideSets(){
+  const L=[],C=[],Q=[],K=[];
+  for(let r=0;r<12;r++){ const a=3*r+1; C.push([a,a+1,a+2]); if(r<11) L.push([a,a+1,a+2,a+3,a+4,a+5]); }
+  for(let n=1;n<=36;n++){ if(n%3!==0) K.push([n,n+1]); if(n<=33) K.push([n,n+3]); if(n%3!==0&&n<=32) Q.push([n,n+1,n+3,n+4]); }
+  const str=a=>a.map(String);
+  return {linea:L.map(str),calle:C.map(str),cuadro:Q.map(str),caballo:K.map(str)};
+}
+function bestSet(sets){
+  const H=ru.hist.slice(-200), last={}; H.forEach((x,i)=>last[x]=i);
+  const cnt={}; H.forEach(x=>cnt[x]=(cnt[x]||0)+1);
+  let best=null;
+  sets.forEach(set=>{ const c=set.reduce((t,x)=>t+(cnt[x]||0),0), rec=Math.max(...set.map(x=>last[x]===undefined?-1:last[x])); if(!best||c>best.c||(c===best.c&&rec>best.rec)) best={ids:set,c,rec}; });
+  return {ids:best.ids,c:best.c,share:H.length?best.c/H.length:0,T:H.length};
+}
+function bestOf(keys){
+  const H=ru.hist.slice(-200), T=H.length; let best=null;
+  keys.forEach(k=>{ const c=H.filter(x=>GROUPS[k].ids.includes(x)).length; if(!best||c>best.c) best={key:k,c}; });
+  return {key:best.key,share:T?best.c/T:0,T};
+}
+function recs(){
+  const S=insideSets(), an=analyzeWheel(), v=verdict(an), nb=nextBet(v);
+  return {an,v,nb,simple:autoSimple(),doz:bestOf(['doz1','doz2','doz3']),col:bestOf(['col1','col2','col3']),
+    linea:bestSet(S.linea),calle:bestSet(S.calle),cuadro:bestSet(S.cuadro),caballo:bestSet(S.caballo),sector:an.bestSec};
+}
 function renderBoard(){
   $('#boardHint').textContent=ru.follow?'Toca el número que salió. Como “Llevar mi saldo” está activado, tu saldo sube o baja según la apuesta recomendada.':'Toca el número que salió. Solo se anota; tu saldo no cambia.';
+  const R=recs(), T=ru.hist.length, nb=R.nb;
   const counts={}; ru.hist.forEach(h=>counts[h]=(counts[h]||0)+1);
   const last=ru.hist[ru.hist.length-1];
-  const nb=nextBet(verdict(analyzeWheel()));
   const chip=nb&&nb.type==='straight'?new Set(nb.ids):new Set();
-  const mainKey=nb&&nb.type==='simple'?nb.key:(nb&&nb.type==='nosess'?autoSimple().key:null);
+  const mainKey=nb&&nb.type==='simple'?nb.key:(nb&&nb.type==='nosess'?R.simple.key:null);
   const mainAmt=nb&&nb.type==='simple'?money(nb.amt):'';
-  const alt=new Set(ru.hist.length?[bestOf(['doz1','doz2','doz3']).key,bestOf(['col1','col2','col3']).key]:[]);
-  const num=(id,style)=>`<button class="cell ${colorOf(id)}${id===last?' last':''}" style="${style}" data-id="${id}" aria-label="Salió ${id}"><span>${id}</span>${chip.has(id)?`<i class="amt">${money(nb.per)}</i>`:''}${counts[id]?`<i class="cnt">${counts[id]}</i>`:''}</button>`;
+  const alt=new Set(T?[R.doz.key,R.col.key]:[]);
+  const rings={};
+  if(T) ['linea','calle','cuadro','caballo','sector'].forEach(k=>{ if(k==='sector'&&nb&&nb.type==='straight') return; R[k].ids.forEach(x=>{ (rings[x]=rings[x]||[]).push(INSIDE_COLORS[k]); }); });
+  const num=(id,style)=>{
+    const rg=(rings[id]||[]).map((c,i)=>`inset 0 0 0 ${2*(i+1)}px ${c}`);
+    if(id===last) rg.unshift('0 0 0 3px #fff');
+    return `<button class="cell ${colorOf(id)}" style="${style}${rg.length?';box-shadow:'+rg.join(','):''}" data-id="${id}" aria-label="Salió ${id}"><span>${id}</span>${chip.has(id)?`<i class="amt">${money(nb.per)}</i>`:''}${counts[id]?`<i class="cnt">${counts[id]}</i>`:''}</button>`;
+  };
   const out=(key,lab,style,cls)=>`<div class="cell out2 ${cls||''}${alt.has(key)?' alt':''}" style="${style}" title="${GROUPS[key].name}"><span>${lab}</span>${mainKey===key?`<i class="amt">${mainAmt||'Aquí'}</i>`:''}</div>`;
   let h=ru.wheel==='us'?num('00','grid-column:3/span 3;grid-row:1')+num('0','grid-column:6/span 3;grid-row:1'):num('0','grid-column:3/span 6;grid-row:1');
   for(let r=0;r<12;r++) for(let c=1;c<=3;c++) h+=num(String(3*r+c),`grid-column:${3+(c-1)*2}/span 2;grid-row:${r+2}`);
@@ -1305,18 +1354,30 @@ function renderBoard(){
 }
 
 function renderOptions(){
-  const n=N(), an=analyzeWheel(), v=verdict(an), nb=nextBet(v), T=ru.hist.length;
-  const s1=autoSimple(), dz=bestOf(['doz1','doz2','doz3']), cl=bestOf(['col1','col2','col3']), sec=an.bestSec;
-  const mainIsSimple=!nb||nb.type!=='straight';
-  const row=(title,tag,p,pay,seen,expv,note)=>`<div class="optrow"><span><b>${title}</b>${tag?`<span class="tag">${tag}</span>`:''}<br><span class="muted small">${note}</span></span><span class="v">${pct(p,1)}<br><span class="muted small" style="font-weight:400">paga ${pay}</span></span>${T?`<span class="muted small" style="grid-column:1/-1">Salió ${pct(seen,0)} de tus giros recientes; lo esperado es ${pct(expv,1)}.</span>`:''}</div>`;
-  const secShare=T?sec.c/T:0;
-  $('#optPanel').innerHTML=`<h2>Dónde apostar</h2>
-  <p class="muted small">Lo mejor de cada tipo de apuesta según lo que ha salido. La cifra grande es tu probabilidad de ganar en el próximo giro.</p>
-  ${row(`Sencilla: ${GROUPS[s1.key].name}`,mainIsSimple?'Recomendada':'',18/n,'1 a 1',s1.share,18/n,'Ganas casi la mitad de las veces. Es la de menor riesgo y la que más dura tu dinero'+(usePartage()?'; con La Partage, la de menor pérdida.':'.'))}
-  ${row(`Docena: ${GROUPS[dz.key].name}`,'',12/n,'2 a 1',dz.share,12/n,'Ganas 1 de cada 3 giros, pero cobras el doble.')}
-  ${row(`Columna: ${GROUPS[cl.key].name}`,'',12/n,'2 a 1',cl.share,12/n,'Igual que la docena, con otra forma de agrupar los números.')}
-  ${row(`Plenos al sector ${sec.ids.join(', ')}`,mainIsSimple?'':'Recomendada',5/n,'35 a 1 por número',secShare,5/n,v.kind==='bias'?'Estos números vecinos en la rueda salen más de lo que permite el azar.':'Cinco números vecinos en la rueda física que más han salido. Ganas pocas veces, pero cobras mucho.')}
-  <div class="note">Todas estas apuestas le dejan a la casa lo mismo (${pct(edgeAny(),2)}${usePartage()?', o 1,35 % en las sencillas con La Partage':''}). Lo que cambia es el riesgo: la sencilla gana seguido y poco; el pleno, rara vez y mucho. En el paño, la ficha dorada marca la recomendada y el borde punteado la docena y la columna que más salen.</div>`;
+  const R=recs(), n=N(), T=ru.hist.length, nb=R.nb, isStraight=nb&&nb.type==='straight';
+  const seen=(sh,k)=>T?`Salió ${pct(sh,0)} de tus giros; lo normal es ${pct(k/n,1)}.`:'Aún sin giros marcados.';
+  const opt=(sw,title,rec,k,pay,why)=>`<div class="opt"><span class="sw ${sw.cls||''}" style="${sw.st||''}"></span><span><b>${title}</b>${rec?'<span class="rtag">Recomendada</span>':''}</span><span class="v">${pct(k/n,1)}</span><span class="d">Paga ${pay}. ${why}</span></div>`;
+  const ring=c=>({st:`border:3px solid ${c}`});
+  const j=a=>a.join(', ');
+  let h=`<h3>Dónde apostar</h3><p class="sub">Lo que más ha salido en cada tipo de apuesta. El porcentaje es tu probabilidad de ganar en el próximo giro; el color es como se marca en el paño.</p>`;
+  h+=opt({cls:'chip'},`Sencilla: ${GROUPS[R.simple.key].name}`,!isStraight,18,'1 a 1',`${seen(R.simple.share,18)} La de menor riesgo: gana casi la mitad de las veces.`);
+  h+=opt({cls:'dash'},`Docena: ${GROUPS[R.doz.key].name}`,false,12,'2 a 1',seen(R.doz.share,12));
+  h+=opt({cls:'dash'},`Columna: ${GROUPS[R.col.key].name}`,false,12,'2 a 1',seen(R.col.share,12));
+  if(T){
+    h+=opt(ring(INSIDE_COLORS.linea),`Línea: ${j(R.linea.ids)}`,false,6,'5 a 1',`${seen(R.linea.share,6)} Una ficha en el borde entre dos calles.`);
+    h+=opt(ring(INSIDE_COLORS.calle),`Calle: ${j(R.calle.ids)}`,false,3,'11 a 1',`${seen(R.calle.share,3)} Una ficha al borde de la fila.`);
+    h+=opt(ring(INSIDE_COLORS.cuadro),`Cuadro: ${j(R.cuadro.ids)}`,false,4,'8 a 1',`${seen(R.cuadro.share,4)} Una ficha en la esquina donde se juntan los cuatro.`);
+    h+=opt(ring(INSIDE_COLORS.caballo),`Caballo: ${j(R.caballo.ids)}`,false,2,'17 a 1',`${seen(R.caballo.share,2)} Una ficha en la línea entre los dos.`);
+    h+=opt(isStraight?{cls:'chip'}:ring(INSIDE_COLORS.sector),`Plenos al sector: ${j(R.sector.ids)}`,isStraight,5,'35 a 1 por número',`${seen(T?R.sector.c/T:0,5)} Vecinos en la rueda física; una ficha en cada número.`);
+  } else h+='<p class="sub" style="margin-top:10px">Marca algunos números y aquí aparecerán también la mejor línea, calle, cuadro y caballo.</p>';
+  h+=`<div class="legend2">
+    <span><span class="sw chip" style="display:inline-block;vertical-align:middle;margin-right:6px"></span>Ficha dorada: la apuesta recomendada, con el monto.</span>
+    <span><span class="sw dash" style="display:inline-block;vertical-align:middle;margin-right:6px"></span>Borde punteado: docena y columna que más salen.</span>
+    <span>Anillos de color dentro de los números: línea, calle, cuadro, caballo y sector, según la lista.</span>
+    <span>Borde blanco: el último número que salió. Número pequeño: veces que ha salido.</span>
+  </div>
+  <p class="sub" style="margin-top:12px">Todas le dejan a la casa lo mismo (${pct(edgeAny(),2)}). Entre menos números cubres, menos seguido ganas pero cobras más.</p>`;
+  $('#ruSide').innerHTML=h;
 }
 
 function renderHist(){
