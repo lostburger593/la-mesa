@@ -420,7 +420,7 @@ details.guide p{ font-size:14.5px; margin-top:8px; }
     <div class="felt" id="ruFelt">
       <div class="next" id="ruNext" aria-live="polite"></div>
       <div class="plan-opts" id="ruPlan"></div>
-      <p class="strip-hint" style="margin-bottom:10px">Toca el número que salió en cada giro.</p>
+      <p class="strip-hint" style="margin-bottom:10px" id="boardHint"></p>
       <div class="rv-board" id="board"></div>
       <div class="board-tools">
         <button class="fbtn" id="undoSpin">Deshacer último</button>
@@ -1112,7 +1112,7 @@ const WHEEL={
 };
 let spinsInit=store.get('ru_spins',null);
 if(!spinsInit){ const old=store.get('ru_byWheel',{eu:[],us:[]}); spinsInit={eu:(old.eu||[]).map(n=>({n})),us:(old.us||[]).map(n=>({n}))}; }
-const ru={wheel:store.get('ru_wheel','eu'),spins:spinsInit,sess:store.get('ru_sess',null),follow:store.get('ru_follow',true),strat:store.get('ru_strat','flat'),simple:store.get('ru_simple','red'),partage:store.get('ru_partage',false),base:store.get('ru_base',1),steps:store.get('ru_steps',7),msg:''};
+const ru={wheel:store.get('ru_wheel','eu'),spins:spinsInit,sess:store.get('ru_sess',null),follow:store.get('ru_follow2',false),strat:store.get('ru_strat','flat'),simple:store.get('ru_simple','red'),partage:store.get('ru_partage',false),base:store.get('ru_base',1),steps:store.get('ru_steps',7),msg:''};
 Object.defineProperty(ru,'hist',{get(){return ru.spins[ru.wheel].map(x=>x.n);}});
 const ids=()=>ru.wheel==='us'?['0','00',...NUMS]:['0',...NUMS];
 const N=()=>ru.wheel==='us'?38:37;
@@ -1131,7 +1131,7 @@ function autoSimple(){
   SIMPLE_KEYS.forEach(k=>{ const c=H.filter(x=>GROUPS[k].ids.includes(x)).length; if(!best||c>best.c) best={key:k,c}; });
   return {key:best.key,share:best.c/T,T};
 }
-function save(){ ['wheel','spins','sess','follow','strat','simple','partage','base','steps'].forEach(k=>store.set('ru_'+k,ru[k])); }
+function save(){ ['wheel','spins','sess','strat','simple','partage','base','steps'].forEach(k=>store.set('ru_'+k,ru[k])); store.set('ru_follow2',ru.follow); }
 function saveRuSess(){ save(); send('saveConfig',{key:'ru_session',value:ru.sess?JSON.stringify(ru.sess):''}); }
 const usePartage=()=>ru.partage&&ru.wheel==='eu';
 const edgeSimple=()=>ru.wheel==='us'?2/38:(usePartage()?1/74:1/37);
@@ -1269,11 +1269,12 @@ function renderNext(){
   }
   $('#ruNext').innerHTML=`${status}<span class="lab">Próxima apuesta</span><span class="bet">${main}</span><p class="why">${why}</p>${go&&!bet.stop&&bet.type==='simple'?`<p class="why" style="color:var(--felt-muted)">Llegar a tu meta antes que al límite: ${pct(ru.strat==='bold'?go.bold:go.flat,0)} con esta estrategia (${ru.strat==='bold'?`apuesta plana: ${pct(go.flat,0)}`:`juego audaz: ${pct(go.bold,0)}`}).</p>`:''}${ru.msg?`<p class="ru-msg">${ru.msg}</p>`:''}`;
   $('#ruPlan').innerHTML=`<div class="seg feltseg" role="group" aria-label="Estrategia"><button data-st="flat" aria-pressed="${ru.strat==='flat'}">Perder lo menos posible</button><button data-st="bold" aria-pressed="${ru.strat==='bold'}">Llegar a mi meta</button></div>
-    <label><input type="checkbox" id="ruFollow"${ru.follow?' checked':''}> Aposté lo recomendado (actualiza mi saldo)</label>
+    <label><input type="checkbox" id="ruFollow"${ru.follow?' checked':''}> Llevar mi saldo: cada número que marque cobra o resta la apuesta recomendada</label>
     ${ru.wheel==='eu'?`<label><input type="checkbox" id="ruPartage"${ru.partage?' checked':''}> La mesa aplica La Partage (devuelve la mitad si sale 0)</label>`:''}`;
 }
 
 function renderBoard(){
+  $('#boardHint').textContent=ru.follow?'Toca el número que salió. Como “Llevar mi saldo” está activado, tu saldo sube o baja según la apuesta recomendada.':'Toca el número que salió. Solo se anota; tu saldo no cambia.';
   const counts={}; ru.hist.forEach(h=>counts[h]=(counts[h]||0)+1);
   const last=ru.hist[ru.hist.length-1];
   const nb=nextBet(verdict(analyzeWheel())), chip=nb&&nb.type==='straight'?new Set(nb.ids):new Set();
