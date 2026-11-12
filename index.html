@@ -1124,6 +1124,13 @@ const GROUPS={
   doz1:{name:'1.ª docena',ids:NUMS.filter(n=>n<=12)}, doz2:{name:'2.ª docena',ids:NUMS.filter(n=>n>12&&n<=24)}, doz3:{name:'3.ª docena',ids:NUMS.filter(n=>n>24)}
 };
 const SIMPLE_KEYS=['red','black','even','odd','low','high'];
+function autoSimple(){
+  const H=ru.hist.slice(-200), T=H.length;
+  if(!T) return {key:'red',share:0,T:0};
+  let best=null;
+  SIMPLE_KEYS.forEach(k=>{ const c=H.filter(x=>GROUPS[k].ids.includes(x)).length; if(!best||c>best.c) best={key:k,c}; });
+  return {key:best.key,share:best.c/T,T};
+}
 function save(){ ['wheel','spins','sess','follow','strat','simple','partage','base','steps'].forEach(k=>store.set('ru_'+k,ru[k])); }
 function saveRuSess(){ save(); send('saveConfig',{key:'ru_session',value:ru.sess?JSON.stringify(ru.sess):''}); }
 const usePartage=()=>ru.partage&&ru.wheel==='eu';
@@ -1166,7 +1173,7 @@ function nextBet(v){
   if(v.kind==='bias'){ const per=Math.max(0.5,Math.round(ru.sess.start*0.005*2)/2); return {type:'straight',ids:v.ids,per,total:per*v.ids.length}; }
   let amt=ru.strat==='bold'?Math.min(b-floor,target-b):Math.min(unitRU(),b-floor);
   amt=Math.max(0.5,Math.floor(amt*2)/2);
-  return {type:'simple',key:ru.simple,amt};
+  return {type:'simple',key:autoSimple().key,amt};
 }
 function settle(bet,id){
   if(!bet||bet.stop||!bet.type||bet.type==='nosess') return null;
@@ -1251,18 +1258,17 @@ function renderNext(){
   else status=`<span class="status bias">Sesgo detectado: ventaja estimada ${pct(v.edgeHat,1)}</span>`;
   if(bet.stop==='goal'){ main='Retírate'; why='Llegaste a tu meta. Es el mejor momento para irte ganando.'; }
   else if(bet.stop==='loss'){ main='Retírate'; why='Llegaste a tu límite de pérdida. Seguir para recuperar es como se pierde más.'; }
-  else if(bet.type==='nosess'){ main=`${GROUPS[ru.simple].name}, 1 ficha`; why='Empieza tu sesión arriba para que te diga el monto exacto.'; }
+  else if(bet.type==='nosess'){ main=`${GROUPS[autoSimple().key].name}, 1 ficha`; why='Empieza tu sesión arriba para que te diga cuánto poner.'; }
   else if(bet.type==='straight'){ main=`Pleno a ${bet.ids.join(', ')}`; why=`${money(bet.per)} a cada número (${money(bet.total)} en total). Estos números salen más de lo que permite el azar; es un sector de la rueda física, típico de una rueda desbalanceada.`; }
   else {
-    main=`${GROUPS[bet.key].name} ${money(bet.amt)}`;
-    if(v.kind==='hint') why=`Los números ${v.ids.join(', ')} salen más de lo normal, pero con estos datos todavía no hay ventaja segura. Sigue con la apuesta de menor pérdida mientras se confirma.`;
-    else if(v.kind==='few') why='Todavía no hay datos para saber si la rueda tiene un defecto. Mientras tanto, esta es la apuesta que menos pierde.';
-    else why='Ningún número ni sector se sale de lo esperado: ninguna apuesta tiene ventaja. Esta es la que menos pierde.';
-    why+=ru.strat==='bold'?' Juego audaz: apuestas fuerte para llegar a tu meta en pocos giros.':' Apuesta plana y pequeña: pierdes lo mínimo por giro.';
+    const au=autoSimple();
+    main=`${money(bet.amt)} al ${GROUPS[bet.key].name.toLowerCase()}`;
+    if(!au.T) why='Aún no marcas números. Empieza con esta y la recomendación se irá ajustando a lo que salga.';
+    else why=`${GROUPS[bet.key].name} es lo que más ha salido (${pct(au.share,0)} de tus últimos ${au.T} giros). Apostar a lo que más sale no te perjudica en una rueda normal y te favorece si la rueda tiene algún defecto.`;
+    if(v.kind==='hint') why+=` Además, ${v.ids.join(', ')} están saliendo más de lo normal; si se confirma, te diré que vayas a pleno a esos números.`;
   }
   $('#ruNext').innerHTML=`${status}<span class="lab">Próxima apuesta</span><span class="bet">${main}</span><p class="why">${why}</p>${go&&!bet.stop&&bet.type==='simple'?`<p class="why" style="color:var(--felt-muted)">Llegar a tu meta antes que al límite: ${pct(ru.strat==='bold'?go.bold:go.flat,0)} con esta estrategia (${ru.strat==='bold'?`apuesta plana: ${pct(go.flat,0)}`:`juego audaz: ${pct(go.bold,0)}`}).</p>`:''}${ru.msg?`<p class="ru-msg">${ru.msg}</p>`:''}`;
   $('#ruPlan').innerHTML=`<div class="seg feltseg" role="group" aria-label="Estrategia"><button data-st="flat" aria-pressed="${ru.strat==='flat'}">Perder lo menos posible</button><button data-st="bold" aria-pressed="${ru.strat==='bold'}">Llegar a mi meta</button></div>
-    <div class="seg feltseg" role="group" aria-label="Apuesta sencilla">${SIMPLE_KEYS.map(k=>`<button data-sk="${k}" aria-pressed="${ru.simple===k}">${GROUPS[k].name}</button>`).join('')}</div>
     <label><input type="checkbox" id="ruFollow"${ru.follow?' checked':''}> Aposté lo recomendado (actualiza mi saldo)</label>
     ${ru.wheel==='eu'?`<label><input type="checkbox" id="ruPartage"${ru.partage?' checked':''}> La mesa aplica La Partage (devuelve la mitad si sale 0)</label>`:''}`;
 }
@@ -1270,7 +1276,8 @@ function renderNext(){
 function renderBoard(){
   const counts={}; ru.hist.forEach(h=>counts[h]=(counts[h]||0)+1);
   const last=ru.hist[ru.hist.length-1];
-  const btn=(id,cls)=>`<button class="cell ${colorOf(id)} ${cls}${id===last?' last':''}" data-id="${id}" aria-label="Salió ${id}"><span>${id}</span>${counts[id]?`<i class="cnt">${counts[id]}</i>`:''}</button>`;
+  const nb=nextBet(verdict(analyzeWheel())), chip=nb&&nb.type==='straight'?new Set(nb.ids):new Set();
+  const btn=(id,cls)=>`<button class="cell ${colorOf(id)} ${cls}${id===last?' last':''}" data-id="${id}" aria-label="Salió ${id}"><span>${id}</span>${chip.has(id)?`<i class="amt">${money(nb.per)}</i>`:''}${counts[id]?`<i class="cnt">${counts[id]}</i>`:''}</button>`;
   let h=ru.wheel==='us'?btn('0','z')+btn('00','z'):btn('0','z');
   for(let r=0;r<12;r++) for(let c=1;c<=3;c++) h+=btn(String(3*r+c),'n');
   const b=$('#board'); b.innerHTML=h; b.classList.toggle('us',ru.wheel==='us');
