@@ -223,10 +223,15 @@ table.side td{ vertical-align:middle; }
 .srow label{ display:inline-flex; align-items:center; gap:6px; }
 
 /* Ruleta vertical */
-.rv-board{ display:grid; grid-template-columns:repeat(6,1fr); gap:5px; max-width:330px; margin:0 auto; }
-.rv-board .cell{ height:40px; }
-.rv-board .cell.z{ grid-column:span 6; } .rv-board.us .cell.z{ grid-column:span 3; }
-.rv-board .cell.n{ grid-column:span 2; }
+.rv-board{ display:grid; grid-template-columns:46px 40px repeat(6,minmax(0,1fr)); grid-auto-rows:38px; gap:4px; max-width:380px; margin:0 auto; }
+.rv-board .cell{ height:auto; min-width:0; }
+.cell.out2{ border:1px solid rgba(238,246,241,.4); color:var(--felt-ink); font:600 12.5px Figtree, sans-serif; cursor:default; background:rgba(0,0,0,.12); }
+.cell.out2.r{ background:var(--rouge); } .cell.out2.b{ background:var(--blk); }
+.cell.vert span{ writing-mode:vertical-rl; transform:rotate(180deg); white-space:nowrap; }
+.cell.alt{ outline:2px dashed var(--gold); outline-offset:-4px; }
+.optrow{ display:grid; grid-template-columns:1fr auto; gap:4px 12px; padding:10px 0; border-bottom:1px solid var(--line); font-size:14.5px; }
+.optrow .v{ text-align:right; font-weight:600; font-variant-numeric:tabular-nums; }
+.optrow .tag{ font-size:12px; font-weight:600; padding:2px 8px; border-radius:999px; background:var(--cD); color:var(--cell-ink); margin-left:6px; }
 .next{ text-align:center; display:grid; gap:6px; justify-items:center; margin-bottom:16px; }
 .next .lab{ color:var(--felt-muted); font-size:14px; }
 .next .bet{ font-family:"Young Serif", Georgia, serif; font-size:clamp(28px,7vw,38px); line-height:1.15; color:var(--felt-ink); }
@@ -432,6 +437,7 @@ details.guide p{ font-size:14.5px; margin-top:8px; }
       </div>
     </div>
     <div class="ru-layout">
+      <div class="panel" id="optPanel"></div>
       <div class="panel" id="histPanel"></div>
       <div class="panel" id="guidePanel"></div>
     </div>
@@ -1121,7 +1127,8 @@ const GROUPS={
   red:{name:'Rojo',ids:NUMS.filter(n=>REDS.has(+n))}, black:{name:'Negro',ids:NUMS.filter(n=>!REDS.has(+n))},
   even:{name:'Par',ids:NUMS.filter(n=>n%2===0)}, odd:{name:'Impar',ids:NUMS.filter(n=>n%2===1)},
   low:{name:'1 a 18',ids:NUMS.filter(n=>n<=18)}, high:{name:'19 a 36',ids:NUMS.filter(n=>n>18)},
-  doz1:{name:'1.ª docena',ids:NUMS.filter(n=>n<=12)}, doz2:{name:'2.ª docena',ids:NUMS.filter(n=>n>12&&n<=24)}, doz3:{name:'3.ª docena',ids:NUMS.filter(n=>n>24)}
+  doz1:{name:'1.ª docena',ids:NUMS.filter(n=>n<=12)}, doz2:{name:'2.ª docena',ids:NUMS.filter(n=>n>12&&n<=24)}, doz3:{name:'3.ª docena',ids:NUMS.filter(n=>n>24)},
+  col1:{name:'1.ª columna',ids:NUMS.filter(n=>n%3===1)}, col2:{name:'2.ª columna',ids:NUMS.filter(n=>n%3===2)}, col3:{name:'3.ª columna',ids:NUMS.filter(n=>n%3===0)}
 };
 const SIMPLE_KEYS=['red','black','even','odd','low','high'];
 function autoSimple(){
@@ -1273,15 +1280,43 @@ function renderNext(){
     ${ru.wheel==='eu'?`<label><input type="checkbox" id="ruPartage"${ru.partage?' checked':''}> La mesa aplica La Partage (devuelve la mitad si sale 0)</label>`:''}`;
 }
 
+function bestOf(keys){
+  const H=ru.hist.slice(-200), T=H.length; let best=null;
+  keys.forEach(k=>{ const c=H.filter(x=>GROUPS[k].ids.includes(x)).length; if(!best||c>best.c) best={key:k,c}; });
+  return {key:best.key,share:T?best.c/T:0,T};
+}
 function renderBoard(){
   $('#boardHint').textContent=ru.follow?'Toca el número que salió. Como “Llevar mi saldo” está activado, tu saldo sube o baja según la apuesta recomendada.':'Toca el número que salió. Solo se anota; tu saldo no cambia.';
   const counts={}; ru.hist.forEach(h=>counts[h]=(counts[h]||0)+1);
   const last=ru.hist[ru.hist.length-1];
-  const nb=nextBet(verdict(analyzeWheel())), chip=nb&&nb.type==='straight'?new Set(nb.ids):new Set();
-  const btn=(id,cls)=>`<button class="cell ${colorOf(id)} ${cls}${id===last?' last':''}" data-id="${id}" aria-label="Salió ${id}"><span>${id}</span>${chip.has(id)?`<i class="amt">${money(nb.per)}</i>`:''}${counts[id]?`<i class="cnt">${counts[id]}</i>`:''}</button>`;
-  let h=ru.wheel==='us'?btn('0','z')+btn('00','z'):btn('0','z');
-  for(let r=0;r<12;r++) for(let c=1;c<=3;c++) h+=btn(String(3*r+c),'n');
+  const nb=nextBet(verdict(analyzeWheel()));
+  const chip=nb&&nb.type==='straight'?new Set(nb.ids):new Set();
+  const mainKey=nb&&nb.type==='simple'?nb.key:(nb&&nb.type==='nosess'?autoSimple().key:null);
+  const mainAmt=nb&&nb.type==='simple'?money(nb.amt):'';
+  const alt=new Set(ru.hist.length?[bestOf(['doz1','doz2','doz3']).key,bestOf(['col1','col2','col3']).key]:[]);
+  const num=(id,style)=>`<button class="cell ${colorOf(id)}${id===last?' last':''}" style="${style}" data-id="${id}" aria-label="Salió ${id}"><span>${id}</span>${chip.has(id)?`<i class="amt">${money(nb.per)}</i>`:''}${counts[id]?`<i class="cnt">${counts[id]}</i>`:''}</button>`;
+  const out=(key,lab,style,cls)=>`<div class="cell out2 ${cls||''}${alt.has(key)?' alt':''}" style="${style}" title="${GROUPS[key].name}"><span>${lab}</span>${mainKey===key?`<i class="amt">${mainAmt||'Aquí'}</i>`:''}</div>`;
+  let h=ru.wheel==='us'?num('00','grid-column:3/span 3;grid-row:1')+num('0','grid-column:6/span 3;grid-row:1'):num('0','grid-column:3/span 6;grid-row:1');
+  for(let r=0;r<12;r++) for(let c=1;c<=3;c++) h+=num(String(3*r+c),`grid-column:${3+(c-1)*2}/span 2;grid-row:${r+2}`);
+  h+=out('doz1','1.ª docena','grid-column:2;grid-row:2/span 4','vert')+out('doz2','2.ª docena','grid-column:2;grid-row:6/span 4','vert')+out('doz3','3.ª docena','grid-column:2;grid-row:10/span 4','vert');
+  [['low','1 a 18',''],['even','Par',''],['red','Rojo','r'],['black','Negro','b'],['odd','Impar',''],['high','19 a 36','']].forEach(([k,l,c],i)=>{ h+=out(k,l,`grid-column:1;grid-row:${2+i*2}/span 2`,'vert '+c); });
+  ['col1','col2','col3'].forEach((k,i)=>{ h+=out(k,'2 a 1',`grid-column:${3+i*2}/span 2;grid-row:14`); });
   const b=$('#board'); b.innerHTML=h; b.classList.toggle('us',ru.wheel==='us');
+}
+
+function renderOptions(){
+  const n=N(), an=analyzeWheel(), v=verdict(an), nb=nextBet(v), T=ru.hist.length;
+  const s1=autoSimple(), dz=bestOf(['doz1','doz2','doz3']), cl=bestOf(['col1','col2','col3']), sec=an.bestSec;
+  const mainIsSimple=!nb||nb.type!=='straight';
+  const row=(title,tag,p,pay,seen,expv,note)=>`<div class="optrow"><span><b>${title}</b>${tag?`<span class="tag">${tag}</span>`:''}<br><span class="muted small">${note}</span></span><span class="v">${pct(p,1)}<br><span class="muted small" style="font-weight:400">paga ${pay}</span></span>${T?`<span class="muted small" style="grid-column:1/-1">Salió ${pct(seen,0)} de tus giros recientes; lo esperado es ${pct(expv,1)}.</span>`:''}</div>`;
+  const secShare=T?sec.c/T:0;
+  $('#optPanel').innerHTML=`<h2>Dónde apostar</h2>
+  <p class="muted small">Lo mejor de cada tipo de apuesta según lo que ha salido. La cifra grande es tu probabilidad de ganar en el próximo giro.</p>
+  ${row(`Sencilla: ${GROUPS[s1.key].name}`,mainIsSimple?'Recomendada':'',18/n,'1 a 1',s1.share,18/n,'Ganas casi la mitad de las veces. Es la de menor riesgo y la que más dura tu dinero'+(usePartage()?'; con La Partage, la de menor pérdida.':'.'))}
+  ${row(`Docena: ${GROUPS[dz.key].name}`,'',12/n,'2 a 1',dz.share,12/n,'Ganas 1 de cada 3 giros, pero cobras el doble.')}
+  ${row(`Columna: ${GROUPS[cl.key].name}`,'',12/n,'2 a 1',cl.share,12/n,'Igual que la docena, con otra forma de agrupar los números.')}
+  ${row(`Plenos al sector ${sec.ids.join(', ')}`,mainIsSimple?'':'Recomendada',5/n,'35 a 1 por número',secShare,5/n,v.kind==='bias'?'Estos números vecinos en la rueda salen más de lo que permite el azar.':'Cinco números vecinos en la rueda física que más han salido. Ganas pocas veces, pero cobras mucho.')}
+  <div class="note">Todas estas apuestas le dejan a la casa lo mismo (${pct(edgeAny(),2)}${usePartage()?', o 1,35 % en las sencillas con La Partage':''}). Lo que cambia es el riesgo: la sencilla gana seguido y poco; el pleno, rara vez y mucho. En el paño, la ficha dorada marca la recomendada y el borde punteado la docena y la columna que más salen.</div>`;
 }
 
 function renderHist(){
@@ -1336,10 +1371,10 @@ function renderGuide(){
 
 function renderAll(){
   $('#wEu').setAttribute('aria-pressed',String(ru.wheel==='eu')); $('#wUs').setAttribute('aria-pressed',String(ru.wheel==='us'));
-  renderRuSess(); renderNext(); renderBoard(); renderHist(); renderGuide();
+  renderRuSess(); renderNext(); renderBoard(); renderOptions(); renderHist(); renderGuide();
 }
 function initRU(){
-  $('#board').addEventListener('click',e=>{ const b=e.target.closest('.cell'); if(!b)return; registerSpin(b.dataset.id); save(); renderAll(); if(navigator.vibrate) navigator.vibrate(8); });
+  $('#board').addEventListener('click',e=>{ const b=e.target.closest('.cell[data-id]'); if(!b)return; registerSpin(b.dataset.id); save(); renderAll(); if(navigator.vibrate) navigator.vibrate(8); });
   $('#ruPlan').addEventListener('click',e=>{
     const st=e.target.closest('[data-st]'), sk=e.target.closest('[data-sk]');
     if(st) ru.strat=st.dataset.st; else if(sk) ru.simple=sk.dataset.sk; else return;
