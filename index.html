@@ -172,6 +172,38 @@ table.obs td.n{ text-align:right; }
 .verdict-box{ margin-top:12px; padding:12px 14px; border-radius:10px; background:var(--surface2); font-size:14.5px; }
 footer{ margin-top:36px; color:var(--muted); font-size:14px; max-width:70ch; }
 [hidden]{ display:none !important; }
+
+/* Sesión */
+.sess{ margin-bottom:20px; }
+.sess-start{ display:grid; grid-template-columns:minmax(0,1.2fr) minmax(0,1fr); gap:16px 24px; align-items:end; }
+.sess-new{ display:flex; gap:10px; align-items:end; }
+.sess-new .field{ flex:1; }
+.sess-grid{ display:grid; grid-template-columns:minmax(0,1.1fr) minmax(0,1fr) minmax(0,1fr); gap:20px 28px; align-items:start; }
+@media (max-width:900px){ .sess-start,.sess-grid{ grid-template-columns:1fr; } }
+.balance{ font-family:"Young Serif", Georgia, serif; font-size:clamp(40px,6vw,54px); line-height:1.05; font-variant-numeric:tabular-nums; }
+.up{ color:var(--green); font-weight:600; } .down{ color:var(--red-ink); font-weight:600; }
+.range{ position:relative; height:12px; border-radius:6px; margin:16px 0 6px; background:linear-gradient(90deg, var(--cR) 0%, var(--surface2) 50%, var(--cD) 100%); border:1px solid var(--line); }
+.range .mk{ position:absolute; top:-5px; width:4px; height:22px; border-radius:2px; transform:translateX(-50%); background:var(--ink); }
+.range .mk.st{ background:var(--muted); width:2px; }
+.range-lbl{ display:flex; justify-content:space-between; font-size:13.5px; color:var(--muted); }
+.alert{ margin-top:12px; padding:10px 14px; border-radius:10px; font-weight:600; font-size:14.5px; }
+.alert.good{ background:var(--cD); color:var(--cell-ink); } .alert.bad{ background:var(--cR); color:var(--cell-ink); } .alert.warn{ background:var(--cH); color:var(--cell-ink); }
+.sess-fields{ display:grid; gap:10px; }
+.sess-fields .hint{ font-size:13px; color:var(--muted); }
+
+/* Paño: saldo y botones de resultado */
+.felt-bal{ position:absolute; top:14px; right:16px; font-size:14px; color:var(--felt-muted); }
+.felt-bal b{ font-family:"Young Serif", Georgia, serif; font-weight:400; font-size:20px; color:var(--felt-ink); margin-left:4px; }
+.rbar{ margin-top:16px; padding-top:14px; border-top:1px solid rgba(238,246,241,.18); display:grid; gap:10px; justify-items:center; }
+.rbar-opts{ display:flex; gap:18px; flex-wrap:wrap; justify-content:center; font-size:14.5px; color:var(--felt-ink); }
+.rbar-opts label{ display:inline-flex; align-items:center; gap:6px; cursor:pointer; }
+.rbar-opts input{ width:18px; height:18px; accent-color:var(--gold); }
+.rbar-btns{ display:flex; gap:8px; flex-wrap:wrap; justify-content:center; }
+.rb{ min-width:92px; display:flex; flex-direction:column; align-items:center; gap:1px; padding:9px 16px; border-radius:12px; border:1px solid rgba(238,246,241,.35); background:rgba(255,255,255,.08); color:var(--felt-ink); font-weight:700; font-size:15.5px; }
+.rb small{ font-weight:600; font-size:13px; opacity:.85; font-variant-numeric:tabular-nums; }
+.rb:hover{ background:rgba(255,255,255,.16); }
+.rb.win{ background:rgba(60,170,110,.35); border-color:rgba(120,220,160,.6); }
+.rb.lose{ background:rgba(200,60,50,.32); border-color:rgba(240,130,120,.55); }
 </style>
 </head>
 <body>
@@ -190,9 +222,11 @@ footer{ margin-top:36px; color:var(--muted); font-size:14px; max-width:70ch; }
 
   <!-- ============ BLACKJACK ============ -->
   <section data-view="blackjack">
+    <div class="panel sess" id="sessPanel"></div>
     <div class="bj-grid">
       <div>
         <div class="felt">
+          <div class="felt-bal" id="feltBal"></div>
           <div class="table-zone">
             <span class="zone-label">Carta visible del crupier</span>
             <div class="hand" id="dealerHand"></div>
@@ -202,6 +236,7 @@ footer{ margin-top:36px; color:var(--muted); font-size:14px; max-width:70ch; }
             <div class="hand" id="playerHand"></div>
             <span class="total" id="playerTotal"></span>
           </div>
+          <div id="resultBar"></div>
         </div>
 
         <div class="panel picker">
@@ -232,8 +267,14 @@ footer{ margin-top:36px; color:var(--muted); font-size:14px; max-width:70ch; }
               </div>
             </div>
             <label class="switch"><span>Se permite rendirse</span><input type="checkbox" id="surr"></label>
+            <div class="switch">
+              <span>Mazos en el zapato</span>
+              <div class="seg" role="group" aria-label="Mazos en el zapato" id="decks">
+                <button data-d="1">1</button><button data-d="2">2</button><button data-d="4">4</button><button data-d="6">6</button><button data-d="8">8</button>
+              </div>
+            </div>
           </div>
-          <p class="muted small" style="margin-top:12px">Estrategia para 4 a 8 barajas, doblar después de dividir permitido y blackjack pagado 3:2.</p>
+          <p class="muted small" style="margin-top:12px" id="rulesNote"></p>
         </div>
 
         <div class="panel" id="bjStats"></div>
@@ -252,7 +293,7 @@ footer{ margin-top:36px; color:var(--muted); font-size:14px; max-width:70ch; }
         <div class="panel"><h3 style="margin-top:0">Pares</h3><div class="scroll"><table class="strat" id="tPairs"></table></div></div>
       </div>
       <div class="legend" id="legend"></div>
-      <div class="note">Con esta estrategia la ventaja de la casa queda aproximadamente entre 0,4 % y 0,6 %, según las reglas. Si la mesa paga el blackjack 6:5 en lugar de 3:2, la ventaja sube alrededor de 1,4 puntos: evita esas mesas. Nunca tomes el seguro.</div>
+      <div class="note" id="edgeNote"></div>
     </div>
   </section>
 
@@ -328,7 +369,9 @@ async function loadRemote(){
     if(c.bj_h17!==undefined) bj.h17=String(c.bj_h17)==='true';
     if(c.bj_surr!==undefined) bj.surr=String(c.bj_surr)==='true';
     if(c.ru_wheel==='eu'||c.ru_wheel==='us') ru.wheel=c.ru_wheel;
-    store.set('bj_h17',bj.h17); store.set('bj_surr',bj.surr); store.set('bj_log',bj.log); save();
+    if(c.bj_decks&&[1,2,4,6,8].includes(+c.bj_decks)) bj.decks=+c.bj_decks;
+    if(c.bj_session!==undefined){ try{ bj.sess=c.bj_session?JSON.parse(c.bj_session):null; }catch(e){} }
+    store.set('bj_h17',bj.h17); store.set('bj_surr',bj.surr); store.set('bj_log',bj.log); store.set('bj_decks',bj.decks); store.set('bj_sess',bj.sess); save();
     renderBJ(); renderAll(); setSync('ok');
   }catch(e){ setSync('error'); }
 }
@@ -348,7 +391,7 @@ const COLS=['2','3','4','5','6','7','8','9','10','A'];
 const SUITS=['♠','♥','♣','♦'];
 const rv=r=>r==='A'?1:+r;
 const PR=v=>v===10?4/13:1/13;
-const bj={player:['10','6'],dealer:'10',h17:store.get('bj_h17',false),surr:store.get('bj_surr',true),log:store.get('bj_log',[])};
+const bj={player:['10','6'],dealer:'10',h17:store.get('bj_h17',false),surr:store.get('bj_surr',true),log:store.get('bj_log',[]),decks:store.get('bj_decks',6),sess:store.get('bj_sess',null)};
 
 const HARD={8:'HHHHHHHHHH',9:'HDDDDHHHHH',10:'DDDDDDDDHH',11:'DDDDDDDDDH',12:'HHSSSHHHHH',13:'SSSSSHHHHH',14:'SSSSSHHHHH',15:'SSSSSHHHUH',16:'SSSSSHHUUU',17:'SSSSSSSSSS',18:'SSSSSSSSSS'};
 const HARD_H17={11:'DDDDDDDDDD',15:'SSSSSHHHUU',17:'SSSSSSSSSV'};
@@ -494,7 +537,7 @@ function renderBJ(){
     if(a.lost) alt='Con más de dos cartas ya no puedes doblar ni rendirte, por eso cambia la jugada.';
     v.innerHTML=`<div class="v-chip pop" style="--cell:var(--c${A.cls})"><span class="sym">${A.sym}</span>${A.name}</div><p class="v-why">${why(a)}</p>${alt?`<p class="v-alt">${alt}</p>`:''}`;
   }
-  renderStats(a); renderCharts(a); renderLog(a);
+  renderStats(a); renderCharts(a); renderResultBar(a); renderLog(a); renderSession(); renderNotes();
 }
 
 function renderStats(a){
@@ -552,32 +595,124 @@ function recName(a){
   if(a.state==='bust')return 'Te pasaste';
   return ACT[a.main].name;
 }
+/* ---------- Sesión y dinero ---------- */
+const EDGE_BASE={1:0.05,2:0.19,4:0.36,6:0.40,8:0.43};
+function houseEdge(){ return Math.max(0,EDGE_BASE[bj.decks]+(bj.h17?0.22:0)-(bj.surr?0.08:0))/100; }
+const money=x=>{ const a=Math.abs(x); return (x<0?'−':'')+'$'+a.toLocaleString('es-EC',{minimumFractionDigits:a%1?2:0,maximumFractionDigits:2}); };
+const sessHands=()=>bj.sess?bj.log.filter(h=>h.session===bj.sess.id):[];
+const balance=()=>bj.sess?bj.sess.start+sessHands().reduce((t,h)=>t+(+h.net||0),0):0;
+const recFor=v=>({bet:Math.max(1,Math.round(v/50)),goal:Math.max(1,Math.round(v*0.25)),stop:Math.max(1,Math.round(v*0.5))});
+function riskStats(st){
+  const e=houseEdge(), mu=-e*st.bet, s2=Math.pow(1.15*st.bet,2), W=st.goal, L=st.stop;
+  let p,T;
+  if(e<1e-9){ p=L/(L+W); T=W*L/s2; }
+  else { const th=-2*mu/s2; p=(1-Math.exp(-th*L))/(Math.exp(th*W)-Math.exp(-th*L)); T=(W*p-L*(1-p))/mu; }
+  return {p,T,loss:e*st.bet};
+}
+function saveSess(){ store.set('bj_sess',bj.sess); send('saveConfig',{key:'bj_session',value:bj.sess?JSON.stringify(bj.sess):''}); }
+
+function renderSession(){
+  const el=$('#sessPanel');
+  if(!bj.sess){
+    el.innerHTML=`<div class="sess-start">
+      <div><h2>Tu sesión</h2><p class="muted small">Indica con cuánto dinero entras a la mesa. Te sugiero cuánto apostar por mano, una meta para retirarte ganando y un límite para retirarte perdiendo.</p></div>
+      <div class="sess-new"><label class="field"><span>Dinero con el que entras</span><input type="number" id="sStart" min="1" step="1" placeholder="Ej.: 200" inputmode="decimal"></label><button class="btn primary" id="sGo">Empezar sesión</button></div>
+    </div>`;
+    const go=()=>{ const v=+$('#sStart').value; if(!(v>0)){ $('#sStart').focus(); return; } bj.sess=Object.assign({id:'S'+Date.now(),start:v},recFor(v)); saveSess(); renderBJ(); };
+    $('#sGo').onclick=go; $('#sStart').onkeydown=e=>{ if(e.key==='Enter') go(); };
+    return;
+  }
+  const st=bj.sess, b=balance(), diff=b-st.start, n=sessHands().length, r=recFor(st.start), k=riskStats(st);
+  const lo=st.start-st.stop, hi=st.start+st.goal, span=hi-lo;
+  const at=x=>Math.min(100,Math.max(0,(x-lo)/span*100));
+  let alert='';
+  if(b>=hi) alert=`<div class="alert good">Llegaste a tu meta. Es el momento recomendado para retirarte con ${money(diff)} de ganancia.</div>`;
+  else if(b<=lo) alert=`<div class="alert bad">Llegaste a tu límite de pérdida. Retírate de la mesa: intentar recuperar lo perdido es como se pierde más.</div>`;
+  else if(st.bet>b) alert=`<div class="alert bad">Tu apuesta por mano es mayor que tu saldo.</div>`;
+  else if(st.bet>b*0.05) alert=`<div class="alert warn">Tu apuesta es más del 5 % de tu saldo: una racha corta de manos perdidas te puede sacar de la mesa.</div>`;
+  el.innerHTML=`<div class="sess-grid">
+    <div>
+      <h2>Tu sesión</h2>
+      <p class="muted small">Saldo actual (entraste con ${money(st.start)})</p>
+      <p class="balance">${money(b)}</p>
+      <p class="${diff>=0?'up':'down'}">${diff>0?'+':''}${money(diff)} en ${n} ${n===1?'mano':'manos'}</p>
+      <div class="range" role="img" aria-label="Saldo entre el límite de pérdida y la meta"><span class="mk st" style="left:${at(st.start)}%"></span><span class="mk" style="left:${at(b)}%"></span></div>
+      <div class="range-lbl"><span>Retirarte si bajas a ${money(lo)}</span><span>Retirarte si llegas a ${money(hi)}</span></div>
+      ${alert}
+    </div>
+    <div class="sess-fields">
+      <label class="field"><span>Apuesta por mano</span><input type="number" id="sBet" min="1" step="1" value="${st.bet}"><span class="hint">Recomendado: ${money(r.bet)} (2 % de tu dinero, unas 50 apuestas)</span></label>
+      <label class="field"><span>Meta de ganancia</span><input type="number" id="sGoal" min="1" step="1" value="${st.goal}"><span class="hint">Recomendado: ${money(r.goal)} (25 %)</span></label>
+      <label class="field"><span>Límite de pérdida</span><input type="number" id="sStop" min="1" step="1" value="${st.stop}"><span class="hint">Recomendado: ${money(r.stop)} (50 %)</span></label>
+      <div class="btns" style="margin-top:0"><button class="btn" id="sRec">Usar recomendados</button><button class="btn" id="sNew">Nueva sesión</button></div>
+    </div>
+    <div>
+      <h3 style="margin-top:0">Si mantienes esta apuesta</h3>
+      <div class="kv">
+        <span>Llegas a la meta antes que al límite</span><span class="v">${pct(k.p,0)}</span>
+        <span>Terminas en el límite de pérdida</span><span class="v">${pct(1-k.p,0)}</span>
+        <span>Duración esperada</span><span class="v">≈ ${num(Math.round(k.T))} manos</span>
+        <span>Pérdida esperada por mano</span><span class="v">${k.loss<1?num(k.loss*100,1)+' centavos':money(k.loss)}</span>
+      </div>
+      <p class="muted small" style="margin-top:10px">Una meta más pequeña sube la probabilidad de terminar ganando, pero el promedio a largo plazo sigue siendo la ventaja de la casa (${pct(houseEdge(),2)}).</p>
+    </div>
+  </div>`;
+  const upd=(id,key)=>{ $(id).onchange=e=>{ const v=Math.max(1,+e.target.value||1); bj.sess[key]=v; saveSess(); renderBJ(); }; };
+  upd('#sBet','bet'); upd('#sGoal','goal'); upd('#sStop','stop');
+  $('#sRec').onclick=()=>{ Object.assign(bj.sess,recFor(bj.sess.start)); saveSess(); renderBJ(); };
+  $('#sNew').onclick=()=>{ if(!confirm('¿Terminar esta sesión y empezar una nueva? Tu registro de manos se conserva.'))return; bj.sess=null; saveSess(); renderBJ(); };
+}
+
+function renderNotes(){
+  document.querySelectorAll('#decks button').forEach(b=>b.setAttribute('aria-pressed',String(+b.dataset.d===bj.decks)));
+  $('#rulesNote').textContent=`Zapato de ${bj.decks} ${bj.decks===1?'mazo':'mazos'}, doblar después de dividir permitido y blackjack pagado 3:2.`+(bj.decks<=2?' La tabla está optimizada para 4 a 8 mazos; con 1 o 2 mazos hay pocas diferencias y casi no cambian la ventaja.':'');
+  const e=houseEdge();
+  $('#edgeNote').textContent=`Con estas reglas y la estrategia básica, la ventaja de la casa es de aproximadamente ${pct(e,2)}: por cada $100 apostados pierdes en promedio ${money(e*100)}. Menos mazos favorecen al jugador. Si la mesa paga el blackjack 6:5 en lugar de 3:2, la ventaja sube alrededor de 1,4 puntos: evita esas mesas. Nunca tomes el seguro.`;
+  $('#feltBal').innerHTML=bj.sess?`Saldo<b>${money(balance())}</b>`:'';
+}
+
+/* ---------- Botones de resultado en el paño ---------- */
+function renderResultBar(a){
+  const el=$('#resultBar');
+  if(a.state==='incomplete'){ el.innerHTML=''; return; }
+  const isBJ=a.state==='bj', isBust=a.state==='bust', two=bj.player.length===2;
+  const canDouble=a.state==='ok'&&two;
+  el.innerHTML=`<div class="rbar">
+    ${a.state==='ok'?`<div class="rbar-opts"><label><input type="checkbox" id="followed" checked> Seguí la guía</label>${canDouble?`<label><input type="checkbox" id="doubled"${a.main==='D'?' checked':''}> Doblé</label>`:''}</div>`:''}
+    <div class="rbar-btns" id="rbtns"></div>
+  </div>`;
+  const draw=()=>{
+    const dbl=!!($('#doubled')&&$('#doubled').checked), bet=bj.sess?bj.sess.bet:0, risk=bet*(dbl?2:1);
+    let B;
+    if(isBust) B=[['Perdí',-risk,'lose']];
+    else if(isBJ) B=[['Gané',bet*1.5,'win'],['Empaté',0,'']];
+    else { B=[['Gané',risk,'win'],['Empaté',0,''],['Perdí',-risk,'lose']]; if(bj.surr&&two&&!dbl) B.push(['Me rendí',-bet/2,'lose']); }
+    $('#rbtns').innerHTML=B.map(x=>`<button class="rb ${x[2]}" data-res="${x[0]}" data-net="${x[1]}">${x[0]}${bj.sess?`<small>${x[1]>0?'+':''}${money(x[1])}</small>`:''}</button>`).join('');
+    $('#rbtns').querySelectorAll('.rb').forEach(btn=>btn.onclick=()=>{
+      const f=$('#followed');
+      const hand={cards:bj.player.join(' - '),dealer:bj.dealer,total:a.h?a.h.total:'',rec:recName(a),followed:f?f.checked:true,result:btn.dataset.res,session:bj.sess?bj.sess.id:'',bet:risk,net:+btn.dataset.net};
+      bj.log.push(hand); store.set('bj_log',bj.log); send('addHand',hand);
+      bj.player=[]; bj.dealer=null; renderBJ();
+    });
+  };
+  draw();
+  if($('#doubled')) $('#doubled').onchange=draw;
+}
+
+/* ---------- Estadísticas del registro ---------- */
 function renderLog(a){
   const L=bj.log, el=document.getElementById('bjLog');
   let h='<h2>Registro de manos</h2>';
-  if(a.state==='incomplete'){
-    h+='<p class="muted small">Cuando juegues una mano, anota aquí cómo terminó para medir tus resultados.</p>';
-  } else {
-    h+=`<p class="small muted">Mano actual: ${bj.player.join(' y ')} contra ${bj.dealer==='A'?'as':bj.dealer}. Recomendación: ${recName(a).toLowerCase()}.</p>
-    <label class="switch" style="margin-top:8px"><span>Seguí la recomendación</span><input type="checkbox" id="followed" checked></label>
-    <div class="btns"><button class="btn primary" data-res="Gané">Gané</button><button class="btn" data-res="Empaté">Empaté</button><button class="btn" data-res="Perdí">Perdí</button></div>`;
-  }
-  if(L.length){
-    const c=(arr,r)=>arr.filter(x=>x.result===r).length;
-    const f=L.filter(x=>x.followed), nf=L.filter(x=>!x.followed);
-    const line=(lab,arr)=>arr.length?`<span>${lab} (${arr.length})</span><span class="v">${pct(c(arr,'Gané')/arr.length,0)} / ${pct(c(arr,'Empaté')/arr.length,0)} / ${pct(c(arr,'Perdí')/arr.length,0)}</span>`:'';
-    h+=`<h3>Tus resultados</h3><p class="muted small" style="margin-bottom:6px">Ganadas / empatadas / perdidas</p>
-    <div class="kv">${line('Todas las manos',L)}${line('Siguiendo la guía',f)}${line('Sin seguirla',nf)}</div>
-    <p class="muted small" style="margin-top:10px">Con estrategia perfecta lo normal es ganar cerca del 43 %, empatar el 9 % y perder el 48 %; los dobles y el pago 3:2 del blackjack compensan la diferencia. Con pocas manos los porcentajes varían mucho.</p>
-    <div class="btns"><button class="btn" id="undoHand">Deshacer última anotación</button></div>`;
-  }
+  if(!L.length){ el.innerHTML=h+'<p class="muted small">Cuando termine cada mano, toca Gané, Empaté o Perdí en el paño. Aquí verás tus resultados.</p>'; return; }
+  const lost=x=>x.result==='Perdí'||x.result==='Me rendí';
+  const f=L.filter(x=>x.followed), nf=L.filter(x=>!x.followed);
+  const line=(lab,arr)=>arr.length?`<span>${lab} (${arr.length})</span><span class="v">${pct(arr.filter(x=>x.result==='Gané').length/arr.length,0)} / ${pct(arr.filter(x=>x.result==='Empaté').length/arr.length,0)} / ${pct(arr.filter(lost).length/arr.length,0)}</span>`:'';
+  h+=`<p class="muted small" style="margin-bottom:6px">Ganadas / empatadas / perdidas</p>
+  <div class="kv">${line('Todas las manos',L)}${line('Siguiendo la guía',f)}${line('Sin seguirla',nf)}</div>
+  <p class="muted small" style="margin-top:10px">Con estrategia perfecta lo normal es ganar cerca del 43 %, empatar el 9 % y perder el 48 %; los dobles y el pago 3:2 del blackjack compensan la diferencia. Con pocas manos los porcentajes varían mucho.</p>
+  <div class="btns"><button class="btn" id="undoHand">Deshacer última mano</button></div>`;
   el.innerHTML=h;
-  el.querySelectorAll('[data-res]').forEach(b=>b.onclick=()=>{
-    const hand={cards:bj.player.join(' - '),dealer:bj.dealer,total:a.h?a.h.total:'',rec:recName(a),followed:document.getElementById('followed').checked,result:b.dataset.res};
-    bj.log.push(hand); store.set('bj_log',bj.log); send('addHand',hand);
-    bj.player=[]; bj.dealer=null; renderBJ();
-  });
-  const u=document.getElementById('undoHand'); if(u) u.onclick=()=>{bj.log.pop(); store.set('bj_log',bj.log); send('undoHand'); renderBJ();};
+  $('#undoHand').onclick=()=>{ bj.log.pop(); store.set('bj_log',bj.log); send('undoHand'); renderBJ(); };
 }
 
 function initBJ(){
@@ -590,6 +725,7 @@ function initBJ(){
   $('#s17').onclick=()=>{bj.h17=false; store.set('bj_h17',false); send('saveConfig',{key:'bj_h17',value:'false'}); renderBJ();};
   $('#h17').onclick=()=>{bj.h17=true; store.set('bj_h17',true); send('saveConfig',{key:'bj_h17',value:'true'}); renderBJ();};
   $('#surr').onchange=e=>{bj.surr=e.target.checked; store.set('bj_surr',bj.surr); send('saveConfig',{key:'bj_surr',value:String(bj.surr)}); renderBJ();};
+  $('#decks').addEventListener('click',e=>{ const b=e.target.closest('button'); if(!b)return; bj.decks=+b.dataset.d; store.set('bj_decks',bj.decks); send('saveConfig',{key:'bj_decks',value:String(bj.decks)}); renderBJ(); });
   renderBJ();
 }
 
