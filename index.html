@@ -210,6 +210,66 @@ table.side td{ vertical-align:middle; }
 .betrow .v{ font-weight:600; font-variant-numeric:tabular-nums; }
 .xbtn{ border:0; background:transparent; font-size:20px; color:var(--muted); line-height:1; padding:0 4px; }
 
+/* Manos divididas */
+.hand.split{ gap:8px; padding-left:0; }
+.hgroup{ background:transparent; border:1px dashed rgba(238,246,241,.35); border-radius:12px; padding:6px 8px 5px; color:var(--felt-muted); font-size:13px; display:flex; flex-direction:column; align-items:center; gap:4px; }
+.hgroup.on{ border:2px solid var(--gold); color:var(--felt-ink); }
+.hand.mini{ padding-left:16px; min-height:64px; }
+.hand.mini .pcard{ width:44px; height:62px; margin-left:-16px; padding:4px 5px; }
+.hand.mini .pcard .r{ font-size:16px; } .hand.mini .pcard .s{ font-size:18px; }
+.hand-actions{ display:flex; gap:8px; flex-wrap:wrap; justify-content:center; margin-top:10px; }
+.fbtn.rec{ border-color:var(--gold); background:rgba(201,166,74,.25); }
+.srow{ display:flex; flex-wrap:wrap; gap:8px 12px; align-items:center; justify-content:center; color:var(--felt-ink); font-size:14.5px; }
+.srow label{ display:inline-flex; align-items:center; gap:6px; }
+
+/* Ruleta vertical */
+.rv-board{ display:grid; grid-template-columns:repeat(6,1fr); gap:5px; max-width:330px; margin:0 auto; }
+.rv-board .cell{ height:40px; }
+.rv-board .cell.z{ grid-column:span 6; } .rv-board.us .cell.z{ grid-column:span 3; }
+.rv-board .cell.n{ grid-column:span 2; }
+.next{ text-align:center; display:grid; gap:6px; justify-items:center; margin-bottom:16px; }
+.next .lab{ color:var(--felt-muted); font-size:14px; }
+.next .bet{ font-family:"Young Serif", Georgia, serif; font-size:clamp(28px,7vw,38px); line-height:1.15; color:var(--felt-ink); }
+.next .why{ color:var(--felt-ink); font-size:14.5px; max-width:46ch; }
+.status{ display:inline-block; padding:4px 12px; border-radius:999px; font-size:13px; font-weight:600; background:rgba(255,255,255,.12); color:var(--felt-ink); }
+.status.bias{ background:rgba(201,166,74,.35); }
+.plan-opts{ display:grid; gap:10px; justify-items:center; margin:6px 0 16px; }
+.plan-opts .seg{ flex-wrap:wrap; justify-content:center; }
+.plan-opts label{ display:inline-flex; gap:6px; align-items:center; color:var(--felt-ink); font-size:14.5px; }
+.plan-opts input{ width:18px; height:18px; accent-color:var(--gold); }
+.board-tools{ display:flex; gap:8px; flex-wrap:wrap; justify-content:center; margin-top:12px; }
+.board-tools input{ width:170px; background:rgba(0,0,0,.22); color:var(--felt-ink); border-color:rgba(238,246,241,.35); }
+.ru-layout{ display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:20px; align-items:start; margin-top:20px; }
+@media (max-width:900px){ .ru-layout{ grid-template-columns:1fr; } }
+details.guide{ border-bottom:1px solid var(--line); padding:10px 0; }
+details.guide summary{ cursor:pointer; font-weight:600; display:flex; justify-content:space-between; gap:10px; list-style:none; }
+details.guide summary::-webkit-details-marker{ display:none; }
+details.guide summary .tag{ font-size:12.5px; font-weight:600; padding:2px 8px; border-radius:999px; white-space:nowrap; align-self:center; }
+.tag.good{ background:var(--cD); color:var(--cell-ink); } .tag.meh{ background:var(--cH); color:var(--cell-ink); } .tag.bad{ background:var(--cR); color:var(--cell-ink); }
+details.guide p{ font-size:14.5px; margin-top:8px; }
+
+/* Celular en vertical */
+@media (max-width:600px){
+  .wrap{ padding:16px 12px 40px; }
+  header.top{ margin-bottom:16px; }
+  nav.tabs{ width:100%; } .tab{ flex:1; text-align:center; padding:8px 6px; }
+  .panel{ padding:16px; border-radius:12px; }
+  .felt{ padding:16px 12px; border-radius:18px; }
+  .felt-bal,.ct-mini{ position:static; display:block; text-align:center; margin-bottom:6px; }
+  .pcard{ width:56px; height:80px; } .hand{ min-height:84px; }
+  .verdict{ min-height:110px; margin:12px auto; }
+  .v-chip{ font-size:28px; padding:8px 18px 10px; }
+  .ranks{ grid-template-columns:repeat(5,minmax(0,1fr)); }
+  .sess-new{ flex-direction:column; align-items:stretch; }
+  .bar{ grid-template-columns:70px 1fr 56px; }
+  table.strat{ font-size:12.5px; min-width:300px; } table.strat td{ min-width:22px; height:26px; }
+  .pchip{ width:40px; height:40px; }
+  .rb{ min-width:76px; padding:8px 10px; }
+  .ct-pad button{ height:104px; }
+  .switch{ font-size:14.5px; }
+  .seg button{ padding:5px 10px; }
+}
+
 /* Conteo discreto */
 .ct-wrap{ max-width:460px; margin:0 auto; background:#0A0E0C; color:#6F7A74; border-radius:22px; padding:18px; border:1px solid #1A221E; }
 .ct-screen{ display:flex; justify-content:space-between; align-items:flex-end; padding:6px 6px 14px; user-select:none; -webkit-user-select:none; touch-action:none; cursor:pointer; }
@@ -288,6 +348,7 @@ table.side td{ vertical-align:middle; }
             <div class="hand" id="playerHand"></div>
             <span class="total" id="playerTotal"></span>
           </div>
+          <div class="hand-actions" id="handActions"></div>
           <div class="ct-mini" id="ctMini"></div>
           <div class="betstrip" id="betStrip"></div>
           <div id="resultBar"></div>
@@ -356,36 +417,23 @@ table.side td{ vertical-align:middle; }
   <!-- ============ RULETA ============ -->
   <section data-view="ruleta" hidden>
     <div class="panel sess" id="ruSess"></div>
-    <div class="ru-controls">
-      <div class="group">
-        <span class="small muted">Rueda</span>
-        <div class="seg" role="group" aria-label="Tipo de rueda">
-          <button id="wEu" aria-pressed="true">Europea (0)</button>
-          <button id="wUs" aria-pressed="false">Americana (0 y 00)</button>
-        </div>
-      </div>
-      <div class="group">
-        <span class="small muted">Al tocar un número</span>
-        <div class="seg" role="group" aria-label="Modo">
-          <button id="mBet" aria-pressed="true">Apostar</button>
-          <button id="mSpin" aria-pressed="false">Registrar lo que salió</button>
-        </div>
-      </div>
-    </div>
-
     <div class="felt" id="ruFelt">
-      <div class="ru-top" id="ruTop"></div>
-      <div class="scroll"><div class="ru-board" id="board"></div></div>
-      <div class="ru-legend">
-        <span id="modeHint"></span>
-        <span><button class="fbtn" id="clearSel">Quitar todas las fichas</button></span>
+      <div class="next" id="ruNext" aria-live="polite"></div>
+      <div class="plan-opts" id="ruPlan"></div>
+      <p class="strip-hint" style="margin-bottom:10px">Toca el número que salió en cada giro.</p>
+      <div class="rv-board" id="board"></div>
+      <div class="board-tools">
+        <button class="fbtn" id="undoSpin">Deshacer último</button>
+        <input type="text" id="paste" placeholder="Varios: 17, 32, 0" inputmode="numeric" aria-label="Agregar varios números">
+        <button class="fbtn" id="addPaste">Agregar</button>
+      </div>
+      <div class="board-tools">
+        <div class="seg feltseg" role="group" aria-label="Tipo de rueda"><button id="wEu" aria-pressed="true">Europea (0)</button><button id="wUs" aria-pressed="false">Americana (0 y 00)</button></div>
       </div>
     </div>
-
-    <div class="ru-grid">
-      <div class="panel" id="betPanel"></div>
+    <div class="ru-layout">
       <div class="panel" id="histPanel"></div>
-      <div class="panel" id="riskPanel"></div>
+      <div class="panel" id="guidePanel"></div>
     </div>
   </section>
 
@@ -479,7 +527,7 @@ const COLS=['2','3','4','5','6','7','8','9','10','A'];
 const SUITS=['♠','♥','♣','♦'];
 const rv=r=>r==='A'?1:+r;
 const PR=v=>v===10?4/13:1/13;
-const bj={player:['10','6'],dealer:'10',h17:store.get('bj_h17',false),surr:store.get('bj_surr',true),log:store.get('bj_log',[]),decks:store.get('bj_decks',6),sess:store.get('bj_sess',null),bets:store.get('bj_bets',{main:0,over:0,under:0,exact:0,pair:0}),spot:'main',pay:store.get('bj_pay',{over:1,under:1,exact:10,pmix:5,pcol:10,pperf:25}),pairType:'no',pairKey:''};
+const bj={hands:[['10','6']],act:0,orig:null,splitAces:false,res:[],dealer:'10',h17:store.get('bj_h17',false),surr:store.get('bj_surr',true),log:store.get('bj_log',[]),decks:store.get('bj_decks',6),sess:store.get('bj_sess',null),bets:store.get('bj_bets',{main:0,over:0,under:0,exact:0,pair:0}),spot:'main',pay:store.get('bj_pay',{over:1,under:1,exact:10,pmix:5,pcol:10,pperf:25}),pairType:'no',pairKey:''};
 
 const HARD={8:'HHHHHHHHHH',9:'HDDDDHHHHH',10:'DDDDDDDDHH',11:'DDDDDDDDDH',12:'HHSSSHHHHH',13:'SSSSSHHHHH',14:'SSSSSHHHHH',15:'SSSSSHHHUH',16:'SSSSSHHUUU',17:'SSSSSSSSSS',18:'SSSSSSSSSS'};
 const HARD_H17={11:'DDDDDDDDDD',15:'SSSSSHHHUU',17:'SSSSSSSSSV'};
@@ -488,6 +536,10 @@ const SOFT_H17={7:'XXXXXSSHHH',8:'SSSSXSSSSS'};
 const PAIRS={'A':'PPPPPPPPPP','10':'SSSSSSSSSS','9':'PPPPPSPPSS','8':'PPPPPPPPPP','7':'PPPPPPHHHH','6':'PPPPPHHHHH','5':'DDDDDDDDHH','4':'HHHPPHHHHH','3':'PPPPPPHHHH','2':'PPPPPPHHHH'};
 const PAIRS_H17={'8':'PPPPPPPPPW'};
 const rowOf=(base,over,k)=>(bj.h17&&over[k])||base[k];
+Object.defineProperty(bj,'player',{get(){return bj.hands[bj.act];},set(v){bj.hands[bj.act]=v;}});
+const isSplit=()=>bj.hands.length>1;
+const origCards=()=>isSplit()?bj.orig:bj.hands[0].slice(0,2);
+function resetHand(){ bj.hands=[[]]; bj.act=0; bj.orig=null; bj.splitAces=false; bj.res=[]; bj.dealer=null; }
 
 const ACT={
   H:{name:'Pedir carta',sym:'+',cls:'H'},
@@ -501,9 +553,9 @@ function resolve(code,two){
     case 'H':return 'H'; case 'S':return 'S'; case 'P':return 'P';
     case 'D':return two?'D':'H';
     case 'X':return two?'D':'S';
-    case 'U':return two&&bj.surr?'R':'H';
-    case 'V':return two&&bj.surr?'R':'S';
-    case 'W':return two&&bj.surr?'R':'P';
+    case 'U':return two&&bj.surr&&!isSplit()?'R':'H';
+    case 'V':return two&&bj.surr&&!isSplit()?'R':'S';
+    case 'W':return two&&bj.surr&&!isSplit()?'R':'P';
   }
 }
 function fallbackOf(code,main){
@@ -548,15 +600,18 @@ function hitBust(h){
 }
 const upName=r=>r==='A'?'un as':'un '+r;
 
-function analyze(){
-  const p=bj.player, d=bj.dealer;
-  if(p.length<2||!d) return {state:'incomplete'};
+function analyze(i){
+  const p=bj.hands[i===undefined?bj.act:i], d=bj.dealer;
+  if(!d) return {state:'incomplete'};
+  if(isSplit()&&p.length<2) return {state:'need'};
+  if(p.length<2) return {state:'incomplete'};
   const h=evalHand(p); const two=p.length===2;
   if(h.total>21) return {state:'bust',h};
-  if(two&&h.total===21) return {state:'bj',h};
+  if(two&&h.total===21&&!isSplit()) return {state:'bj',h};
+  if(bj.splitAces) return {state:'aces',h};
   const col=COLS.indexOf(d);
   let table,key,code;
-  if(two&&p[0]===p[1]){ table='pairs'; key=p[0]; code=rowOf(PAIRS,PAIRS_H17,key)[col]; }
+  if(two&&p[0]===p[1]&&bj.hands.length<4){ table='pairs'; key=p[0]; code=rowOf(PAIRS,PAIRS_H17,key)[col]; }
   else if(h.soft){
     if(h.total>=21){ table=null; code='S'; }
     else { table='soft'; key=h.total-11; code=rowOf(SOFT,SOFT_H17,key)[col]; }
@@ -600,7 +655,9 @@ function cardHTML(r,i){
 }
 function renderBJ(){
   $('#dealerHand').innerHTML=bj.dealer?cardHTML(bj.dealer,1):'<div class="pcard empty"></div>';
-  $('#playerHand').innerHTML=bj.player.length?bj.player.map(cardHTML).join(''):'<div class="pcard empty"></div><div class="pcard empty"></div>';
+  const ph=$('#playerHand'); ph.classList.toggle('split',isSplit());
+  if(!isSplit()) ph.innerHTML=bj.player.length?bj.player.map(cardHTML).join(''):'<div class="pcard empty"></div><div class="pcard empty"></div>';
+  else ph.innerHTML=bj.hands.map((h,i)=>{ const t=h.length?evalHand(h).total:0; return `<button class="hgroup${i===bj.act?' on':''}" data-h="${i}" aria-label="Mano ${i+1}"><div class="hand mini">${h.map((c,j)=>cardHTML(c,i+j)).join('')}${h.length<2?'<div class="pcard empty"></div>':''}</div><span>Mano ${i+1}${h.length>=2?': '+(t>21?'se pasó':t):''}</span></button>`; }).join('');
   document.querySelectorAll('#dealerPicker .rank').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.r===bj.dealer)));
   $('#s17').setAttribute('aria-pressed',String(!bj.h17)); $('#h17').setAttribute('aria-pressed',String(bj.h17));
   $('#surr').checked=bj.surr;
@@ -609,14 +666,19 @@ function renderBJ(){
   const v=$('#verdict'); let tot='';
   if(a.h){
     const p=bj.player;
-    tot=(a.table==='pairs')?`Tu mano: <b>par de ${p[0]==='A'?'ases':p[0]}</b>`:`Tu mano: <b>${a.h.total}</b> ${a.h.soft?'blando':'duro'}`;
+    const lab=isSplit()?`Mano ${bj.act+1} de ${bj.hands.length}`:'Tu mano';
+    tot=(a.table==='pairs')?`${lab}: <b>par de ${p[0]==='A'?'ases':p[0]}</b>`:`${lab}: <b>${a.h.total}</b> ${a.h.soft?'blando':'duro'}`;
   }
   $('#playerTotal').innerHTML=tot;
 
   if(a.state==='incomplete'){
     v.innerHTML=`<p class="v-why">Elige al menos dos cartas tuyas y la carta visible del crupier.</p>`;
+  } else if(a.state==='need'){
+    v.innerHTML=`<p class="v-why">Agrega la segunda carta de la mano ${bj.act+1}.</p>`;
+  } else if(a.state==='aces'){
+    v.innerHTML=`<div class="v-chip pop" style="--cell:var(--cS)"><span class="sym">=</span>Plantarse</div><p class="v-why">Los ases divididos reciben una sola carta cada uno.${a.h.total===21?' Este 21 paga 1 a 1, no cuenta como blackjack.':''}</p>`;
   } else if(a.state==='bust'){
-    v.innerHTML=`<div class="v-chip" style="--cell:var(--cR)">Te pasaste</div><p class="v-why">Sumas ${a.h.total}. Empieza una nueva mano.</p>`;
+    v.innerHTML=`<div class="v-chip" style="--cell:var(--cR)">Te pasaste</div><p class="v-why">Sumas ${a.h.total}.${isSplit()&&bj.act<bj.hands.length-1?' Pasa a la siguiente mano.':isSplit()?'':' Empieza una nueva mano.'}</p>`;
   } else if(a.state==='bj'){
     v.innerHTML=`<div class="v-chip pop" style="--cell:var(--cD)">¡Blackjack!</div><p class="v-why">Cobras 3:2. ${bj.dealer==='A'?'Si te ofrecen “dinero par”, es lo mismo que tomar el seguro: a largo plazo conviene rechazarlo.':''}</p>`;
   } else {
@@ -627,7 +689,7 @@ function renderBJ(){
     if(a.base) alt=`Ajuste por conteo (conteo real ${fmtTC()}): la tabla básica dice ${ACT[a.base].name.toLowerCase()}.`;
     v.innerHTML=`<div class="v-chip pop" style="--cell:var(--c${A.cls})"><span class="sym">${A.sym}</span>${A.name}</div><p class="v-why">${why(a)}</p>${alt?`<p class="v-alt">${alt}</p>`:''}`;
   }
-  renderStats(a); renderCharts(a); renderBetStrip(); renderResultBar(a); renderLog(a); renderSession(); renderSidesPanel(); renderNotes();
+  renderHandActions(a); renderStats(a); renderCharts(a); renderBetStrip(); renderResultBar(a); renderLog(a); renderSession(); renderSidesPanel(); renderNotes();
 }
 
 function renderStats(a){
@@ -682,6 +744,8 @@ function renderCharts(a){
 
 function recName(a){
   if(a.state==='bj')return 'Blackjack';
+  if(a.state==='aces')return 'Plantarse';
+  if(!a.main)return '';
   if(a.state==='bust')return 'Te pasaste';
   return ACT[a.main].name;
 }
@@ -775,8 +839,9 @@ function sideProbs(){
   return {over,under,exact,pperf:(nd-1)/(T-1),pcol:nd/(T-1),pmix:2*nd/(T-1)};
 }
 function resolveSides(){
-  if(bj.player.length<2) return null;
-  const s=rv(bj.player[0])+rv(bj.player[1]), B=bj.bets, y=bj.pay, items=[];
+  const oc=origCards();
+  if(!oc||oc.length<2) return null;
+  const s=rv(oc[0])+rv(oc[1]), B=bj.bets, y=bj.pay, items=[];
   if(B.over) items.push({k:'+13',name:SIDE_NAME.over,bet:B.over,net:s>13?B.over*y.over:-B.over});
   if(B.under) items.push({k:'−13',name:SIDE_NAME.under,bet:B.under,net:s<13?B.under*y.under:-B.under});
   if(B.exact) items.push({k:'13',name:SIDE_NAME.exact,bet:B.exact,net:s===13?B.exact*y.exact:-B.exact});
@@ -821,8 +886,67 @@ function renderNotes(){
 }
 
 /* ---------- Botones de resultado en el paño ---------- */
+function renderHandActions(a){
+  const el=$('#handActions'), p=bj.player; let h='';
+  const canSplit=!!bj.dealer&&p.length===2&&p[0]===p[1]&&bj.hands.length<4&&!bj.splitAces;
+  if(canSplit) h+=`<button class="fbtn${a.main==='P'?' rec':''}" id="doSplit">Dividir${a.main==='P'?' (recomendado)':''}</button>`;
+  if(isSplit()&&bj.act<bj.hands.length-1) h+=`<button class="fbtn" id="nextHand">Me planté: siguiente mano</button>`;
+  el.innerHTML=h;
+  const ds=$('#doSplit'); if(ds) ds.onclick=()=>{ const [c1,c2]=p; if(!isSplit()) bj.orig=p.slice(0,2); bj.hands.splice(bj.act,1,[c1],[c2]); if(c1==='A') bj.splitAces=true; bj.res=[]; renderBJ(); };
+  const nh=$('#nextHand'); if(nh) nh.onclick=()=>{ bj.act++; renderBJ(); };
+}
+function autoAdvance(){
+  if(!isSplit())return;
+  const a=analyze(bj.act);
+  const done=a.state==='bust'||a.state==='aces'||(a.h&&a.h.total>=21);
+  if(!done)return;
+  for(let j=bj.act+1;j<bj.hands.length;j++){ if(bj.hands[j].length<2){ bj.act=j; return; } }
+  for(let j=0;j<bj.hands.length;j++){ if(bj.hands[j].length<2){ bj.act=j; return; } }
+  if(bj.act<bj.hands.length-1) bj.act++;
+}
+function sidesHTML(sides){
+  if(!sides||!sides.items.length) return '';
+  const oc=origCards(), same=oc[0]===oc[1];
+  let sr=`<div class="side-res">${sides.items.map(x=>`<span class="${x.net>0?'w':'l'}">${x.k}: ${x.net>0?'gana':'pierde'} ${signed(x.net)}</span>`).join('')}</div>`;
+  if(bj.bets.pair&&same) sr+=`<div class="rbar-opts"><span>¿Qué par fue?</span><div class="seg feltseg">${[['no','No es par'],['mix','Mixto'],['col','Color'],['perf','Perfecto']].map(([k,l])=>`<button data-pt="${k}" aria-pressed="${bj.pairType===k}">${l}</button>`).join('')}</div></div>${oc[0]==='10'?'<p class="strip-hint">Con 10, J, Q o K solo es par si son la misma figura.</p>':''}`;
+  return sr;
+}
+function syncPairType(){
+  const oc=origCards()||[], key=oc.join();
+  if(bj.pairKey!==key){ bj.pairKey=key; bj.pairType=(oc.length===2&&oc[0]===oc[1]&&oc[0]!=='10')?'mix':'no'; }
+}
+function renderSplitResults(){
+  const el=$('#resultBar');
+  if(!bj.dealer||!bj.hands.every(h=>h.length>=2)){ el.innerHTML='<div class="rbar"><p class="strip-hint">Completa las cartas de cada mano para anotar el resultado.</p></div>'; return; }
+  syncPairType();
+  const sides=resolveSides(), bet=bj.bets.main, sn=sides?sides.net:0;
+  bj.hands.forEach((h,i)=>{ if(!bj.res[i]){ const ai=analyze(i), t=evalHand(h).total; bj.res[i]={dbl:ai.state==='ok'&&ai.main==='D',res:t>21?'Perdí':null}; } });
+  const nets=bj.hands.map((h,i)=>{ const r=bj.res[i], risk=bet*(r.dbl?2:1); return r.res==='Gané'?risk:r.res==='Perdí'?-risk:0; });
+  const all=bj.res.every(r=>r.res);
+  el.innerHTML=`<div class="rbar">
+    <div style="display:grid;gap:8px;justify-items:center">${sidesHTML(sides)}</div>
+    ${bj.hands.map((h,i)=>{ const t=evalHand(h).total, bust=t>21, r=bj.res[i];
+      return `<div class="srow"><span>Mano ${i+1} (${bust?'se pasó':t})</span>${!bust&&!bj.splitAces?`<label><input type="checkbox" data-dbl="${i}"${r.dbl?' checked':''}> Doblé</label>`:''}<div class="seg feltseg">${(bust?['Perdí']:['Gané','Empaté','Perdí']).map(x=>`<button data-hr="${i}" data-res="${x}" aria-pressed="${r.res===x}">${x}</button>`).join('')}</div></div>`; }).join('')}
+    <label class="rbar-opts" style="justify-content:center"><span><input type="checkbox" id="followed" checked> Seguí la guía</span></label>
+    ${all?`<div class="rbar-btns"><button class="rb ${nets.reduce((a,b)=>a+b,0)+sn>=0?'win':'lose'}" id="saveSplit">Guardar mano<small>${signed(nets.reduce((a,b)=>a+b,0)+sn)}</small></button></div>`:''}
+  </div>`;
+  el.querySelectorAll('[data-pt]').forEach(b=>b.onclick=()=>{ bj.pairType=b.dataset.pt; renderSplitResults(); });
+  el.querySelectorAll('[data-dbl]').forEach(c=>c.onchange=()=>{ bj.res[+c.dataset.dbl].dbl=c.checked; renderSplitResults(); });
+  el.querySelectorAll('[data-hr]').forEach(b=>b.onclick=()=>{ bj.res[+b.dataset.hr].res=b.dataset.res; renderSplitResults(); });
+  const sv=$('#saveSplit'); if(sv) sv.onclick=()=>{
+    const f=$('#followed'), sidesStr=sides?sides.items.map(x=>`${x.name} ${money(x.bet)}: ${signed(x.net)}`).join('; '):'';
+    bj.hands.forEach((h,i)=>{
+      const r=bj.res[i], ai=analyze(i);
+      const hand={cards:h.join(' - ')+' (dividida)',dealer:bj.dealer,total:evalHand(h).total,rec:recName(ai)||'Dividir',followed:f?f.checked:true,result:r.res,
+        session:bj.sess?bj.sess.id:'',bet:bet*(r.dbl?2:1),sides:i===0?sidesStr:'',sideNet:i===0?sn:0,net:nets[i]+(i===0?sn:0)};
+      bj.log.push(hand); send('addHand',hand);
+    });
+    store.set('bj_log',bj.log); resetHand(); renderBJ();
+  };
+}
 function renderResultBar(a){
   const el=$('#resultBar');
+  if(isSplit()){ renderSplitResults(); return; }
   if(a.state==='incomplete'){ el.innerHTML=''; return; }
   const isBJ=a.state==='bj', isBust=a.state==='bust', two=bj.player.length===2, canDouble=a.state==='ok'&&two;
   const key=bj.player.slice(0,2).join();
@@ -856,7 +980,7 @@ function renderResultBar(a){
         sides:sides?sides.items.map(x=>`${x.name} ${money(x.bet)}: ${signed(x.net)}`).join('; '):'',
         sideNet:sn,net:+btn.dataset.net+sn};
       bj.log.push(hand); store.set('bj_log',bj.log); send('addHand',hand);
-      bj.player=[]; bj.dealer=null; renderBJ();
+      resetHand(); renderBJ();
     });
   };
   draw();
@@ -952,9 +1076,17 @@ function initCount(){
 function initBJ(){
   $('#playerPicker').innerHTML=RANKS.map(r=>`<button class="rank" data-r="${r}" aria-label="Agregar ${r==='A'?'as':r}">${r}</button>`).join('');
   $('#dealerPicker').innerHTML=RANKS.map(r=>`<button class="rank" data-r="${r}" aria-label="Crupier muestra ${r==='A'?'as':r}">${r}</button>`).join('');
-  $('#playerPicker').addEventListener('click',e=>{const b=e.target.closest('.rank'); if(!b)return; const h=evalHand(bj.player); if(bj.player.length>=2&&h.total>=21)return; if(bj.player.length>=9)return; bj.player.push(b.dataset.r); ctCard(b.dataset.r,1); renderBJ(); renderCount();});
+  $('#playerPicker').addEventListener('click',e=>{const b=e.target.closest('.rank'); if(!b)return; const p=bj.player, h=evalHand(p); if(p.length>=2&&h.total>=21)return; if(p.length>=9)return; if(bj.splitAces&&p.length>=2)return; p.push(b.dataset.r); ctCard(b.dataset.r,1); autoAdvance(); renderBJ(); renderCount();});
+  $('#playerHand').addEventListener('click',e=>{ const g=e.target.closest('.hgroup'); if(!g)return; bj.act=+g.dataset.h; renderBJ(); });
   $('#dealerPicker').addEventListener('click',e=>{const b=e.target.closest('.rank'); if(!b)return; if(bj.dealer===b.dataset.r)return; if(bj.dealer) ctCard(bj.dealer,-1); bj.dealer=b.dataset.r; ctCard(bj.dealer,1); renderBJ(); renderCount();});
-  $('#undoCard').onclick=()=>{const r=bj.player.pop(); if(r) ctCard(r,-1); renderBJ(); renderCount();};
+  $('#undoCard').onclick=()=>{
+    const p=bj.player;
+    if(isSplit()&&p.length<=1){
+      if(bj.hands.length===2&&bj.hands.every(h=>h.length===1)){ bj.hands=[bj.orig.slice()]; bj.act=0; bj.orig=null; bj.splitAces=false; bj.res=[]; renderBJ(); }
+      return;
+    }
+    const r=p.pop(); if(r) ctCard(r,-1); bj.res=[]; renderBJ(); renderCount();
+  };
   $('#betStrip').addEventListener('click',e=>{
     const sp=e.target.closest('[data-spot]'), ch=e.target.closest('[data-chip]'), ac=e.target.closest('[data-act]');
     if(sp) bj.spot=sp.dataset.spot;
@@ -963,7 +1095,7 @@ function initBJ(){
     else return;
     store.set('bj_bets',bj.bets); renderBJ();
   });
-  $('#newHand').onclick=()=>{bj.player=[]; bj.dealer=null; renderBJ();};
+  $('#newHand').onclick=()=>{ resetHand(); renderBJ(); };
   $('#s17').onclick=()=>{bj.h17=false; store.set('bj_h17',false); send('saveConfig',{key:'bj_h17',value:'false'}); renderBJ();};
   $('#h17').onclick=()=>{bj.h17=true; store.set('bj_h17',true); send('saveConfig',{key:'bj_h17',value:'true'}); renderBJ();};
   $('#surr').onchange=e=>{bj.surr=e.target.checked; store.set('bj_surr',bj.surr); send('saveConfig',{key:'bj_surr',value:String(bj.surr)}); renderBJ();};
@@ -974,90 +1106,105 @@ function initBJ(){
 /* =================== RULETA =================== */
 const REDS=new Set([1,3,5,7,9,12,14,16,18,19,21,23,25,27,30,32,34,36]);
 const NUMS=Array.from({length:36},(_,i)=>String(i+1));
-const PAY={pleno:35,caballo:17,calle:11,cuadro:8,linea:5,docena:2,columna:2,simple:1};
-const TNAME={pleno:'Pleno',caballo:'Caballo',calle:'Calle',cuadro:'Cuadro',linea:'Línea',docena:'Docena',columna:'Columna',simple:'Sencilla'};
-const NEED={pleno:1,caballo:2,calle:3,cuadro:4,linea:6};
-const HINT={pleno:'Toca un número.',caballo:'Toca 2 números vecinos.',calle:'Toca los 3 números de una misma fila vertical (ej.: 1, 2 y 3).',cuadro:'Toca 4 números que formen un cuadro (ej.: 1, 2, 4 y 5).',linea:'Toca los 6 números de dos calles seguidas (ej.: del 1 al 6).'};
-const DENOMS=[0.5,1,5,10,25,100];
+const WHEEL={
+  eu:'0 32 15 19 4 21 2 25 17 34 6 27 13 36 11 30 8 23 10 5 24 16 33 1 20 14 31 9 22 18 29 7 28 12 35 3 26'.split(' '),
+  us:'0 28 9 26 30 11 7 20 32 17 5 22 34 15 3 24 36 13 1 00 27 10 25 29 12 8 19 31 18 6 21 33 16 4 23 35 14 2'.split(' ')
+};
 let spinsInit=store.get('ru_spins',null);
 if(!spinsInit){ const old=store.get('ru_byWheel',{eu:[],us:[]}); spinsInit={eu:(old.eu||[]).map(n=>({n})),us:(old.us||[]).map(n=>({n}))}; }
-const ru={wheel:store.get('ru_wheel','eu'),mode:'bet',btype:'pleno',denom:store.get('ru_denom',1),bets:store.get('ru_bets',[]),pending:[],spins:spinsInit,sess:store.get('ru_sess',null),n:store.get('ru_n',20),base:store.get('ru_base',1),steps:store.get('ru_steps',7),msg:'',err:''};
+const ru={wheel:store.get('ru_wheel','eu'),spins:spinsInit,sess:store.get('ru_sess',null),follow:store.get('ru_follow',true),strat:store.get('ru_strat','flat'),simple:store.get('ru_simple','red'),partage:store.get('ru_partage',false),base:store.get('ru_base',1),steps:store.get('ru_steps',7),msg:''};
 Object.defineProperty(ru,'hist',{get(){return ru.spins[ru.wheel].map(x=>x.n);}});
 const ids=()=>ru.wheel==='us'?['0','00',...NUMS]:['0',...NUMS];
 const N=()=>ru.wheel==='us'?38:37;
 const colorOf=id=>(id==='0'||id==='00')?'g':(REDS.has(+id)?'r':'b');
 const GROUPS={
-  col1:{lab:'2 a 1',t:'columna',name:'Columna superior',ids:NUMS.filter(n=>n%3===0)},
-  col2:{lab:'2 a 1',t:'columna',name:'Columna del medio',ids:NUMS.filter(n=>n%3===2)},
-  col3:{lab:'2 a 1',t:'columna',name:'Columna inferior',ids:NUMS.filter(n=>n%3===1)},
-  doz1:{lab:'1.ª docena',t:'docena',name:'1.ª docena',ids:NUMS.filter(n=>n<=12)},
-  doz2:{lab:'2.ª docena',t:'docena',name:'2.ª docena',ids:NUMS.filter(n=>n>12&&n<=24)},
-  doz3:{lab:'3.ª docena',t:'docena',name:'3.ª docena',ids:NUMS.filter(n=>n>24)},
-  low:{lab:'1 a 18',t:'simple',name:'1 a 18',ids:NUMS.filter(n=>n<=18)},
-  even:{lab:'Par',t:'simple',name:'Par',ids:NUMS.filter(n=>n%2===0)},
-  red:{lab:'Rojo',t:'simple',name:'Rojo',ids:NUMS.filter(n=>REDS.has(+n))},
-  black:{lab:'Negro',t:'simple',name:'Negro',ids:NUMS.filter(n=>!REDS.has(+n))},
-  odd:{lab:'Impar',t:'simple',name:'Impar',ids:NUMS.filter(n=>n%2===1)},
-  high:{lab:'19 a 36',t:'simple',name:'19 a 36',ids:NUMS.filter(n=>n>18)}
+  red:{name:'Rojo',ids:NUMS.filter(n=>REDS.has(+n))}, black:{name:'Negro',ids:NUMS.filter(n=>!REDS.has(+n))},
+  even:{name:'Par',ids:NUMS.filter(n=>n%2===0)}, odd:{name:'Impar',ids:NUMS.filter(n=>n%2===1)},
+  low:{name:'1 a 18',ids:NUMS.filter(n=>n<=18)}, high:{name:'19 a 36',ids:NUMS.filter(n=>n>18)},
+  doz1:{name:'1.ª docena',ids:NUMS.filter(n=>n<=12)}, doz2:{name:'2.ª docena',ids:NUMS.filter(n=>n>12&&n<=24)}, doz3:{name:'3.ª docena',ids:NUMS.filter(n=>n>24)}
 };
-function save(){ store.set('ru_wheel',ru.wheel); store.set('ru_denom',ru.denom); store.set('ru_bets',ru.bets); store.set('ru_spins',ru.spins); store.set('ru_sess',ru.sess); store.set('ru_n',ru.n); store.set('ru_base',ru.base); store.set('ru_steps',ru.steps); }
-const covered=()=>{ const s=new Set(); ru.bets.forEach(b=>b.ids.forEach(x=>s.add(x))); return s; };
-const totalBet=()=>ru.bets.reduce((t,b)=>t+b.amount,0);
-const sortIds=a=>a.slice().sort((x,y)=>(x==='00'?-1:+x)-(y==='00'?-1:+y));
-const betName=b=>b.g?b.name:`${TNAME[b.type]} ${sortIds(b.ids).join('-')}`;
-function addBet(type,list,g,name){
-  const key=(g||type)+':'+sortIds(list).join(',');
-  const ex=ru.bets.find(b=>b.key===key);
-  if(ex) ex.amount=+(ex.amount+ru.denom).toFixed(2);
-  else ru.bets.push({key,type,ids:list.slice(),amount:ru.denom,g:g||null,name:name||null});
-}
-function shapeOK(type,list){
-  const z=list.filter(x=>x==='0'||x==='00'), n=list.filter(x=>x!=='0'&&x!=='00').map(Number).sort((a,b)=>a-b), us=ru.wheel==='us';
-  if(type==='caballo'){
-    if(list.length!==2) return false;
-    if(z.length===2) return us;
-    if(z.length===1){ const x=n[0]; if(z[0]==='0') return us?[1,2].includes(x):[1,2,3].includes(x); return [2,3].includes(x); }
-    const [a,b]=n; return b-a===3||(b-a===1&&a%3!==0);
-  }
-  if(type==='calle'){
-    if(list.length!==3) return false;
-    if(z.length===1&&!us) return n.join()==='1,2'||n.join()==='2,3';
-    if(z.length===2&&us) return n[0]===2;
-    if(z.length) return false;
-    return n[0]%3===1&&n[1]===n[0]+1&&n[2]===n[0]+2;
-  }
-  if(type==='cuadro'){
-    if(list.length!==4) return false;
-    if(z.length===1&&z[0]==='0'&&!us) return n.join()==='1,2,3';
-    if(z.length) return false;
-    const a=n[0]; return a%3!==0&&n[1]===a+1&&n[2]===a+3&&n[3]===a+4;
-  }
-  if(type==='linea'){
-    if(list.length!==6||z.length) return false;
-    const a=n[0]; return a%3===1&&n.every((x,i)=>x===a+i);
-  }
-  return list.length===1;
-}
-const netFor=id=>ru.bets.reduce((t,b)=>t+(b.ids.includes(id)?b.amount*PAY[b.type]:-b.amount),0);
+const SIMPLE_KEYS=['red','black','even','odd','low','high'];
+function save(){ ['wheel','spins','sess','follow','strat','simple','partage','base','steps'].forEach(k=>store.set('ru_'+k,ru[k])); }
+function saveRuSess(){ save(); send('saveConfig',{key:'ru_session',value:ru.sess?JSON.stringify(ru.sess):''}); }
+const usePartage=()=>ru.partage&&ru.wheel==='eu';
+const edgeSimple=()=>ru.wheel==='us'?2/38:(usePartage()?1/74:1/37);
+const edgeAny=()=>ru.wheel==='us'?2/38:1/37;
 function ruBalance(){ if(!ru.sess) return 0; let t=ru.sess.start; ['eu','us'].forEach(w=>ru.spins[w].forEach(x=>{ if(x.ses===ru.sess.id) t+=(+x.net||0); })); return t; }
 const ruSessSpins=()=>ru.sess?['eu','us'].reduce((a,w)=>a.concat(ru.spins[w].filter(x=>x.ses===ru.sess.id)),[]):[];
-function saveRuSess(){ save(); send('saveConfig',{key:'ru_session',value:ru.sess?JSON.stringify(ru.sess):''}); }
+function Phi(z){ const t=1/(1+0.3275911*Math.abs(z)/Math.SQRT2); const y=1-(((((1.061405429*t-1.453152027)*t)+1.421413741)*t-0.284496736)*t+0.254829592)*t*Math.exp(-z*z/2); return 0.5*(1+(z>=0?y:-y)); }
+function chiP(x,df){ const z=(Math.pow(x/df,1/3)-(1-2/(9*df)))/Math.sqrt(2/(9*df)); return 1-Phi(z); }
+
+/* Análisis: ¿la rueda tiene sesgo real? */
+function analyzeWheel(){
+  const H=ru.hist, T=H.length, n=N(), list=ids(), cnt={};
+  list.forEach(x=>cnt[x]=0); H.forEach(x=>{ if(x in cnt) cnt[x]++; });
+  const test=(set)=>{ const k=set.length, p0=k/n, c=set.reduce((t,x)=>t+cnt[x],0); if(!T) return {ids:set,c,z:0,padj:1}; const z=(c-T*p0)/Math.sqrt(T*p0*(1-p0)); return {ids:set,c,z,padj:Math.min(1,(1-Phi(z))*n)}; };
+  let bestNum=null; list.forEach(x=>{ const r=test([x]); if(!bestNum||r.z>bestNum.z) bestNum=r; });
+  const W=WHEEL[ru.wheel]; let bestSec=null;
+  for(let i=0;i<n;i++){ const set=[0,1,2,3,4].map(k=>W[(i+k)%n]); const r=test(set); if(!bestSec||r.z>bestSec.z) bestSec=r; }
+  return {T,n,cnt,bestNum,bestSec};
+}
+function verdict(an){
+  const minT=10*an.n;
+  if(an.T<minT) return {kind:'few',need:minT};
+  const cand=[an.bestNum,an.bestSec].sort((a,b)=>a.padj-b.padj)[0];
+  if(cand.padj<0.01){
+    const k=cand.ids.length, ph=cand.c/an.T, lo=ph-1.96*Math.sqrt(ph*(1-ph)/an.T);
+    const edgeHat=ph*36/k-1, edgeLo=lo*36/k-1;
+    return {kind:edgeLo>0?'bias':'hint',ids:cand.ids,edgeHat,edgeLo};
+  }
+  return {kind:'fair'};
+}
+
+/* Plan de apuesta */
+const unitRU=()=>Math.max(0.5,Math.round((ru.sess?ru.sess.start:100)*0.02*2)/2);
+function nextBet(v){
+  if(!ru.sess) return {type:'nosess'};
+  const b=ruBalance(), floor=ru.sess.start-ru.sess.stop, target=ru.sess.start+ru.sess.goal;
+  if(b<=floor) return {stop:'loss'};
+  if(b>=target) return {stop:'goal'};
+  if(v.kind==='bias'){ const per=Math.max(0.5,Math.round(ru.sess.start*0.005*2)/2); return {type:'straight',ids:v.ids,per,total:per*v.ids.length}; }
+  let amt=ru.strat==='bold'?Math.min(b-floor,target-b):Math.min(unitRU(),b-floor);
+  amt=Math.max(0.5,Math.floor(amt*2)/2);
+  return {type:'simple',key:ru.simple,amt};
+}
+function settle(bet,id){
+  if(!bet||bet.stop||!bet.type||bet.type==='nosess') return null;
+  if(bet.type==='simple'){
+    const win=GROUPS[bet.key].ids.includes(id), zero=id==='0'||id==='00';
+    const net=win?bet.amt:(zero&&usePartage()?-bet.amt/2:-bet.amt);
+    return {st:bet.amt,net,d:`${GROUPS[bet.key].name} ${money(bet.amt)}: ${signed(net)}`};
+  }
+  const hit=bet.ids.includes(id), net=hit?bet.per*35-bet.per*(bet.ids.length-1):-bet.total;
+  return {st:bet.total,net,d:`Pleno a ${bet.ids.join(', ')} (${money(bet.per)} c/u): ${signed(net)}`};
+}
+function goalOdds(){
+  if(!ru.sess) return null;
+  const b=ruBalance(), floor=ru.sess.start-ru.sess.stop, target=ru.sess.start+ru.sess.goal;
+  if(b<=floor||b>=target) return null;
+  const e=edgeSimple(), p=(1-e)/2, q=1-p, r=q/p, u=unitRU();
+  const L=Math.max(1,Math.round((b-floor)/u)), Wn=Math.max(1,Math.round((target-b)/u));
+  const pf=(1-Math.pow(r,L))/(1-Math.pow(r,L+Wn));
+  const dur=L/(q-p)-((L+Wn)/(q-p))*pf;
+  let x=(b-floor)/(target-floor), res=0, mult=1;
+  for(let i=0;i<60;i++){ if(x>=1-1e-12){ res+=mult; break; } if(x<=1e-12) break; if(x<0.5){ mult*=p; x*=2; } else { res+=mult*p; mult*=q; x=2*x-1; } }
+  return {flat:pf,flatSpins:dur,bold:res,u};
+}
 
 function registerSpin(id){
-  const st=totalBet(), net=ru.bets.length?netFor(id):0;
-  const d=ru.bets.map(b=>`${betName(b)} ${money(b.amount)}: ${b.ids.includes(id)?signed(b.amount*PAY[b.type]):signed(-b.amount)}`).join('; ');
-  const rec={n:id,ses:ru.sess?ru.sess.id:'',st,net,d};
+  const v=verdict(analyzeWheel()), bet=nextBet(v);
+  const st=ru.follow?settle(bet,id):null;
+  const rec={n:id,ses:st&&ru.sess?ru.sess.id:'',st:st?st.st:0,net:st?st.net:0,d:st?st.d:''};
   ru.spins[ru.wheel].push(rec);
   send('addSpins',{wheel:ru.wheel,spins:[rec]});
-  const wins=ru.bets.filter(b=>b.ids.includes(id));
-  ru.msg=st?`Salió ${id}. ${wins.length?'Ganaste '+wins.map(b=>`${betName(b).toLowerCase()} (${signed(b.amount*PAY[b.type])})`).join(', ')+'.':'Ninguna de tus apuestas ganó.'} Neto del giro: ${signed(net)}.`:`Salió ${id}.`;
+  ru.msg=st?`Salió ${id}. ${st.d}.`:`Salió ${id}.`;
 }
 
 function renderRuSess(){
   const el=$('#ruSess');
   if(!ru.sess){
     el.innerHTML=`<div class="sess-start">
-      <div><h2>Tu sesión de ruleta</h2><p class="muted small">Indica con cuánto inicias. Cada giro que registres sumará o restará según tus fichas.</p></div>
+      <div><h2>Tu sesión de ruleta</h2><p class="muted small">Indica con cuánto inicias para que la recomendación te diga cuánto apostar y lleve tu saldo.</p></div>
       <div class="sess-new"><label class="field"><span>Dinero con el que inicias</span><input type="number" id="rStart" min="1" step="1" placeholder="Ej.: 100" inputmode="decimal"></label><button class="btn primary" id="rGo">Empezar sesión</button></div>
     </div>`;
     const go=()=>{ const v=+$('#rStart').value; if(!(v>0)){ $('#rStart').focus(); return; } const r=recFor(v); ru.sess={id:'R'+Date.now(),start:v,goal:r.goal,stop:r.stop}; saveRuSess(); renderAll(); };
@@ -1071,9 +1218,9 @@ function renderRuSess(){
       <h2>Tu sesión de ruleta</h2>
       <p class="muted small">Saldo actual (iniciaste con ${money(st.start)})</p>
       <p class="balance">${money(b)}</p>
-      <p class="${diff>=0?'up':'down'}">${signed(diff)} en ${played.length} ${played.length===1?'giro':'giros'} apostados</p>
+      <p class="${diff>=0?'up':'down'}">${signed(diff)} en ${played.length} ${played.length===1?'giro apostado':'giros apostados'}</p>
       ${rangeHTML(st.start,b,lo,hi)}
-      ${alertHTML(b,lo,hi,diff,totalBet())}
+      ${b>=hi||b<=lo?alertHTML(b,lo,hi,diff,0):''}
     </div>
     <div class="sess-fields">
       <label class="field"><span>Meta de ganancia</span><input type="number" id="rGoal" min="1" step="1" value="${st.goal}"><span class="hint">Recomendado: ${money(r.goal)} (25 %)</span></label>
@@ -1084,10 +1231,9 @@ function renderRuSess(){
       <h3 style="margin-top:0">En esta sesión</h3>
       <div class="kv">
         <span>Total apostado</span><span class="v">${money(wagered)}</span>
-        <span>Pérdida esperada por la ventaja de la casa</span><span class="v">${money(wagered*(1-36/N()))}</span>
+        <span>Pérdida esperada (ventaja de la casa)</span><span class="v">${money(wagered*edgeSimple())}</span>
         <span>Tu resultado real</span><span class="v">${signed(diff)}</span>
       </div>
-      <p class="muted small" style="margin-top:10px">La diferencia entre lo esperado y lo real es la suerte del momento; a largo plazo el resultado se acerca a lo esperado.</p>
     </div>
   </div>`;
   const upd=(id,key)=>{ $(id).onchange=e=>{ ru.sess[key]=Math.max(1,+e.target.value||1); saveRuSess(); renderAll(); }; };
@@ -1096,170 +1242,118 @@ function renderRuSess(){
   $('#rNew').onclick=()=>{ if(!confirm('¿Terminar esta sesión y empezar una nueva? El historial de giros se conserva.'))return; ru.sess=null; saveRuSess(); renderAll(); };
 }
 
-function renderTop(){
-  $('#ruTop').innerHTML=`<div class="seg feltseg" role="group" aria-label="Tipo de apuesta">${Object.keys(NEED).map(k=>`<button data-bt="${k}" aria-pressed="${ru.btype===k}">${TNAME[k]}</button>`).join('')}</div>
-  <div class="denoms" role="group" aria-label="Valor de la ficha">${DENOMS.map(v=>`<button class="pchip ${chipCls(v)}" data-den="${v}" aria-pressed="${ru.denom===v}">${v===0.5?'0,50':v}</button>`).join('')}
-  <input type="number" id="denOther" min="0.1" step="0.1" placeholder="Otro" value="${DENOMS.includes(ru.denom)?'':ru.denom}" aria-label="Otro valor de ficha"></div>`;
+function renderNext(){
+  const an=analyzeWheel(), v=verdict(an), bet=nextBet(v), go=goalOdds();
+  let status='', main='', why='';
+  if(v.kind==='few') status=`<span class="status">Analizando la rueda: ${an.T} de ${v.need} giros</span>`;
+  else if(v.kind==='fair') status=`<span class="status">Rueda compatible con una rueda justa</span>`;
+  else if(v.kind==='hint') status=`<span class="status bias">Posible sesgo, aún sin ventaja comprobada</span>`;
+  else status=`<span class="status bias">Sesgo detectado: ventaja estimada ${pct(v.edgeHat,1)}</span>`;
+  if(bet.stop==='goal'){ main='Retírate'; why='Llegaste a tu meta. Es el mejor momento para irte ganando.'; }
+  else if(bet.stop==='loss'){ main='Retírate'; why='Llegaste a tu límite de pérdida. Seguir para recuperar es como se pierde más.'; }
+  else if(bet.type==='nosess'){ main=`${GROUPS[ru.simple].name}, 1 ficha`; why='Empieza tu sesión arriba para que te diga el monto exacto.'; }
+  else if(bet.type==='straight'){ main=`Pleno a ${bet.ids.join(', ')}`; why=`${money(bet.per)} a cada número (${money(bet.total)} en total). Estos números salen más de lo que permite el azar; es un sector de la rueda física, típico de una rueda desbalanceada.`; }
+  else {
+    main=`${GROUPS[bet.key].name} ${money(bet.amt)}`;
+    if(v.kind==='hint') why=`Los números ${v.ids.join(', ')} salen más de lo normal, pero con estos datos todavía no hay ventaja segura. Sigue con la apuesta de menor pérdida mientras se confirma.`;
+    else if(v.kind==='few') why='Todavía no hay datos para saber si la rueda tiene un defecto. Mientras tanto, esta es la apuesta que menos pierde.';
+    else why='Ningún número ni sector se sale de lo esperado: ninguna apuesta tiene ventaja. Esta es la que menos pierde.';
+    why+=ru.strat==='bold'?' Juego audaz: apuestas fuerte para llegar a tu meta en pocos giros.':' Apuesta plana y pequeña: pierdes lo mínimo por giro.';
+  }
+  $('#ruNext').innerHTML=`${status}<span class="lab">Próxima apuesta</span><span class="bet">${main}</span><p class="why">${why}</p>${go&&!bet.stop&&bet.type==='simple'?`<p class="why" style="color:var(--felt-muted)">Llegar a tu meta antes que al límite: ${pct(ru.strat==='bold'?go.bold:go.flat,0)} con esta estrategia (${ru.strat==='bold'?`apuesta plana: ${pct(go.flat,0)}`:`juego audaz: ${pct(go.bold,0)}`}).</p>`:''}${ru.msg?`<p class="ru-msg">${ru.msg}</p>`:''}`;
+  $('#ruPlan').innerHTML=`<div class="seg feltseg" role="group" aria-label="Estrategia"><button data-st="flat" aria-pressed="${ru.strat==='flat'}">Perder lo menos posible</button><button data-st="bold" aria-pressed="${ru.strat==='bold'}">Llegar a mi meta</button></div>
+    <div class="seg feltseg" role="group" aria-label="Apuesta sencilla">${SIMPLE_KEYS.map(k=>`<button data-sk="${k}" aria-pressed="${ru.simple===k}">${GROUPS[k].name}</button>`).join('')}</div>
+    <label><input type="checkbox" id="ruFollow"${ru.follow?' checked':''}> Aposté lo recomendado (actualiza mi saldo)</label>
+    ${ru.wheel==='eu'?`<label><input type="checkbox" id="ruPartage"${ru.partage?' checked':''}> La mesa aplica La Partage (devuelve la mitad si sale 0)</label>`:''}`;
 }
 
 function renderBoard(){
   const counts={}; ru.hist.forEach(h=>counts[h]=(counts[h]||0)+1);
-  const last=ru.hist[ru.hist.length-1], cov=covered(), pend=new Set(ru.pending);
-  const direct={}, gAmt={};
-  ru.bets.forEach(b=>{ if(b.type==='pleno') direct[b.ids[0]]=(direct[b.ids[0]]||0)+b.amount; if(b.g) gAmt[b.g]=b.amount; });
-  const btn=(id,style)=>`<button class="cell ${colorOf(id)}${cov.has(id)&&!direct[id]?' cov':''}${pend.has(id)?' pend':''}${id===last?' last':''}" style="${style}" data-id="${id}" aria-label="Número ${id}"><span>${id}</span>${direct[id]?`<i class="amt">${money(direct[id])}</i>`:''}${counts[id]&&ru.mode==='spin'?`<i class="cnt">${counts[id]}</i>`:''}</button>`;
-  let h='';
-  if(ru.wheel==='us'){ h+=btn('00','grid-column:1;grid-row:1/span 3'); h+=btn('0','grid-column:1;grid-row:4/span 3'); }
-  else h+=btn('0','grid-column:1;grid-row:1/span 6');
-  for(let c=0;c<12;c++) for(let r=0;r<3;r++){ const n=String(3*c+3-r); h+=btn(n,`grid-column:${c+2};grid-row:${2*r+1}/span 2`); }
-  const g=(k,style)=>`<button class="cell out" style="${style}" data-g="${k}"><span>${GROUPS[k].lab}</span>${gAmt[k]?`<i class="amt">${money(gAmt[k])}</i>`:''}</button>`;
-  h+=g('col1','grid-column:14;grid-row:1/span 2')+g('col2','grid-column:14;grid-row:3/span 2')+g('col3','grid-column:14;grid-row:5/span 2');
-  h+=g('doz1','grid-column:2/span 4;grid-row:7')+g('doz2','grid-column:6/span 4;grid-row:7')+g('doz3','grid-column:10/span 4;grid-row:7');
-  ['low','even','red','black','odd','high'].forEach((k,i)=>{h+=g(k,`grid-column:${2+i*2}/span 2;grid-row:8`);});
-  $('#board').innerHTML=h;
-  $('#ruFelt').classList.toggle('mode-spin',ru.mode==='spin');
-  let hint;
-  if(ru.err) hint=`<span class="ru-err">${ru.err}</span>`;
-  else if(ru.mode==='spin') hint=ru.msg?`<span class="ru-msg">${ru.msg}</span>`:'Toca el número que salió. Tus fichas se cobran o se pierden solas.';
-  else hint=`Ficha de ${money(ru.denom)}. ${HINT[ru.btype]}${ru.pending.length?` (${ru.pending.length} de ${NEED[ru.btype]})`:''}`;
-  $('#modeHint').innerHTML=hint;
+  const last=ru.hist[ru.hist.length-1];
+  const btn=(id,cls)=>`<button class="cell ${colorOf(id)} ${cls}${id===last?' last':''}" data-id="${id}" aria-label="Salió ${id}"><span>${id}</span>${counts[id]?`<i class="cnt">${counts[id]}</i>`:''}</button>`;
+  let h=ru.wheel==='us'?btn('0','z')+btn('00','z'):btn('0','z');
+  for(let r=0;r<12;r++) for(let c=1;c<=3;c++) h+=btn(String(3*r+c),'n');
+  const b=$('#board'); b.innerHTML=h; b.classList.toggle('us',ru.wheel==='us');
 }
-
-function renderBet(){
-  const n=N(), edge=1-36/n, tot=totalBet(), cov=covered(), k=cov.size, p=k/n;
-  let h='<h2>Tus apuestas</h2>';
-  if(!ru.bets.length){
-    h+='<p class="muted">Elige el valor de la ficha y el tipo de apuesta en el paño, y toca los números o las zonas. Puedes combinar varias apuestas; cada toque suma una ficha.</p>';
-  } else {
-    h+=ru.bets.map((b,i)=>`<div class="betrow"><div>${betName(b)}<br><span class="muted small">Paga ${PAY[b.type]} a 1, gana ${pct(b.ids.length/n,1)}</span></div><span class="v">${money(b.amount)}</span><button class="xbtn" data-del="${i}" aria-label="Quitar">×</button></div>`).join('');
-    const nets=ids().map(netFor), win=nets.filter(x=>x>0).length/n, tie=nets.filter(x=>x===0).length/n;
-    h+=`<div class="kv" style="margin-top:12px">
-      <span>Total en la mesa</span><span class="v">${money(tot)}</span>
-      <span>Terminas el giro ganando</span><span class="v">${pct(win,1)}</span>
-      ${tie?`<span>Terminas igual</span><span class="v">${pct(tie,1)}</span>`:''}
-      <span>Terminas perdiendo</span><span class="v">${pct(1-win-tie,1)}</span>
-      <span>Mejor resultado posible</span><span class="v">${signed(Math.max(...nets))}</span>
-      <span>Peor resultado posible</span><span class="v">${signed(Math.min(...nets))}</span>
-      <span>Valor esperado por giro</span><span class="v" style="color:var(--red-ink)">${signed(-tot*edge)}</span>
-    </div>
-    <h3>En los próximos giros</h3>
-    <label class="field"><span>Giros: <b>${ru.n}</b></span><input type="range" id="nSpins" min="1" max="100" value="${ru.n}"></label>
-    <div class="kv" style="margin-top:10px">
-      <span>Sale al menos uno de tus números</span><span class="v">${pct(1-Math.pow(1-p,ru.n))}</span>
-      <span>No sale ninguno</span><span class="v">${pct(Math.pow(1-p,ru.n))}</span>
-      <span>Pérdida esperada con estas fichas</span><span class="v">${money(ru.n*tot*edge)}</span>
-    </div>`;
-  }
-  h+=`<div class="note">La rueda no tiene memoria: cada número tiene ${pct(1/n,2)} en cada giro, pase lo que pase antes. Toda apuesta le deja a la casa ${pct(edge,2)} en promedio. Si sale ${ru.wheel==='us'?'0 o 00':'0'}, las apuestas sencillas, docenas y columnas pierden.</div>`;
-  $('#betPanel').innerHTML=h;
-  $('#betPanel').querySelectorAll('[data-del]').forEach(b=>b.onclick=()=>{ ru.bets.splice(+b.dataset.del,1); save(); renderAll(); });
-  const r=$('#nSpins'); if(r) r.oninput=e=>{ ru.n=+e.target.value; save(); renderBet(); };
-}
-
-function Phi(z){ const t=1/(1+0.3275911*Math.abs(z)/Math.SQRT2); const y=1-(((((1.061405429*t-1.453152027)*t)+1.421413741)*t-0.284496736)*t+0.254829592)*t*Math.exp(-z*z/2); return 0.5*(1+(z>=0?y:-y)); }
-function chiP(x,df){ const z=(Math.pow(x/df,1/3)-(1-2/(9*df)))/Math.sqrt(2/(9*df)); return 1-Phi(z); }
 
 function renderHist(){
-  const H=ru.hist, T=H.length, n=N(), list=ids();
-  let h=`<h2>Lo que ha salido</h2>
-  <label class="field"><span>Cargar giros anteriores (no cambian tu saldo)</span><input type="text" id="paste" placeholder="Ej.: 17, 32, 0, 5" inputmode="numeric"></label>
-  <div class="btns"><button class="btn primary" id="addPaste">Agregar</button><button class="btn" id="undoSpin">Deshacer último giro</button><button class="btn" id="clearHist">Borrar historial</button></div>`;
-  if(!T){ h+='<p class="muted" style="margin-top:12px">Cambia a “Registrar lo que salió” y toca los números en el paño.</p>'; $('#histPanel').innerHTML=h; bindHist(); return; }
-  h+=`<h3>Últimos giros (${T} en total)</h3><div class="chips">`+H.slice(-24).reverse().map(x=>`<span class="chip ${colorOf(x)}">${x}</span>`).join('')+'</div>';
-  const cnt={}; list.forEach(x=>cnt[x]=0); H.forEach(x=>{ if(x in cnt) cnt[x]++; });
-  const mx=Math.max(1,...Object.values(cnt));
-  h+=`<h3>Frecuencia por número</h3><div class="freq" role="img" aria-label="Frecuencia de cada número">`+list.map(x=>`<div class="${colorOf(x)}" style="height:${cnt[x]/mx*100}%" title="${x}: ${cnt[x]}"></div>`).join('')+'</div>';
+  const an=analyzeWheel(), H=ru.hist, T=H.length, n=N(), list=ids();
+  let h='<h2>Lo que ha salido</h2>';
+  if(!T){ $('#histPanel').innerHTML=h+'<p class="muted">Toca en el paño cada número que salga. Con más giros, el análisis puede detectar si la rueda tiene un defecto.</p>'; return; }
+  h+=`<p class="muted small">${T} giros registrados. Últimos:</p><div class="chips">`+H.slice(-24).reverse().map(x=>`<span class="chip ${colorOf(x)}">${x}</span>`).join('')+'</div>';
+  const mx=Math.max(1,...Object.values(an.cnt));
+  h+=`<h3>Frecuencia en el orden de la rueda</h3><div class="freq" role="img" aria-label="Frecuencia de cada número en el orden físico de la rueda">`+WHEEL[ru.wheel].map(x=>`<div class="${colorOf(x)}" style="height:${an.cnt[x]/mx*100}%" title="${x}: ${an.cnt[x]}"></div>`).join('')+'</div><p class="muted small">Si la rueda tuviera un defecto, se vería un grupo de barras altas juntas.</p>';
   const cat=(name,set)=>{ const o=H.filter(x=>set.includes(x)).length; return `<tr><td>${name}</td><td class="n">${o} (${pct(o/T,0)})</td><td class="n">${pct(set.length/n,1)}</td></tr>`; };
   const zeros=ru.wheel==='us'?['0','00']:['0'];
   h+=`<h3>Observado contra esperado</h3><table class="obs"><thead><tr><th>Zona</th><th style="text-align:right">Salió</th><th style="text-align:right">Esperado</th></tr></thead><tbody>`+
     cat('Rojo',GROUPS.red.ids)+cat('Negro',GROUPS.black.ids)+cat('Cero',zeros)+cat('Par',GROUPS.even.ids)+cat('Impar',GROUPS.odd.ids)+
     cat('1 a 18',GROUPS.low.ids)+cat('19 a 36',GROUPS.high.ids)+cat('1.ª docena',GROUPS.doz1.ids)+cat('2.ª docena',GROUPS.doz2.ids)+cat('3.ª docena',GROUPS.doz3.ids)+'</tbody></table>';
-  const since={}; list.forEach(x=>{ const i=H.lastIndexOf(x); since[x]=i<0?T:T-1-i; });
-  const cold=list.slice().sort((a,b)=>since[b]-since[a]).slice(0,5);
-  h+=`<h3>Más tiempo sin salir</h3><p class="small">${cold.map(x=>`<b>${x}</b> (${since[x]===T?'nunca':since[x]+' giros'})`).join(', ')}.</p><p class="muted small">Un número “atrasado” no tiene más probabilidad de salir: sigue en ${pct(1/n,2)}.</p>`;
-  const E=T/n; let chi=0; list.forEach(x=>{ chi+=Math.pow(cnt[x]-E,2)/E; }); const pv=chiP(chi,n-1);
-  let verdict;
-  if(T<5*n) verdict=`Con ${T} giros no hay datos suficientes para juzgar la rueda; hacen falta al menos ${5*n}. Las rachas que ves ahora son ruido normal.`;
-  else if(pv<0.01) verdict=`Prueba chi cuadrado: valor p ${num(pv,4)}. La distribución es inusual y podría indicar una rueda sesgada, pero confírmalo con muchos más giros antes de sacar conclusiones.`;
-  else verdict=`Prueba chi cuadrado: valor p ${num(pv,3)}. Los resultados son compatibles con una rueda justa: las diferencias que ves son azar.`;
-  h+=`<div class="verdict-box">${verdict}</div>`;
-  $('#histPanel').innerHTML=h; bindHist();
-}
-function bindHist(){
-  const valid=new Set(ids());
-  const add=()=>{
-    const added=[];
-    $('#paste').value.split(/[\s,;]+/).forEach(s=>{ s=s.trim(); if(!s)return; const id=s==='00'?'00':String(parseInt(s,10)); if(valid.has(id)){ const rec={n:id,ses:'',st:0,net:0,d:''}; ru.spins[ru.wheel].push(rec); added.push(rec);} });
-    if(added.length) send('addSpins',{wheel:ru.wheel,spins:added});
-    $('#paste').value=''; save(); renderAll();
-  };
-  $('#addPaste').onclick=add;
-  $('#paste').onkeydown=e=>{ if(e.key==='Enter') add(); };
-  $('#undoSpin').onclick=()=>{ if(!ru.spins[ru.wheel].length)return; ru.spins[ru.wheel].pop(); ru.msg=''; send('undoSpin',{wheel:ru.wheel}); save(); renderAll(); };
+  const b1=an.bestNum, b2=an.bestSec;
+  h+=`<h3>Lo más repetido</h3><div class="kv">
+    <span>Número: ${b1.ids[0]} (${b1.c} veces)</span><span class="v">${b1.padj<0.01?'fuera de lo normal':'dentro de lo normal'}</span>
+    <span>Sector de 5: ${b2.ids.join(', ')}</span><span class="v">${b2.padj<0.01?'fuera de lo normal':'dentro de lo normal'}</span>
+  </div>`;
+  const E=T/n; let chi=0; list.forEach(x=>{ chi+=Math.pow(an.cnt[x]-E,2)/E; }); const pv=chiP(chi,n-1);
+  let vtxt;
+  if(T<5*n) vtxt=`Con ${T} giros no hay datos suficientes para juzgar la rueda; hacen falta al menos ${5*n} para la prueba general y ${10*n} para recomendar números. Las rachas que ves ahora son azar.`;
+  else if(pv<0.01) vtxt=`Prueba chi cuadrado: valor p ${num(pv,4)}. La distribución es inusual; podría haber un defecto en la rueda.`;
+  else vtxt=`Prueba chi cuadrado: valor p ${num(pv,3)}. Compatible con una rueda justa: las diferencias son azar.`;
+  h+=`<div class="verdict-box">${vtxt}</div><div class="btns"><button class="btn" id="clearHist">Borrar historial de esta rueda</button></div>`;
+  $('#histPanel').innerHTML=h;
   $('#clearHist').onclick=()=>{ if(!confirm('¿Borrar todo el historial de esta rueda? También se borra de Google Sheets y deja de contar en tu saldo.'))return; ru.spins[ru.wheel]=[]; ru.msg=''; send('clearSpins',{wheel:ru.wheel}); save(); renderAll(); };
 }
 
-function renderRisk(){
-  const n=N(), q=(n-18)/n, s=ru.steps, b=ru.base;
-  const bank=b*(Math.pow(2,s)-1), pr=Math.pow(q,s), ev=b*(1-pr)-b*(Math.pow(2,s)-1)*pr, p100=1-Math.pow(1-pr,100);
-  $('#riskPanel').innerHTML=`<h2>Riesgo de la martingala</h2>
-  <p class="muted small">Doblar la apuesta a rojo o negro después de cada pérdida. Parece infalible; mira por qué no lo es.</p>
-  <div class="fields" style="margin-top:12px">
-    <label class="field"><span>Apuesta base</span><input type="number" id="rBase" min="0.5" step="0.5" value="${b}"></label>
-    <label class="field"><span>Pérdidas seguidas que aguantas</span><input type="number" id="rSteps" min="1" max="20" value="${s}"></label>
-  </div>
-  <div class="kv" style="margin-top:14px">
-    <span>Capital necesario</span><span class="v">${money(bank)}</span>
-    <span>Apuesta en el último intento</span><span class="v">${money(b*Math.pow(2,s-1))}</span>
-    <span>Ganancia si el ciclo sale bien</span><span class="v">${money(b)}</span>
-    <span>Probabilidad de perder el ciclo</span><span class="v">${pct(pr,2)}</span>
-    <span>Ruina en 100 ciclos</span><span class="v" style="color:var(--red-ink)">${pct(p100,1)}</span>
-    <span>Valor esperado por ciclo</span><span class="v" style="color:var(--red-ink)">${signed(ev)}</span>
-  </div>
-  <div class="note">Ganas poco muchas veces y pierdes ${money(bank)} de golpe de vez en cuando. El valor esperado sigue siendo negativo: ningún sistema de apuestas cambia la ventaja de la casa, y el límite de la mesa corta la progresión.</div>`;
-  $('#rBase').onchange=e=>{ ru.base=Math.max(0.5,+e.target.value||1); save(); renderRisk(); };
-  $('#rSteps').onchange=e=>{ ru.steps=Math.min(20,Math.max(1,Math.round(+e.target.value)||1)); save(); renderRisk(); };
+function renderGuide(){
+  const n=N(), q=(n-18)/n, s=ru.steps, b=ru.base, bank=b*(Math.pow(2,s)-1), pr=Math.pow(q,s), p100=1-Math.pow(1-pr,100);
+  const G=(title,tag,cls,body,open)=>`<details class="guide"${open?' open':''}><summary><span>${title}</span><span class="tag ${cls}">${tag}</span></summary>${body}</details>`;
+  $('#guidePanel').innerHTML=`<h2>Estrategias estudiadas</h2>
+  <p class="muted small">Ninguna estrategia de apuestas cambia la ventaja de la casa en una rueda justa. Lo que sí puedes controlar es cuánto pierdes y cuánto riesgo corres.</p>
+  ${G('Elige la rueda europea','Reduce pérdida','good','<p>Un solo cero deja a la casa 2,70 %. La americana, con 0 y 00, deja 5,26 %: casi el doble por cada dólar apostado.</p>',true)}
+  ${G('Busca La Partage o En Prison','Reduce pérdida','good','<p>Si sale 0, la mesa te devuelve la mitad de las apuestas sencillas (rojo, negro, par, impar, mitades). La ventaja baja a 1,35 %, la mejor apuesta de la ruleta. Pregunta al crupier si se aplica.</p>')}
+  ${G('Apuesta plana y pequeña','Reduce pérdida','good','<p>Lo que pierdes en promedio es la ventaja de la casa multiplicada por el total que apuestas. Apostar poco y siempre lo mismo (unos 2 % de tu dinero) hace que pierdas lo mínimo por giro y que la sesión dure más.</p>')}
+  ${G('Juego audaz (Dubins y Savage)','Para una meta','meh','<p>Si tu objetivo es alcanzar una cantidad concreta, la teoría demuestra que apostar fuerte pocas veces a una suerte sencilla da más probabilidad de lograrlo que muchas apuestas pequeñas, porque le das menos giros a la ventaja de la casa. A cambio, la sesión puede terminar muy rápido.</p>')}
+  ${G('Jugar menos giros','Reduce pérdida','good','<p>Una mesa con crupier gira unas 40 veces por hora. La pérdida esperada crece con cada giro, así que fijar un número de giros o un tiempo es tan importante como la meta y el límite.</p>')}
+  ${G('Buscar una rueda con defecto','Única con ventaja','meh','<p>Joseph Jaggers en Montecarlo (siglo XIX) y la familia García-Pelayo en España (años noventa) ganaron registrando miles de giros y encontrando ruedas desbalanceadas. Es lo que analiza esta página. Los casinos modernos revisan y rotan sus ruedas, así que es raro encontrar una, y hacen falta cientos o miles de giros para comprobarlo.</p>')}
+  ${G('Martingala','No funciona','bad',`<p>Doblar después de cada pérdida. Ganas poco muchas veces y, de vez en cuando, pierdes todo de golpe; el límite de la mesa corta la progresión.</p>
+    <div class="fields" style="margin-top:10px"><label class="field"><span>Apuesta base</span><input type="number" id="rBase" min="0.5" step="0.5" value="${b}"></label><label class="field"><span>Pérdidas seguidas que aguantas</span><input type="number" id="rSteps" min="1" max="20" value="${s}"></label></div>
+    <div class="kv" style="margin-top:10px"><span>Capital necesario</span><span class="v">${money(bank)}</span><span>Ganancia por ciclo exitoso</span><span class="v">${money(b)}</span><span>Perder el ciclo completo</span><span class="v">${pct(pr,2)}</span><span>Ruina en 100 ciclos</span><span class="v" style="color:var(--red-ink)">${pct(p100,1)}</span></div>`)}
+  ${G("D’Alembert, Fibonacci y Labouchère",'No funciona','bad','<p>Son progresiones más suaves que la martingala: subes la apuesta poco a poco tras perder. Cambian la forma de los resultados (muchas sesiones con ganancia pequeña y algunas con pérdida grande), pero la pérdida promedio sigue siendo la misma ventaja de la casa sobre más dinero apostado.</p>')}
+  ${G('Cubrir la mesa (James Bond, Voisins)','No funciona','bad','<p>Repartir fichas entre muchos números sube la probabilidad de ganar algo en cada giro, pero cada ficha sigue perdiendo 2,70 % en promedio. Es la misma pérdida esperada con otra apariencia.</p>')}
+  ${G('Números calientes o atrasados','No funciona','bad','<p>Es la falacia del jugador: en una rueda justa, un número que no ha salido en 100 giros tiene exactamente la misma probabilidad que cualquier otro. Las rachas son normales en el azar.</p>')}
+  ${G('Evita la apuesta de cinco números','Aumenta pérdida','bad','<p>En la americana, apostar a 0, 00, 1, 2 y 3 deja a la casa 7,89 %, la peor apuesta de la mesa.</p>')}`;
+  const rb=$('#rBase'), rs=$('#rSteps');
+  rb.onchange=e=>{ ru.base=Math.max(0.5,+e.target.value||1); save(); renderGuide(); const d=$('#guidePanel details:nth-of-type(7)'); if(d) d.open=true; };
+  rs.onchange=e=>{ ru.steps=Math.min(20,Math.max(1,Math.round(+e.target.value)||1)); save(); renderGuide(); const d=$('#guidePanel details:nth-of-type(7)'); if(d) d.open=true; };
 }
 
 function renderAll(){
   $('#wEu').setAttribute('aria-pressed',String(ru.wheel==='eu')); $('#wUs').setAttribute('aria-pressed',String(ru.wheel==='us'));
-  $('#mBet').setAttribute('aria-pressed',String(ru.mode==='bet')); $('#mSpin').setAttribute('aria-pressed',String(ru.mode==='spin'));
-  renderRuSess(); renderTop(); renderBoard(); renderBet(); renderHist(); renderRisk();
+  renderRuSess(); renderNext(); renderBoard(); renderHist(); renderGuide();
 }
 function initRU(){
-  $('#board').addEventListener('click',e=>{
-    const b=e.target.closest('.cell'); if(!b)return;
-    ru.err='';
-    if(b.dataset.id){
-      const id=b.dataset.id;
-      if(ru.mode==='spin'){ registerSpin(id); ru.pending=[]; }
-      else if(ru.btype==='pleno') addBet('pleno',[id]);
-      else {
-        const i=ru.pending.indexOf(id); if(i>=0) ru.pending.splice(i,1); else ru.pending.push(id);
-        if(ru.pending.length===NEED[ru.btype]){
-          if(shapeOK(ru.btype,ru.pending)) addBet(ru.btype,ru.pending);
-          else ru.err=`Esos números no forman ${ {caballo:'un caballo',calle:'una calle',cuadro:'un cuadro',linea:'una línea'}[ru.btype] }. ${HINT[ru.btype]}`;
-          ru.pending=[];
-        }
-      }
-    } else if(b.dataset.g&&ru.mode==='bet'){
-      const G=GROUPS[b.dataset.g]; addBet(G.t,G.ids,b.dataset.g,G.name);
-    }
+  $('#board').addEventListener('click',e=>{ const b=e.target.closest('.cell'); if(!b)return; registerSpin(b.dataset.id); save(); renderAll(); if(navigator.vibrate) navigator.vibrate(8); });
+  $('#ruPlan').addEventListener('click',e=>{
+    const st=e.target.closest('[data-st]'), sk=e.target.closest('[data-sk]');
+    if(st) ru.strat=st.dataset.st; else if(sk) ru.simple=sk.dataset.sk; else return;
     save(); renderAll();
   });
-  $('#ruTop').addEventListener('click',e=>{
-    const bt=e.target.closest('[data-bt]'), dn=e.target.closest('[data-den]');
-    if(bt){ ru.btype=bt.dataset.bt; ru.pending=[]; ru.err=''; ru.mode='bet'; }
-    else if(dn){ ru.denom=+dn.dataset.den; }
-    else return;
+  $('#ruPlan').addEventListener('change',e=>{
+    if(e.target.id==='ruFollow') ru.follow=e.target.checked;
+    if(e.target.id==='ruPartage') ru.partage=e.target.checked;
     save(); renderAll();
   });
-  $('#ruTop').addEventListener('change',e=>{ if(e.target.id==='denOther'){ const v=+e.target.value; if(v>0){ ru.denom=+v.toFixed(2); save(); renderAll(); } } });
-  $('#wEu').onclick=()=>{ ru.wheel='eu'; ru.bets=ru.bets.filter(b=>!b.ids.includes('00')); ru.pending=[]; ru.msg=''; send('saveConfig',{key:'ru_wheel',value:'eu'}); save(); renderAll(); };
-  $('#wUs').onclick=()=>{ ru.wheel='us'; ru.pending=[]; ru.msg=''; send('saveConfig',{key:'ru_wheel',value:'us'}); save(); renderAll(); };
-  $('#mBet').onclick=()=>{ ru.mode='bet'; ru.err=''; renderAll(); };
-  $('#mSpin').onclick=()=>{ ru.mode='spin'; ru.pending=[]; ru.err=''; renderAll(); };
-  $('#clearSel').onclick=()=>{ ru.bets=[]; ru.pending=[]; save(); renderAll(); };
+  const valid=()=>new Set(ids());
+  const add=()=>{
+    const V=valid(), added=[];
+    $('#paste').value.split(/[\s,;]+/).forEach(s=>{ s=s.trim(); if(!s)return; const id=s==='00'?'00':String(parseInt(s,10)); if(V.has(id)){ const rec={n:id,ses:'',st:0,net:0,d:''}; ru.spins[ru.wheel].push(rec); added.push(rec);} });
+    if(added.length) send('addSpins',{wheel:ru.wheel,spins:added});
+    $('#paste').value=''; ru.msg=added.length?`Agregaste ${added.length} ${added.length===1?'número':'números'} al historial (sin cambiar tu saldo).`:''; save(); renderAll();
+  };
+  $('#addPaste').onclick=add;
+  $('#paste').onkeydown=e=>{ if(e.key==='Enter') add(); };
+  $('#undoSpin').onclick=()=>{ if(!ru.spins[ru.wheel].length)return; ru.spins[ru.wheel].pop(); ru.msg=''; send('undoSpin',{wheel:ru.wheel}); save(); renderAll(); };
+  $('#wEu').onclick=()=>{ ru.wheel='eu'; ru.msg=''; send('saveConfig',{key:'ru_wheel',value:'eu'}); save(); renderAll(); };
+  $('#wUs').onclick=()=>{ ru.wheel='us'; ru.msg=''; send('saveConfig',{key:'ru_wheel',value:'us'}); save(); renderAll(); };
   renderAll();
 }
 
