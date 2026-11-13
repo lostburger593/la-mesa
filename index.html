@@ -289,6 +289,64 @@ details.guide p{ font-size:14.5px; margin-top:8px; }
   .seg button{ padding:5px 10px; }
 }
 
+/* Mesas de práctica */
+nav.tabs{ overflow-x:auto; flex-wrap:nowrap; scrollbar-width:none; }
+.tab{ white-space:nowrap; }
+.sim-top{ display:flex; flex-wrap:wrap; gap:10px 18px; align-items:center; justify-content:space-between; margin-bottom:12px; }
+.sim-top .money{ font-family:"Young Serif", Georgia, serif; font-size:30px; line-height:1; font-variant-numeric:tabular-nums; }
+.sim-top .meta{ display:flex; gap:14px; flex-wrap:wrap; font-size:14px; color:var(--muted); }
+.sim-top .meta b{ color:var(--ink); font-variant-numeric:tabular-nums; }
+.sim-dealer{ display:flex; flex-direction:column; align-items:center; gap:6px; margin-bottom:14px; }
+.sim-seats{ display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:8px; }
+.seat{ border:1px dashed rgba(238,246,241,.3); border-radius:12px; padding:8px; color:var(--felt-ink); min-height:118px; display:flex; flex-direction:column; gap:5px; background:rgba(0,0,0,.08); text-align:left; }
+.seat.me{ border-style:solid; border-color:rgba(201,166,74,.6); }
+.seat.sel{ box-shadow:0 0 0 2px var(--gold); }
+.seat.turn{ box-shadow:0 0 0 3px #fff; }
+.seat .sh{ display:flex; justify-content:space-between; align-items:center; font-size:13px; color:var(--felt-muted); gap:6px; }
+.seat .sh b{ color:var(--felt-ink); }
+.seat .types{ display:flex; gap:3px; }
+.seat .types button{ border:1px solid rgba(238,246,241,.3); background:transparent; color:var(--felt-muted); border-radius:6px; font-size:11.5px; padding:2px 6px; }
+.seat .types button[aria-pressed="true"]{ background:var(--felt-ink); color:var(--felt2); }
+.shand{ display:flex; align-items:center; gap:6px; flex-wrap:wrap; }
+.shand.cur{ background:rgba(255,255,255,.08); border-radius:8px; padding:2px 4px; }
+.mcards{ display:flex; padding-left:12px; }
+.mcard{ width:30px; height:42px; border-radius:5px; background:var(--card); color:var(--card-ink); margin-left:-12px; box-shadow:0 1px 3px rgba(0,0,0,.4); font:700 12px Figtree, sans-serif; padding:2px 3px; line-height:1.05; display:flex; flex-direction:column; }
+.mcard.red{ color:#B3261E; }
+.mcard.back{ background:repeating-linear-gradient(45deg,#7A1E1E 0 4px,#9B2B2B 4px 8px); border:2px solid #f4f4f4; }
+.dcards .mcard{ width:50px; height:70px; font-size:17px; margin-left:-16px; padding:4px 5px; }
+.dcards{ padding-left:16px; }
+.stot{ font-size:13px; color:var(--felt-ink); }
+.sres{ font-size:12px; font-weight:700; padding:1px 7px; border-radius:999px; }
+.sres.w{ background:rgba(60,170,110,.45); } .sres.l{ background:rgba(200,60,50,.45); } .sres.p{ background:rgba(201,166,74,.45); }
+.sbet{ font-size:12.5px; color:var(--felt-muted); }
+.sim-bar{ position:sticky; bottom:0; z-index:5; background:var(--surface); border:1px solid var(--line); border-radius:16px; padding:12px; margin-top:12px; box-shadow:0 -6px 18px rgba(0,0,0,.14); display:grid; gap:10px; }
+.advice{ display:grid; gap:4px; }
+.advice .big{ font-family:"Young Serif", Georgia, serif; font-size:24px; line-height:1.15; }
+.advice .small{ color:var(--muted); }
+.acts{ display:flex; gap:6px; flex-wrap:wrap; }
+.act{ flex:1; min-width:84px; height:48px; border-radius:12px; font-weight:700; font-size:15px; border:1px solid var(--line); background:var(--surface2); color:var(--ink); }
+.act.rec{ outline:3px solid var(--gold); outline-offset:1px; }
+.act.primary{ background:var(--felt); color:var(--felt-ink); border-color:var(--felt); }
+.act:disabled{ opacity:.35; cursor:not-allowed; }
+.betctl{ display:grid; gap:8px; justify-items:center; }
+.betctl .spot{ color:var(--muted); border-color:var(--line); }
+.betctl .spot b{ color:var(--ink); }
+.betctl .spot[aria-pressed="true"]{ color:var(--ink); background:rgba(201,166,74,.18); border-color:var(--gold); }
+.fb{ font-size:14px; font-weight:600; }
+.fb.ok{ color:var(--green); } .fb.bad{ color:var(--red-ink); }
+.wheel-res{ display:flex; align-items:center; justify-content:center; gap:14px; margin-bottom:12px; min-height:84px; }
+.wheel-ball{ width:78px; height:78px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-family:"Young Serif", Georgia, serif; font-size:32px; color:#fff; border:4px solid var(--gold); box-shadow:0 4px 14px rgba(0,0,0,.35); }
+.wheel-ball.r{ background:var(--rouge); } .wheel-ball.b{ background:#111; } .wheel-ball.g{ background:var(--green); } .wheel-ball.idle{ background:rgba(0,0,0,.25); font-size:16px; }
+.wheel-net{ font-size:15px; color:var(--felt-ink); max-width:24ch; }
+.opt .put{ grid-column:3; justify-self:end; }
+.minibtn{ border:1px solid rgba(238,246,241,.45); background:transparent; color:var(--felt-ink); border-radius:999px; padding:3px 10px; font-size:12.5px; font-weight:600; }
+@media (max-width:600px){
+  .tab{ flex:0 0 auto; padding:8px 12px; font-size:14px; }
+  .sim-seats{ grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .sim-top .money{ font-size:26px; }
+  .act{ min-width:70px; font-size:14px; }
+}
+
 /* Conteo discreto */
 .ct-wrap{ max-width:460px; margin:0 auto; background:#0A0E0C; color:#6F7A74; border-radius:22px; padding:18px; border:1px solid #1A221E; }
 .ct-screen{ display:flex; justify-content:space-between; align-items:flex-end; padding:6px 6px 14px; user-select:none; -webkit-user-select:none; touch-action:none; cursor:pointer; }
@@ -348,6 +406,8 @@ details.guide p{ font-size:14.5px; margin-top:8px; }
       <a class="tab" role="tab" data-tab="blackjack" href="#blackjack">Blackjack</a>
       <a class="tab" role="tab" data-tab="ruleta" href="#ruleta">Ruleta</a>
       <a class="tab" role="tab" data-tab="conteo" href="#conteo">Conteo</a>
+      <a class="tab" role="tab" data-tab="jbj" href="#jbj">Jugar BJ</a>
+      <a class="tab" role="tab" data-tab="jru" href="#jru">Jugar ruleta</a>
     </nav>
   </header>
 
@@ -489,6 +549,46 @@ details.guide p{ font-size:14.5px; margin-top:8px; }
     </div>
   </section>
 
+  <!-- ============ JUGAR BLACKJACK ============ -->
+  <section data-view="jbj" hidden>
+    <div class="sim-top" id="sbTop"></div>
+    <div class="felt">
+      <div class="sim-dealer" id="sbDealer"></div>
+      <div class="sim-seats" id="sbSeats"></div>
+    </div>
+    <div class="sim-bar" id="sbBar"></div>
+    <div class="ru-layout">
+      <div class="panel" id="sbInfo"></div>
+      <div class="panel" id="sbHist"></div>
+    </div>
+  </section>
+
+  <!-- ============ JUGAR RULETA ============ -->
+  <section data-view="jru" hidden>
+    <div class="sim-top" id="srTopBar"></div>
+    <div class="felt">
+      <div class="ru-felt-grid">
+        <div>
+          <div class="wheel-res" id="srWheel"></div>
+          <div class="ru-top" id="srCtl" style="justify-content:center"></div>
+          <p class="strip-hint" id="srHint" style="margin-bottom:10px"></p>
+          <div class="rv-board" id="srBoard"></div>
+          <div class="board-tools">
+            <button class="act primary" id="srSpin" style="flex:0 1 180px">Girar</button>
+            <button class="fbtn" id="srUndo">Quitar última ficha</button>
+            <button class="fbtn" id="srClear">Quitar todas</button>
+            <button class="fbtn" id="srRepeat">Repetir apuesta</button>
+          </div>
+        </div>
+        <div class="ru-side" id="srSide"></div>
+      </div>
+    </div>
+    <div class="ru-layout">
+      <div class="panel" id="srBets"></div>
+      <div class="panel" id="srStats"></div>
+    </div>
+  </section>
+
   <footer>Herramienta recreativa y educativa. Ningún sistema vence la ventaja de la casa a largo plazo: juega solo con dinero que estés dispuesto a perder y fija un límite antes de sentarte.</footer>
 </div>
 
@@ -539,7 +639,7 @@ async function loadRemote(){
 /* ---------- Routing ---------- */
 function route(){
   const h=location.hash.slice(1);
-  const v=['ruleta','conteo'].includes(h)?h:'blackjack';
+  const v=['ruleta','conteo','jbj','jru'].includes(h)?h:'blackjack';
   document.querySelectorAll('[data-view]').forEach(s=>s.hidden=s.dataset.view!==v);
   document.querySelectorAll('.tab').forEach(t=>t.setAttribute('aria-selected',String(t.dataset.tab===v)));
 }
@@ -854,8 +954,8 @@ const SIDE_NAME={over:'Más de 13',under:'Menos de 13',exact:'13 exacto',pair:'P
 const CHIPS=[1,5,10,25,50,100];
 const chipCls=v=>({0.5:'c05',1:'c1',5:'c5',10:'c10',25:'c25',50:'c50',100:'c100'})[v]||'c1';
 const sideTotal=()=>bj.bets.over+bj.bets.under+bj.bets.exact+bj.bets.pair;
-function sideProbs(){
-  const nd=bj.decks, T=52*nd, c=4*nd; let over=0,under=0,exact=0;
+function sideProbs(ndIn){
+  const nd=ndIn||bj.decks, T=52*nd, c=4*nd; let over=0,under=0,exact=0;
   for(let a=1;a<=13;a++) for(let b=1;b<=13;b++){
     const p=c*(c-(a===b?1:0))/(T*(T-1)), s=Math.min(a,10)+Math.min(b,10);
     if(s>13) over+=p; else if(s<13) under+=p; else exact+=p;
@@ -1041,10 +1141,11 @@ const ctBet=()=>ctUnit()*Math.max(1,Math.floor(trueCount())-1);
 function ctAdd(delta){ ct.rc+=delta; ct.seen+=1; ct.stack.push(delta); if(ct.stack.length>600) ct.stack.shift(); saveCt(); }
 function ctCard(r,sign){ if(!(ct.on&&ct.link))return; if(sign>0) ctAdd(HL(r)); else { ct.rc-=HL(r); ct.seen=Math.max(0,ct.seen-1); saveCt(); } }
 function ctUndo(){ if(!ct.stack.length)return; ct.rc-=ct.stack.pop(); ct.seen=Math.max(0,ct.seen-1); saveCt(); }
-function deviation(a){
-  if(!ct.on||a.state!=='ok'||a.h.soft) return null;
+function deviation(a){ return ct.on?devCore(a,trueCount()):null; }
+function devCore(a,tc){
+  if(a.state!=='ok'||a.h.soft) return null;
   if(a.table==='pairs'&&a.key!=='10'&&a.key!=='5') return null;
-  const tc=trueCount(), t=a.h.total, d=bj.dealer, two=a.two, base=a.main;
+  const t=a.h.total, d=a.dealer||bj.dealer, two=a.two, base=a.main;
   let act=null;
   if(a.table==='pairs'&&a.key==='10'){ if((d==='5'&&tc>=5)||(d==='6'&&tc>=4)) act='P'; return act&&act!==base?act:null; }
   if(base!=='R'){
@@ -1461,7 +1562,452 @@ function initRU(){
   renderAll();
 }
 
-route(); initBJ(); initRU(); initCount(); loadRemote();
+
+/* =================== MESA DE PRÁCTICA: BLACKJACK =================== */
+const SB_SUITS=['♠','♥','♦','♣'];
+const FACE=['A','2','3','4','5','6','7','8','9','10','J','Q','K'];
+const sRank=c=>['J','Q','K'].includes(c.r)?'10':c.r;
+const isRed=c=>c.s==='♥'||c.s==='♦';
+const rnd=n=>{ try{ return crypto.getRandomValues(new Uint32Array(1))[0]%n; }catch(e){ return Math.floor(Math.random()*n); } };
+const sb={
+  bank:store.get('sb_bank',1000), start:store.get('sb_start',1000), unit:store.get('sb_unit',10),
+  seats:(store.get('sb_seats',null)||[{type:'me'},{type:'bot'},{type:'bot'},{type:'empty'},{type:'bot'},{type:'empty'},{type:'bot'}]).map(x=>({type:x.type,bets:x.bets||{main:x.type==='me'?10:0,over:0,under:0,exact:0,pair:0},hands:[],sides:null,net:0})),
+  shoe:[], dealt:0, cut:0, rc:0, phase:'bet', dealer:[], hole:false, turn:null, sel:0, spot:'main', msg:'', fb:'', fbok:true,
+  stats:store.get('sb_stats',{dec:0,ok:0,rounds:0,net:0}), hints:store.get('sb_hints',true), showCount:store.get('sb_show',true), hist:[], busy:false
+};
+function saveSB(){ store.set('sb_bank',sb.bank); store.set('sb_start',sb.start); store.set('sb_unit',sb.unit); store.set('sb_seats',sb.seats.map(x=>({type:x.type,bets:x.bets}))); store.set('sb_stats',sb.stats); store.set('sb_hints',sb.hints); store.set('sb_show',sb.showCount); }
+function sbShuffle(){
+  const a=[]; for(let d=0;d<8;d++) for(const s of SB_SUITS) for(const r of FACE) a.push({r,s});
+  for(let i=a.length-1;i>0;i--){ const j=rnd(i+1); [a[i],a[j]]=[a[j],a[i]]; }
+  sb.shoe=a; sb.dealt=0; sb.rc=0; sb.cut=Math.floor(416*(0.72+rnd(7)/100));
+  sb.msg='Se barajó el zapato de 8 mazos. El conteo vuelve a cero.';
+}
+function sbDraw(show){ const c=sb.shoe.pop(); sb.dealt++; if(show!==false) sb.rc+=HL(sRank(c)); return c; }
+const sbDecksLeft=()=>Math.max(0.25,(416-sb.dealt)/52);
+const sbTC=()=>sb.rc/sbDecksLeft();
+const sbTCtxt=()=>{ const t=sbTC(); return (t>0?'+':'')+num(t,1); };
+const sbSuggest=()=>sb.unit*Math.max(1,Math.floor(sbTC())-1);
+const sbEval=cards=>evalHand(cards.map(sRank));
+const seatCost=s=>s.bets.main+s.bets.over+s.bets.under+s.bets.exact+s.bets.pair;
+const mySeats=()=>sb.seats.filter(s=>s.type==='me');
+
+function sbResolveSides(seat){
+  const [a,b]=seat.hands[0].cards, B=seat.bets, y=bj.pay, items=[];
+  const sum=Math.min(rv(sRank(a)),10)+Math.min(rv(sRank(b)),10);
+  const add=(name,bet,win,pay)=>{ if(bet) items.push({name,bet,ret:win?bet*(pay+1):0,net:win?bet*pay:-bet}); };
+  add('+13',B.over,sum>13,y.over); add('−13',B.under,sum<13,y.under); add('13',B.exact,sum===13,y.exact);
+  if(B.pair){
+    let pay=0,kind='';
+    if(a.r===b.r){ if(a.s===b.s){ pay=y.pperf; kind='perfecto'; } else if(isRed(a)===isRed(b)){ pay=y.pcol; kind='de color'; } else { pay=y.pmix; kind='mixto'; } }
+    items.push({name:'Par'+(kind?' '+kind:''),bet:B.pair,ret:pay?B.pair*(pay+1):0,net:pay?B.pair*pay:-B.pair});
+  }
+  return items;
+}
+
+function sbAdvice(seat,hand,useDev){
+  const ranks=hand.cards.map(sRank), h=evalHand(ranks), two=ranks.length===2, split=seat.hands.length>1;
+  if(h.total>=21||hand.aces||hand.done) return null;
+  const d=sRank(sb.dealer[0]), col=COLS.indexOf(d);
+  let table,key,code;
+  if(two&&ranks[0]===ranks[1]&&seat.hands.length<4){ table='pairs'; key=ranks[0]; code=rowOf(PAIRS,PAIRS_H17,key)[col]; }
+  else if(h.soft){ table='soft'; key=h.total-11; code=(key>=2&&key<=9)?rowOf(SOFT,SOFT_H17,key)[col]:(h.total>=19?'S':'H'); }
+  else { key=Math.min(18,Math.max(8,h.total)); table='hard'; code=rowOf(HARD,HARD_H17,key)[col]; }
+  const surr=two&&bj.surr&&!split;
+  const map={H:'H',S:'S',P:'P',D:two?'D':'H',X:two?'D':'S',U:surr?'R':'H',V:surr?'R':'S',W:surr?'R':'P'};
+  const base=map[code];
+  let main=base, dev=null;
+  if(useDev){ dev=devCore({state:'ok',h,two,table,key,main:base,dealer:d},sbTC()); if(dev) main=dev; }
+  return {main,base,dev:!!dev,h,d,table,key,two};
+}
+
+function sbDeal(){
+  const mine=mySeats(), active=sb.seats.filter(s=>s.type!=='empty');
+  sb.fb='';
+  if(!active.length){ sb.msg='Ocupa al menos un puesto.'; return; }
+  if(mine.some(s=>s.bets.main<=0)){ sb.msg='Cada puesto tuyo necesita una apuesta principal.'; return; }
+  const cost=mine.reduce((t,s)=>t+seatCost(s),0);
+  if(cost>sb.bank){ sb.msg='No te alcanza el saldo para estas apuestas.'; return; }
+  sb.msg='';
+  if(!sb.shoe.length||sb.dealt>=sb.cut) sbShuffle();
+  sb.bank-=cost;
+  sb.dealer=[]; sb.hole=false; sb.ins=null;
+  sb.seats.forEach(s=>{ s.sides=null; s.net=s.type==='me'?-seatCost(s):0; s.hands=s.type==='empty'?[]:[{cards:[],bet:s.type==='me'?s.bets.main:10,done:false,aces:false,surr:false,res:null}]; });
+  for(let k=0;k<2;k++){ active.forEach(s=>s.hands[0].cards.push(sbDraw())); sb.dealer.push(sbDraw(k===0)); }
+  mine.forEach(s=>{ const it=sbResolveSides(s); s.sides=it; const ret=it.reduce((t,x)=>t+x.ret,0); sb.bank+=ret; s.net+=ret; });
+  active.forEach(s=>{ const h=s.hands[0]; if(sbEval(h.cards).total===21){ h.done=true; h.bj=true; } });
+  const up=sRank(sb.dealer[0]);
+  if(up==='A'&&mine.length){ sb.phase='ins'; return; }
+  if(up==='A'||up==='10') sbPeek(); else { sb.phase='play'; sbNext(true); }
+}
+function sbInsurance(take){
+  sb.ins=take;
+  if(take){ mySeats().forEach(s=>{ const c=s.bets.main/2; sb.bank-=c; s.net-=c; s.insBet=c; }); }
+  else mySeats().forEach(s=>s.insBet=0);
+  const good=sbTC()>=3;
+  sbFeedback(take===good,take?'Seguro':'Sin seguro',good?'Tomar el seguro':'No tomar el seguro');
+  sbPeek();
+}
+function sbPeek(){
+  const dbj=sbEval(sb.dealer).total===21;
+  if(dbj){
+    sb.hole=true; sb.rc+=HL(sRank(sb.dealer[1]));
+    mySeats().forEach(s=>{ if(s.insBet){ sb.bank+=s.insBet*3; s.net+=s.insBet*3; } });
+    sb.msg='El crupier tiene blackjack.';
+    sbSettle(); return;
+  }
+  if(sb.ins) sb.msg='El crupier no tiene blackjack: el seguro se pierde.';
+  sb.phase='play'; sbNext(true);
+}
+function sbNext(fromStart){
+  let si=fromStart?0:sb.turn.s, hi=fromStart?0:sb.turn.h;
+  for(;si<7;si++,hi=0){
+    const s=sb.seats[si];
+    for(;hi<s.hands.length;hi++){ if(!s.hands[hi].done){ sb.turn={s:si,h:hi}; if(s.type==='bot') setTimeout(sbBotStep,420); renderSB(); return; } }
+  }
+  sb.turn=null; sbDealerPlay();
+}
+function sbCur(){ const s=sb.seats[sb.turn.s]; return {seat:s,hand:s.hands[sb.turn.h]}; }
+function sbAct(a,isBot){
+  if(!sb.turn) return;
+  const {seat,hand}=sbCur(), mine=seat.type==='me';
+  if(mine&&!isBot){ const adv=sbAdvice(seat,hand,true); if(adv){ const names={H:'Pedir',S:'Plantarse',D:'Doblar',P:'Dividir',R:'Rendirse'}; sbFeedback(a===adv.main,names[a],ACT[adv.main].name+(adv.dev?' (ajuste por conteo)':'')); } }
+  if(a==='H'){ hand.cards.push(sbDraw()); if(sbEval(hand.cards).total>=21) hand.done=true; }
+  else if(a==='S'){ hand.done=true; }
+  else if(a==='D'){ if(mine){ sb.bank-=hand.bet; seat.net-=hand.bet; } hand.bet*=2; hand.dbl=true; hand.cards.push(sbDraw()); hand.done=true; }
+  else if(a==='R'){ hand.surr=true; hand.done=true; }
+  else if(a==='P'){
+    if(mine){ sb.bank-=hand.bet; seat.net-=hand.bet; }
+    const c2=hand.cards.pop(), aces=sRank(hand.cards[0])==='A';
+    const nh={cards:[c2],bet:hand.bet,done:false,aces,surr:false,res:null};
+    hand.cards.push(sbDraw()); nh.cards.push(sbDraw());
+    if(aces){ hand.aces=true; hand.done=true; nh.done=true; }
+    seat.hands.splice(sb.turn.h+1,0,nh);
+    if(sbEval(hand.cards).total===21) hand.done=true;
+    if(sbEval(nh.cards).total===21) nh.done=true;
+  }
+  if(hand.done) sbNext(false); else { if(seat.type==='bot') setTimeout(sbBotStep,420); renderSB(); }
+}
+function sbBotStep(){
+  if(!sb.turn) return;
+  const {seat,hand}=sbCur(); if(seat.type!=='bot') return;
+  const adv=sbAdvice(seat,hand,false);
+  sbAct(adv?adv.base:'S',true);
+}
+function sbCanSplit(seat,hand){ return hand.cards.length===2&&sRank(hand.cards[0])===sRank(hand.cards[1])&&seat.hands.length<4; }
+function sbFeedback(ok,did,should){
+  sb.stats.dec++; if(ok) sb.stats.ok++;
+  sb.fbok=ok; sb.fb=ok?`Bien: ${did.toLowerCase()} era la jugada correcta.`:`Jugaste ${did.toLowerCase()}; lo correcto era ${should.toLowerCase()}.`;
+  saveSB();
+}
+function sbDealerPlay(){
+  sb.phase='dealer';
+  if(!sb.hole){ sb.hole=true; sb.rc+=HL(sRank(sb.dealer[1])); }
+  const live=sb.seats.some(s=>s.hands.some(h=>!h.surr&&!h.bj&&sbEval(h.cards).total<=21));
+  if(live){
+    const step=()=>{
+      const e=sbEval(sb.dealer);
+      if(e.total<17||(e.total===17&&e.soft&&bj.h17)){ sb.dealer.push(sbDraw()); renderSB(); setTimeout(step,450); }
+      else sbSettle();
+    };
+    renderSB(); setTimeout(step,450);
+  } else sbSettle();
+}
+function sbSettle(){
+  const d=sbEval(sb.dealer), dbj=d.total===21&&sb.dealer.length===2;
+  sb.hole=true;
+  sb.seats.forEach(s=>s.hands.forEach(h=>{
+    const t=sbEval(h.cards).total, bjHand=h.bj&&s.hands.length===1;
+    let ret=0,res;
+    if(h.surr){ ret=h.bet/2; res='Rendido'; }
+    else if(dbj){ ret=bjHand?h.bet:0; res=bjHand?'Empate':'Pierde'; }
+    else if(bjHand){ ret=h.bet*2.5; res='Blackjack'; }
+    else if(t>21){ res='Se pasó'; }
+    else if(d.total>21||t>d.total){ ret=h.bet*2; res='Gana'; }
+    else if(t===d.total){ ret=h.bet; res='Empate'; }
+    else res='Pierde';
+    h.res=res;
+    if(s.type==='me'){ sb.bank+=ret; s.net+=ret; }
+  }));
+  const net=mySeats().reduce((t,s)=>t+s.net,0);
+  sb.stats.rounds++; sb.stats.net+=net;
+  sb.hist.unshift({net,d:d.total>21?'se pasó':d.total,tc:sbTCtxt()}); sb.hist=sb.hist.slice(0,30);
+  sb.phase='done'; sb.turn=null; saveSB(); renderSB();
+}
+
+function mcard(c,back){ if(back) return '<div class="mcard back"></div>'; return `<div class="mcard${isRed(c)?' red':''}"><span>${c.r}</span><span>${c.s}</span></div>`; }
+function renderSB(){
+  // barra superior
+  const diff=sb.bank-sb.start;
+  $('#sbTop').innerHTML=`<div><div class="muted small">Saldo de práctica</div><div class="money">${money(sb.bank)}</div><div class="${diff>=0?'up':'down'} small">${signed(diff)} desde ${money(sb.start)}</div></div>
+    <div class="meta">${sb.showCount?`<span>Conteo <b>${sb.rc>0?'+':''}${sb.rc}</b></span><span>Real <b>${sbTCtxt()}</b></span>`:''}<span>Mazos restantes <b>${num(sbDecksLeft(),1)}</b></span><span>Aciertos <b>${sb.stats.dec?pct(sb.stats.ok/sb.stats.dec,0):'—'}</b></span></div>`;
+  // crupier
+  const dE=sbEval(sb.dealer);
+  $('#sbDealer').innerHTML=`<span class="zone-label">Crupier${sb.dealer.length?(sb.hole?`: ${dE.total>21?'se pasó':dE.total}`:`: muestra ${sRank(sb.dealer[0])==='10'?'10':sb.dealer[0].r}`):''}</span>
+    <div class="mcards dcards">${sb.dealer.length?sb.dealer.map((c,i)=>mcard(c,i===1&&!sb.hole)).join(''):'<div class="mcard back" style="opacity:.25"></div><div class="mcard back" style="opacity:.25"></div>'}</div>
+    ${sb.msg?`<span class="small" style="color:var(--felt-muted)">${sb.msg}</span>`:''}`;
+  // puestos
+  const betting=sb.phase==='bet'||sb.phase==='done';
+  $('#sbSeats').innerHTML=sb.seats.map((s,i)=>{
+    const turn=sb.turn&&sb.turn.s===i;
+    const types=betting?`<span class="types">${[['empty','—'],['bot','Bot'],['me','Yo']].map(([k,l])=>`<button data-seat="${i}" data-type="${k}" aria-pressed="${s.type===k}" aria-label="Puesto ${i+1}: ${l==='—'?'vacío':l}">${l}</button>`).join('')}</span>`:'';
+    let body='';
+    if(s.hands.length) body=s.hands.map((h,j)=>{ const e=sbEval(h.cards), cur=turn&&sb.turn.h===j;
+      const rc=h.res?(['Gana','Blackjack'].includes(h.res)?'w':h.res==='Empate'?'p':'l'):'';
+      return `<div class="shand${cur?' cur':''}"><div class="mcards">${h.cards.map(c=>mcard(c)).join('')}</div><span class="stot">${e.total>21?'Se pasó':e.total}${h.dbl?' ×2':''}</span>${h.res?`<span class="sres ${rc}">${h.res}</span>`:''}</div>`; }).join('');
+    else if(s.type==='empty') body='<span class="sbet">Puesto libre</span>';
+    else body='<span class="sbet">Esperando reparto</span>';
+    const B=s.bets, side=B.over+B.under+B.exact+B.pair;
+    const betTxt=s.type==='me'?`<span class="sbet">Apuesta ${money(B.main)}${side?` + comodines ${money(side)}`:''}${s.sides&&s.sides.length?'<br>'+s.sides.map(x=>`${x.name}: ${signed(x.net)}`).join(', '):''}${sb.phase==='done'?`<br><b style="color:var(--felt-ink)">Neto ${signed(s.net)}</b>`:''}</span>`:(s.type==='bot'?'<span class="sbet">Bot, juega la estrategia básica</span>':'');
+    return `<div class="seat${s.type==='me'?' me':''}${betting&&sb.sel===i&&s.type==='me'?' sel':''}${turn?' turn':''}" data-pick="${i}"><div class="sh"><b>Puesto ${i+1}</b>${types}</div>${body}${betTxt}</div>`;
+  }).join('');
+  renderSBBar(); renderSBInfo();
+}
+function renderSBBar(){
+  const el=$('#sbBar');
+  if(sb.phase==='bet'||sb.phase==='done'){
+    const mine=mySeats();
+    if(!mine.some((s,i)=>true)){ el.innerHTML='<p class="small">Marca “Yo” en al menos un puesto para jugar.</p><div class="acts"><button class="act primary" id="sbDealBtn">Repartir solo bots</button></div>'; }
+    else {
+      if(sb.seats[sb.sel].type!=='me') sb.sel=sb.seats.findIndex(s=>s.type==='me');
+      const s=sb.seats[sb.sel], B=s.bets, tc=sbTC();
+      const tip=tc>=2?`Conteo real ${sbTCtxt()}: la mesa te favorece. Sube a ${money(sbSuggest())} por puesto${tc>=3?' y considera ocupar otro puesto':''}.`:tc<=-1?`Conteo real ${sbTCtxt()}: quedan muchas cartas bajas. Apuesta el mínimo (${money(sb.unit)}) o deja libre algún puesto.`:`Conteo real ${sbTCtxt()}: mesa neutra. Apuesta tu unidad (${money(sb.unit)}).`;
+      const sp=sideProbs(8), y=bj.pay, eO=(1-sp.over)-sp.over*y.over;
+      el.innerHTML=`<div class="advice"><span class="small">Consejo antes de repartir</span><span>${tip}</span><span class="small">Comodines: el +13 le deja a la casa ${pct(eO,1)} y el resto suele ser peor. Si buscas perder menos, déjalos en cero.</span></div>
+      <div class="betctl"><span class="small">Apostando en el puesto ${sb.sel+1}${mine.length>1?' (toca otro de tus puestos para cambiar)':''}</span>
+        <div class="spots">${SPOTS.map(([k,l])=>`<button class="spot" data-sbspot="${k}" aria-pressed="${sb.spot===k}"><span>${l}</span><b>${money(B[k])}</b></button>`).join('')}</div>
+        <div class="chiprow">${CHIPS.map(v=>`<button class="pchip ${chipCls(v)}" data-sbchip="${v}">${v}</button>`).join('')}<button class="btn" data-sbact="clear">Borrar</button><button class="btn" data-sbact="copy">Igual en todos mis puestos</button></div>
+      </div>
+      ${sb.fb?`<p class="fb ${sb.fbok?'ok':'bad'}">${sb.fb}</p>`:''}
+      <div class="acts"><button class="act primary" id="sbDealBtn">${sb.phase==='done'?'Nueva ronda':'Repartir'} (${money(mine.reduce((t,x)=>t+seatCost(x),0))})</button></div>`;
+    }
+    const d=$('#sbDealBtn'); if(d) d.onclick=()=>{ sbDeal(); renderSB(); };
+    return;
+  }
+  if(sb.phase==='ins'){
+    const good=sbTC()>=3;
+    el.innerHTML=`<div class="advice"><span class="small">El crupier muestra un as</span><span class="big">¿Tomar seguro?</span><span class="small">${sb.hints?(good?`Conteo real ${sbTCtxt()}: sí conviene, quedan muchas cartas de 10.`:`Conteo real ${sbTCtxt()}: no conviene. El seguro pierde en promedio 7,7 % si no cuentas cartas.`):'Decide tú; te diré si acertaste.'}</span></div>
+    <div class="acts"><button class="act${sb.hints&&good?' rec':''}" id="insY">Sí, seguro</button><button class="act${sb.hints&&!good?' rec':''}" id="insN">No</button></div>`;
+    $('#insY').onclick=()=>{ sbInsurance(true); renderSB(); }; $('#insN').onclick=()=>{ sbInsurance(false); renderSB(); };
+    return;
+  }
+  if(sb.phase==='play'&&sb.turn){
+    const {seat,hand}=sbCur();
+    if(seat.type==='bot'){ el.innerHTML=`<div class="advice"><span class="small">Juega el bot del puesto ${sb.turn.s+1}…</span></div>${sb.fb?`<p class="fb ${sb.fbok?'ok':'bad'}">${sb.fb}</p>`:''}`; return; }
+    const adv=sbAdvice(seat,hand,true), e=sbEval(hand.cards), two=hand.cards.length===2;
+    const can={H:true,S:true,D:two,P:sbCanSplit(seat,hand)&&sb.bank>=hand.bet,R:two&&bj.surr&&seat.hands.length===1};
+    if(two&&sb.bank<hand.bet) can.D=false;
+    let tip='';
+    if(adv){
+      const dist=dealerDist(rv(adv.d),bj.h17), bust=hitBust(e), so=standOutcome(e.total,dist);
+      const seen=sb.seats.reduce((a,s)=>a.concat(...s.hands.map(h=>h.cards)),[]).concat([sb.dealer[0]]);
+      const hi=seen.filter(c=>HL(sRank(c))<0).length, lo=seen.filter(c=>HL(sRank(c))>0).length;
+      tip=`<span class="big">${sb.hints?ACT[adv.main].name:'¿Qué harías?'}</span>
+      ${sb.hints?`<span class="small">${adv.dev?`Ajuste por conteo (real ${sbTCtxt()}): la tabla básica dice ${ACT[adv.base].name.toLowerCase()}. `:''}Si pides, te pasas ${pct(bust,0)}. El crupier con ${upName(adv.d)} se pasa ${pct(dist.bust,0)}. Plantándote con ${e.total} ganas ${pct(so.win,0)}.</span>`:''}
+      <span class="small">En la mesa esta ronda: ${hi} cartas altas y ${lo} bajas a la vista.${sb.showCount?` Conteo real ${sbTCtxt()}.`:''}</span>`;
+    }
+    const lab={H:'Pedir',S:'Plantarse',D:'Doblar',P:'Dividir',R:'Rendirse'};
+    el.innerHTML=`<div class="advice"><span class="small">Puesto ${sb.turn.s+1}${seat.hands.length>1?`, mano ${sb.turn.h+1} de ${seat.hands.length}`:''}: tienes ${e.total}${e.soft?' blando':''}</span>${tip}</div>
+      ${sb.fb?`<p class="fb ${sb.fbok?'ok':'bad'}">${sb.fb}</p>`:''}
+      <div class="acts">${['H','S','D','P','R'].map(k=>`<button class="act${sb.hints&&adv&&adv.main===k?' rec':''}" data-sbplay="${k}"${can[k]?'':' disabled'}>${lab[k]}</button>`).join('')}</div>`;
+    return;
+  }
+  el.innerHTML=`<div class="advice"><span class="small">Juega el crupier…</span></div>`;
+}
+function renderSBInfo(){
+  $('#sbInfo').innerHTML=`<h2>Mesa de práctica</h2>
+  <p class="muted small">Zapato de 8 mazos que se baraja al llegar a la carta de corte. Usa las reglas y los pagos de comodines que configuraste en la pestaña Blackjack. El dinero es ficticio.</p>
+  <div class="switches" style="margin-top:12px">
+    <label class="switch"><span>Mostrar el consejo antes de jugar</span><input type="checkbox" id="sbHints"${sb.hints?' checked':''}></label>
+    <label class="switch"><span>Mostrar el conteo de cartas</span><input type="checkbox" id="sbShow"${sb.showCount?' checked':''}></label>
+    <label class="field"><span>Unidad de apuesta</span><input type="number" id="sbUnit" min="1" step="1" value="${sb.unit}"></label>
+    <label class="field"><span>Saldo inicial de práctica</span><input type="number" id="sbStartIn" min="10" step="10" value="${sb.start}"></label>
+  </div>
+  <div class="btns"><button class="btn" id="sbReset">Reiniciar saldo</button><button class="btn" id="sbShuffleBtn">Barajar zapato</button></div>`;
+  $('#sbHints').onchange=e=>{ sb.hints=e.target.checked; saveSB(); renderSB(); };
+  $('#sbShow').onchange=e=>{ sb.showCount=e.target.checked; saveSB(); renderSB(); };
+  $('#sbUnit').onchange=e=>{ sb.unit=Math.max(1,+e.target.value||10); saveSB(); renderSB(); };
+  $('#sbStartIn').onchange=e=>{ sb.start=Math.max(10,+e.target.value||1000); saveSB(); renderSB(); };
+  $('#sbReset').onclick=()=>{ if(!confirm('¿Reiniciar tu saldo de práctica?'))return; sb.bank=sb.start; sb.stats={dec:0,ok:0,rounds:0,net:0}; sb.hist=[]; saveSB(); renderSB(); };
+  $('#sbShuffleBtn').onclick=()=>{ if(sb.phase!=='bet'&&sb.phase!=='done')return; sbShuffle(); renderSB(); };
+  const H=sb.hist;
+  $('#sbHist').innerHTML=`<h2>Tus rondas</h2>
+  <div class="kv"><span>Rondas jugadas</span><span class="v">${sb.stats.rounds}</span><span>Resultado total</span><span class="v">${signed(sb.stats.net)}</span><span>Decisiones correctas</span><span class="v">${sb.stats.dec?`${sb.stats.ok} de ${sb.stats.dec}`:'—'}</span></div>
+  ${H.length?`<h3>Últimas rondas</h3><table class="obs"><thead><tr><th>Crupier</th><th style="text-align:right">Conteo real</th><th style="text-align:right">Tu neto</th></tr></thead><tbody>${H.slice(0,10).map(r=>`<tr><td>${r.d}</td><td class="n">${r.tc}</td><td class="n">${signed(r.net)}</td></tr>`).join('')}</tbody></table>`:''}`;
+}
+function initSB(){
+  $('#sbSeats').addEventListener('click',e=>{
+    const t=e.target.closest('[data-type]');
+    if(t){ if(sb.phase!=='bet'&&sb.phase!=='done')return; const s=sb.seats[+t.dataset.seat]; s.type=t.dataset.type; if(s.type==='me'&&!s.bets.main) s.bets.main=sb.unit; if(s.type!=='me') s.hands=[]; if(s.type==='me') sb.sel=+t.dataset.seat; saveSB(); renderSB(); return; }
+    const pk=e.target.closest('[data-pick]');
+    if(pk&&sb.seats[+pk.dataset.pick].type==='me'){ sb.sel=+pk.dataset.pick; renderSB(); }
+  });
+  $('#sbBar').addEventListener('click',e=>{
+    const sp=e.target.closest('[data-sbspot]'), ch=e.target.closest('[data-sbchip]'), ac=e.target.closest('[data-sbact]'), pl=e.target.closest('[data-sbplay]');
+    if(pl){ if(!pl.disabled) sbAct(pl.dataset.sbplay,false); renderSB(); return; }
+    const s=sb.seats[sb.sel]; if(!s||s.type!=='me') return;
+    if(sp) sb.spot=sp.dataset.sbspot;
+    else if(ch) s.bets[sb.spot]=+(s.bets[sb.spot]+(+ch.dataset.sbchip)).toFixed(2);
+    else if(ac&&ac.dataset.sbact==='clear') s.bets[sb.spot]=0;
+    else if(ac&&ac.dataset.sbact==='copy') mySeats().forEach(x=>{ x.bets=Object.assign({},s.bets); });
+    else return;
+    saveSB(); renderSB();
+  });
+  renderSB();
+}
+
+/* =================== MESA DE PRÁCTICA: RULETA =================== */
+const DENOMS=[0.5,1,5,10,25,100];
+const SR_PAY={pleno:35,caballo:17,calle:11,cuadro:8,linea:5,docena:2,columna:2,simple:1};
+const SR_NAME={pleno:'Pleno',caballo:'Caballo',calle:'Calle',cuadro:'Cuadro',linea:'Línea',docena:'Docena',columna:'Columna',simple:'Sencilla'};
+const SR_NEED={pleno:1,caballo:2,calle:3,cuadro:4,linea:6};
+const SR_HINT={pleno:'Toca un número para ponerle una ficha.',caballo:'Toca 2 números vecinos.',calle:'Toca los 3 números de una fila.',cuadro:'Toca 4 números que formen un cuadro.',linea:'Toca los 6 números de dos filas seguidas.'};
+const SR_GT={red:'simple',black:'simple',even:'simple',odd:'simple',low:'simple',high:'simple',doz1:'docena',doz2:'docena',doz3:'docena',col1:'columna',col2:'columna',col3:'columna'};
+const sr={bank:store.get('sr_bank',500),start:store.get('sr_start',500),wheel:store.get('sr_wheel','eu'),denom:store.get('sr_denom',1),btype:'pleno',bets:[],pending:[],hist:store.get('sr_hist',[]),wager:store.get('sr_wager',0),lastBets:[],spinning:false,show:null,res:'',err:''};
+function saveSR(){ ['bank','start','wheel','denom','hist','wager'].forEach(k=>store.set('sr_'+k,sr[k])); }
+const srIds=()=>sr.wheel==='us'?['0','00',...NUMS]:['0',...NUMS];
+const srN=()=>sr.wheel==='us'?38:37;
+const srTotal=()=>sr.bets.reduce((t,b)=>t+b.amount,0);
+const srSort=a=>a.slice().sort((x,y)=>(x==='00'?-1:+x)-(y==='00'?-1:+y));
+const srName=b=>b.g?GROUPS[b.g].name:`${SR_NAME[b.type]} ${srSort(b.ids).join('-')}`;
+function srAdd(type,list,g,amt){
+  const key=(g||type)+':'+srSort(list).join(','), a=amt||sr.denom;
+  if(srTotal()+a>sr.bank){ sr.err='No te alcanza el saldo para esa ficha.'; return; }
+  const ex=sr.bets.find(b=>b.key===key);
+  if(ex) ex.amount=+(ex.amount+a).toFixed(2); else sr.bets.push({key,type,ids:list.slice(),amount:a,g:g||null});
+  sr.lastAdd=key;
+}
+function srShape(type,list){
+  const z=list.filter(x=>x==='0'||x==='00'), n=list.filter(x=>x!=='0'&&x!=='00').map(Number).sort((a,b)=>a-b), us=sr.wheel==='us';
+  if(type==='caballo'){ if(list.length!==2) return false; if(z.length===2) return us; if(z.length===1){ const x=n[0]; if(z[0]==='0') return us?[1,2].includes(x):[1,2,3].includes(x); return [2,3].includes(x); } const [a,b]=n; return b-a===3||(b-a===1&&a%3!==0); }
+  if(type==='calle'){ if(list.length!==3) return false; if(z.length===1&&!us) return n.join()==='1,2'||n.join()==='2,3'; if(z.length===2&&us) return n[0]===2; if(z.length) return false; return n[0]%3===1&&n[1]===n[0]+1&&n[2]===n[0]+2; }
+  if(type==='cuadro'){ if(list.length!==4) return false; if(z.length===1&&z[0]==='0'&&!us) return n.join()==='1,2,3'; if(z.length) return false; const a=n[0]; return a%3!==0&&n[1]===a+1&&n[2]===a+3&&n[3]===a+4; }
+  if(type==='linea'){ if(list.length!==6||z.length) return false; const a=n[0]; return a%3===1&&n.every((x,i)=>x===a+i); }
+  return list.length===1;
+}
+function srNet(id){ return sr.bets.reduce((t,b)=>t+(b.ids.includes(id)?b.amount*SR_PAY[b.type]:-b.amount),0); }
+function withSim(fn){ const ow=ru.wheel, os=ru.spins; ru.wheel=sr.wheel; ru.spins={eu:[],us:[]}; ru.spins[sr.wheel]=sr.hist.map(n=>({n})); try{ return fn(); } finally { ru.wheel=ow; ru.spins=os; } }
+function srSpin(){
+  if(sr.spinning) return;
+  const tot=srTotal();
+  if(tot>sr.bank){ sr.err='No te alcanza el saldo.'; renderSR(); return; }
+  sr.spinning=true; sr.err=''; sr.res='';
+  const list=srIds(), win=list[rnd(list.length)];
+  let k=0; const tick=setInterval(()=>{ sr.show=list[rnd(list.length)]; renderWheel(); if(++k>=14){ clearInterval(tick); finish(); } },90);
+  function finish(){
+    const net=srNet(win);
+    sr.bank+=net; sr.wager+=tot; sr.hist.push(win); sr.show=win; sr.spinning=false;
+    const wins=sr.bets.filter(b=>b.ids.includes(win));
+    sr.res=tot?(wins.length?`Ganaste ${wins.map(b=>srName(b).toLowerCase()).join(', ')}. Neto ${signed(net)}.`:`Perdiste ${money(tot)}.`):'Giro sin apuestas.';
+    if(tot) sr.lastBets=sr.bets.map(b=>Object.assign({},b));
+    sr.bets=[]; saveSR(); renderSR();
+  }
+}
+function renderWheel(){
+  const x=sr.show;
+  $('#srWheel').innerHTML=x===null?`<div class="wheel-ball idle">Gira</div><span class="wheel-net">Pon tus fichas y toca Girar.</span>`:`<div class="wheel-ball ${colorOf(x)}">${x}</div><span class="wheel-net">${sr.spinning?'Girando…':sr.res}</span>`;
+}
+function srRecs(){ return withSim(()=>recs()); }
+function renderSR(){
+  const diff=sr.bank-sr.start, n=srN(), edge=sr.wheel==='us'?2/38:1/37;
+  $('#srTopBar').innerHTML=`<div><div class="muted small">Saldo de práctica</div><div class="money">${money(sr.bank)}</div><div class="${diff>=0?'up':'down'} small">${signed(diff)} desde ${money(sr.start)}</div></div>
+    <div class="meta"><span>Giros <b>${sr.hist.length}</b></span><span>Apostado <b>${money(sr.wager)}</b></span><span>Pérdida esperada <b>${money(sr.wager*edge)}</b></span>
+    <span class="seg" role="group" aria-label="Rueda"><button data-srw="eu" aria-pressed="${sr.wheel==='eu'}">Europea</button><button data-srw="us" aria-pressed="${sr.wheel==='us'}">Americana</button></span></div>`;
+  renderWheel();
+  $('#srCtl').innerHTML=`<div class="seg feltseg" role="group" aria-label="Tipo de apuesta">${Object.keys(SR_NEED).map(k=>`<button data-srbt="${k}" aria-pressed="${sr.btype===k}">${SR_NAME[k]}</button>`).join('')}</div>
+    <div class="denoms" role="group" aria-label="Valor de la ficha">${DENOMS.map(v=>`<button class="pchip ${chipCls(v)}" data-srden="${v}" aria-pressed="${sr.denom===v}">${v===0.5?'0,50':v}</button>`).join('')}</div>`;
+  $('#srHint').innerHTML=sr.err?`<span class="ru-err">${sr.err}</span>`:`Ficha de ${money(sr.denom)}. ${SR_HINT[sr.btype]}${sr.pending.length?` (${sr.pending.length} de ${SR_NEED[sr.btype]})`:''} Las zonas de afuera se apuestan tocándolas.`;
+  // paño
+  const cov=new Set(); sr.bets.forEach(b=>b.ids.forEach(x=>cov.add(x)));
+  const direct={}, gAmt={};
+  sr.bets.forEach(b=>{ if(b.type==='pleno') direct[b.ids[0]]=(direct[b.ids[0]]||0)+b.amount; if(b.g) gAmt[b.g]=b.amount; });
+  const pend=new Set(sr.pending), last=sr.hist[sr.hist.length-1];
+  const numb=(id,style)=>`<button class="cell ${colorOf(id)}${cov.has(id)&&!direct[id]?' cov':''}${pend.has(id)?' pend':''}" style="${style}${id===last?';box-shadow:0 0 0 3px #fff':''}" data-srid="${id}" aria-label="Apostar al ${id}"><span>${id}</span>${direct[id]?`<i class="amt">${money(direct[id])}</i>`:''}</button>`;
+  const out=(k,lab,style,cls)=>`<button class="cell out2 ${cls||''}" style="${style}" data-srg="${k}" aria-label="Apostar a ${GROUPS[k].name}"><span>${lab}</span>${gAmt[k]?`<i class="amt">${money(gAmt[k])}</i>`:''}</button>`;
+  let h=sr.wheel==='us'?numb('00','grid-column:3/span 3;grid-row:1')+numb('0','grid-column:6/span 3;grid-row:1'):numb('0','grid-column:3/span 6;grid-row:1');
+  for(let r=0;r<12;r++) for(let c=1;c<=3;c++) h+=numb(String(3*r+c),`grid-column:${3+(c-1)*2}/span 2;grid-row:${r+2}`);
+  h+=out('doz1','1.ª docena','grid-column:2;grid-row:2/span 4','vert')+out('doz2','2.ª docena','grid-column:2;grid-row:6/span 4','vert')+out('doz3','3.ª docena','grid-column:2;grid-row:10/span 4','vert');
+  [['low','1 a 18',''],['even','Par',''],['red','Rojo','r'],['black','Negro','b'],['odd','Impar',''],['high','19 a 36','']].forEach(([k,l,c],i)=>{ h+=out(k,l,`grid-column:1;grid-row:${2+i*2}/span 2`,'vert '+c); });
+  ['col1','col2','col3'].forEach((k,i)=>{ h+=out(k,'2 a 1',`grid-column:${3+i*2}/span 2;grid-row:14`); });
+  $('#srBoard').innerHTML=h;
+  $('#srSpin').textContent=srTotal()?`Girar (${money(srTotal())})`:'Girar';
+  $('#srSpin').disabled=sr.spinning;
+  // consejo y recomendaciones
+  const R=srRecs(), T=sr.hist.length, tot=srTotal();
+  let adv='';
+  if(tot){
+    const nets=srIds().map(srNet), win=nets.filter(x=>x>0).length/n, share=tot/Math.max(1,sr.bank);
+    adv=`<div class="opt" style="grid-template-columns:1fr"><span><b>Tu apuesta: ${money(tot)}</b></span><span class="d" style="grid-column:1">Terminas el giro ganando ${pct(win,0)} de las veces. Mejor caso ${signed(Math.max(...nets))}, peor ${signed(Math.min(...nets))}. En promedio pierdes ${money(tot*edge)} por giro.${share>0.05?` <b style="color:#F7AEA6">Es ${pct(share,0)} de tu saldo: arriesgado, lo recomendable es no pasar de 2 a 5 %.</b>`:''}</span></div>`;
+  }
+  const j=a=>a.join(', ');
+  const seen=(sh,k)=>T?`Salió ${pct(sh,0)}; lo normal es ${pct(k/n,1)}.`:'Aún sin giros.';
+  const unit=Math.max(0.5,Math.round(sr.start*0.02*2)/2);
+  const row=(title,k,pay,why,put,rec)=>`<div class="opt"><span class="sw ${rec?'chip':'dash'}"></span><span><b>${title}</b>${rec?'<span class="rtag">Recomendada</span>':''}</span><span class="v">${pct(k/n,1)}</span><span class="d">Paga ${pay}. ${why}</span><span style="grid-column:2/-1;justify-self:start"><button class="minibtn" data-put="${put}">Poner ${money(put.startsWith('g:')?unit:sr.denom)}</button></span></div>`;
+  let side=`<h3>Dónde apostar</h3><p class="sub">Según los giros de esta mesa. El porcentaje es tu probabilidad de ganar el próximo giro. La rueda de práctica es justa, como debería serlo la del casino.</p>${adv}`;
+  side+=row(`Sencilla: ${GROUPS[R.simple.key].name}`,18,'1 a 1',`${seen(R.simple.share,18)} La de menor riesgo.`,'g:'+R.simple.key,true);
+  side+=row(`Docena: ${GROUPS[R.doz.key].name}`,12,'2 a 1',seen(R.doz.share,12),'g:'+R.doz.key,false);
+  side+=row(`Columna: ${GROUPS[R.col.key].name}`,12,'2 a 1',seen(R.col.share,12),'g:'+R.col.key,false);
+  if(T){
+    side+=row(`Línea: ${j(R.linea.ids)}`,6,'5 a 1',seen(R.linea.share,6),'linea:'+j(R.linea.ids),false);
+    side+=row(`Calle: ${j(R.calle.ids)}`,3,'11 a 1',seen(R.calle.share,3),'calle:'+j(R.calle.ids),false);
+    side+=row(`Cuadro: ${j(R.cuadro.ids)}`,4,'8 a 1',seen(R.cuadro.share,4),'cuadro:'+j(R.cuadro.ids),false);
+    side+=row(`Caballo: ${j(R.caballo.ids)}`,2,'17 a 1',seen(R.caballo.share,2),'caballo:'+j(R.caballo.ids),false);
+  }
+  side+=`<p class="sub" style="margin-top:12px">Todas le dejan a la casa ${pct(edge,2)}. La sencilla gana seguido y poco; las de pocos números ganan rara vez y mucho. Apuesta sugerida: ${money(unit)} por giro (2 % de tu saldo inicial).</p>`;
+  $('#srSide').innerHTML=side;
+  // lista de apuestas
+  $('#srBets').innerHTML=`<h2>Fichas en la mesa</h2>${sr.bets.length?sr.bets.map((b,i)=>`<div class="betrow"><div>${srName(b)}<br><span class="muted small">Paga ${SR_PAY[b.type]} a 1, gana ${pct(b.ids.length/n,1)}</span></div><span class="v">${money(b.amount)}</span><button class="xbtn" data-srdel="${i}" aria-label="Quitar">×</button></div>`).join(''):'<p class="muted">No tienes fichas puestas. Toca el paño o usa “Poner” en las recomendaciones.</p>'}`;
+  // estadísticas
+  const H=sr.hist;
+  $('#srStats').innerHTML=`<h2>Giros de esta mesa</h2>${H.length?`<div class="chips">${H.slice(-24).reverse().map(x=>`<span class="chip ${colorOf(x)}">${x}</span>`).join('')}</div>
+    <div class="kv" style="margin-top:8px"><span>Rojo / negro / cero</span><span class="v">${['red','black'].map(k=>pct(H.filter(x=>GROUPS[k].ids.includes(x)).length/H.length,0)).join(' / ')} / ${pct(H.filter(x=>x==='0'||x==='00').length/H.length,0)}</span>
+    <span>Tu resultado real</span><span class="v">${signed(diff)}</span><span>Lo que se esperaba perder</span><span class="v">${money(sr.wager*edge)}</span></div>
+    <p class="muted small" style="margin-top:8px">Con pocos giros la suerte domina; con muchos, tu resultado se acerca a la pérdida esperada.</p>`:'<p class="muted">Todavía no hay giros.</p>'}
+    <div class="fields" style="margin-top:12px"><label class="field"><span>Saldo inicial</span><input type="number" id="srStartIn" min="10" step="10" value="${sr.start}"></label></div>
+    <div class="btns"><button class="btn" id="srReset">Reiniciar saldo e historial</button></div>`;
+  $('#srStartIn').onchange=e=>{ sr.start=Math.max(10,+e.target.value||500); saveSR(); renderSR(); };
+  $('#srReset').onclick=()=>{ if(!confirm('¿Reiniciar tu saldo y los giros de práctica?'))return; sr.bank=sr.start; sr.hist=[]; sr.wager=0; sr.bets=[]; sr.show=null; sr.res=''; saveSR(); renderSR(); };
+}
+function initSR(){
+  $('#srBoard').addEventListener('click',e=>{
+    if(sr.spinning) return;
+    const c=e.target.closest('[data-srid]'), g=e.target.closest('[data-srg]');
+    sr.err='';
+    if(c){
+      const id=c.dataset.srid;
+      if(sr.btype==='pleno') srAdd('pleno',[id]);
+      else {
+        const i=sr.pending.indexOf(id); if(i>=0) sr.pending.splice(i,1); else sr.pending.push(id);
+        if(sr.pending.length===SR_NEED[sr.btype]){
+          if(srShape(sr.btype,sr.pending)) srAdd(sr.btype,sr.pending);
+          else sr.err=`Esos números no forman ${({caballo:'un caballo',calle:'una calle',cuadro:'un cuadro',linea:'una línea'})[sr.btype]}. ${SR_HINT[sr.btype]}`;
+          sr.pending=[];
+        }
+      }
+    } else if(g){ const k=g.dataset.srg; srAdd(SR_GT[k],GROUPS[k].ids,k); }
+    renderSR();
+  });
+  $('#srCtl').addEventListener('click',e=>{
+    const bt=e.target.closest('[data-srbt]'), dn=e.target.closest('[data-srden]');
+    if(bt){ sr.btype=bt.dataset.srbt; sr.pending=[]; sr.err=''; } else if(dn){ sr.denom=+dn.dataset.srden; } else return;
+    saveSR(); renderSR();
+  });
+  $('#srSide').addEventListener('click',e=>{
+    const b=e.target.closest('[data-put]'); if(!b||sr.spinning) return;
+    const v=b.dataset.put; sr.err='';
+    if(v.startsWith('g:')){ const k=v.slice(2), unit=Math.max(0.5,Math.round(sr.start*0.02*2)/2); srAdd(SR_GT[k],GROUPS[k].ids,k,unit); }
+    else { const [t,list]=v.split(':'); srAdd(t,list.split(', ')); }
+    renderSR();
+  });
+  $('#srBets').addEventListener('click',e=>{ const d=e.target.closest('[data-srdel]'); if(!d)return; sr.bets.splice(+d.dataset.srdel,1); renderSR(); });
+  $('#srTopBar').addEventListener('click',e=>{ const w=e.target.closest('[data-srw]'); if(!w||sr.spinning)return; sr.wheel=w.dataset.srw; sr.bets=sr.bets.filter(b=>!b.ids.includes('00')||sr.wheel==='us'); sr.pending=[]; saveSR(); renderSR(); });
+  $('#srSpin').onclick=srSpin;
+  $('#srUndo').onclick=()=>{ if(sr.spinning||!sr.bets.length)return; const i=sr.bets.findIndex(b=>b.key===sr.lastAdd); const b=sr.bets[i>=0?i:sr.bets.length-1]; b.amount=+(b.amount-sr.denom).toFixed(2); if(b.amount<=0) sr.bets.splice(sr.bets.indexOf(b),1); renderSR(); };
+  $('#srClear').onclick=()=>{ if(sr.spinning)return; sr.bets=[]; sr.pending=[]; renderSR(); };
+  $('#srRepeat').onclick=()=>{ if(sr.spinning||!sr.lastBets.length)return; const tot=sr.lastBets.reduce((t,b)=>t+b.amount,0); if(tot>sr.bank){ sr.err='No te alcanza el saldo para repetir.'; renderSR(); return; } sr.bets=sr.lastBets.map(b=>Object.assign({},b)); renderSR(); };
+  renderSR();
+}
+
+route(); initBJ(); initRU(); initCount(); initSB(); initSR(); loadRemote();
 })();
 </script>
 </body>
